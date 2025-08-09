@@ -16,8 +16,6 @@
             --card-bg: #141414;
             --text-light: #F5F5F5;
             --text-muted: #A0A0A0;
-            --whatsapp-card-bg: #121B22;
-            --whatsapp-green: #00A884;
         }
         body { 
             font-family: 'Inter', sans-serif;
@@ -43,16 +41,6 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .whatsapp-card {
-            background-color: var(--whatsapp-card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .whatsapp-green {
-            background-color: var(--whatsapp-green);
-        }
-        .whatsapp-green:hover {
-            background-color: #00896B;
-        }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -74,6 +62,60 @@
         .carousel-container:hover .scrolling-wrapper {
             animation-play-state: paused;
         }
+
+        /* --- Michoro (Animations) --- */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7);
+            }
+            50% {
+                transform: scale(1.3);
+                box-shadow: 0 0 0 7px rgba(229, 9, 20, 0);
+            }
+        }
+        .heartbeat {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes typing-dots {
+            0%, 20% { content: '.'; }
+            40%, 60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        .typing-indicator::after {
+            content: '...';
+            animation: typing-dots 1.5s infinite;
+            display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            10%, 90% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fake-toast {
+            animation: fadeInOut 5s ease-in-out;
+        }
+        
+        .video-preview-container {
+            overflow: hidden;
+            border-radius: 0.5rem; /* Match card's border-radius */
+        }
+        .video-preview {
+            filter: blur(8px); /* Fanya video isionekane vizuri mwanzoni */
+            transition: filter 0.3s ease-in-out;
+        }
+        .group-card:hover .video-preview {
+            filter: blur(0px); /* Ondoa blur anapogusa */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -89,86 +131,32 @@
                 <video id="hero-video-player" autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0"></video>
                 <div class="absolute inset-0 bg-black/60 z-10"></div>
                 <div class="relative z-20 p-4">
-                    <span class="bg-[var(--brand-red)] text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">🔞 Watu Wazima Pekee</span>
                     <h2 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight my-4 max-w-3xl mx-auto">
-                        Acha Punyeto. Pata Utamu Halisi wa <span class="text-[var(--brand-red)]">Video za Kibongo</span>.
+                        UNASOTA NA PUNYETO, WENZAKO <span class="text-[var(--brand-red)]">WANATOMBANA LIVE.</span>
                     </h2>
                     <p class="text-base sm:text-lg text-gray-200 max-w-xl mx-auto mb-8">
-                       Umechoka na video feki? Huku unapata 'raw footage', bila sensor, bila unafiki. Ni raha tupu kutoka kwa watu halisi.
+                       Acha kujitekenya. Humu ndani kuna video 1,000+ za kutombana na link za magroup ya malaya wa Bongo wanaosubiri wateja. Bila VPN.
                     </p>
                     <button class="open-modal-trigger main-cta-button text-white font-bold py-4 px-8 rounded-lg text-lg sm:text-xl w-full max-w-sm mx-auto animate-pulse-red">
-                        NIPE ACCESS SASA (TSH 5,000)
+                        Acha Ufala, Ingia Humu
                     </button>
                     <p class="text-xs text-gray-400 mt-3">Malipo salama na ya siri.</p>
                 </div>
             </section>
 
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
                 <!-- Groups Section -->
                 <section class="my-10 md:my-16">
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-8">Chagua Sumu Yako... Kila Group Lina Kiu Yake 😈</h3>
-                    <div class="space-y-4 max-w-2xl mx-auto">
-                        <!-- Group Card 1 -->
-                        <div class="whatsapp-card rounded-xl shadow-lg p-4">
-                            <div class="flex items-center gap-4">
-                                <video class="w-24 h-24 object-cover rounded-lg flex-shrink-0" autoplay loop muted playsinline>
-                                   <source src="https://www.mzansifun.com/upload/videos/2025/05/sY97MeomSLRKuEGCMLu4_21_dfd4d5f54b75f029d090426b0bd47c95_video_shorts_360p_converted.mp4" type="video/mp4">
-                                </video>
-                                <div class="text-left flex-grow">
-                                    <h4 class="font-bold text-lg text-white">Video za Kichakani 🌳</h4>
-                                    <p class="text-gray-400 mt-1 text-xs sm:text-sm">Video halisi za watu wakijirusha kichakani, gesti, na kwenye magari. Raw & Uncensored.</p>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mt-4 pt-3 border-t border-gray-700/50">
-                                <div class="text-xs text-gray-400">
-                                    <span class="font-bold text-white">241</span> Wanachama • <span class="text-green-400 font-semibold">19 Online</span>
-                                </div>
-                                <button class="open-modal-trigger whatsapp-green text-white font-bold py-2 px-5 rounded-full text-sm flex-shrink-0">
-                                    Jiunge
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Group Card 2 -->
-                        <div class="whatsapp-card rounded-xl shadow-lg p-4">
-                            <div class="flex items-center gap-4">
-                               <video class="w-24 h-24 object-cover rounded-lg flex-shrink-0" autoplay loop muted playsinline>
-                                   <source src="https://www.mzansifun.com/upload/videos/2024/12/JHOqoYTNAZ6lhBcBQYSb_10_f2dcc3801e4738a4420eb3300db89abd_video_shorts_240p_converted.mp4" type="video/mp4">
-                               </video>
-                               <div class="text-left flex-grow">
-                                    <h4 class="font-bold text-lg text-white">Mashine za Bongo 🍑</h4>
-                                    <p class="text-gray-400 mt-1 text-xs sm:text-sm">Jionee warembo wa Kitanzania wenye maumbo matata wakionyesha ufundi wao.</p>
-                               </div>
-                            </div>
-                            <div class="flex justify-between items-center mt-4 pt-3 border-t border-gray-700/50">
-                                <div class="text-xs text-gray-400">
-                                    <span class="font-bold text-white">412</span> Wanachama • <span class="text-green-400 font-semibold">45 Online</span>
-                                </div>
-                                <button class="open-modal-trigger whatsapp-green text-white font-bold py-2 px-5 rounded-full text-sm flex-shrink-0">
-                                    Jiunge
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Group Card 3 -->
-                        <div class="whatsapp-card rounded-xl shadow-lg p-4">
-                            <div class="flex items-center gap-4">
-                               <video class="w-24 h-24 object-cover rounded-lg flex-shrink-0" autoplay loop muted playsinline>
-                                   <source src="https://www.mzansifun.com/upload/videos/2024/06/2t6k3Omq3Jq7Po9M1gdy_28_d235ebbf915f31c2c1193f47a73937d2_video_shorts_240p_converted.mp4" type="video/mp4">
-                               </video>
-                               <div class="text-left flex-grow">
-                                    <h4 class="font-bold text-lg text-white">Wanafunzi wa Chuo (18+) 🎓</h4>
-                                    <p class="text-gray-400 mt-1 text-xs sm:text-sm">Tazama wanafunzi (18+) wakivua uniform na kuonyesha utundu wao. Content exclusive.</p>
-                               </div>
-                            </div>
-                            <div class="flex justify-between items-center mt-4 pt-3 border-t border-gray-700/50">
-                                <div class="text-xs text-gray-400">
-                                    <span class="font-bold text-white">189</span> Wanachama • <span class="text-green-400 font-semibold">28 Online</span>
-                                </div>
-                                <button class="open-modal-trigger whatsapp-green text-white font-bold py-2 px-5 rounded-full text-sm flex-shrink-0">
-                                    Jiunge
-                                </button>
-                            </div>
-                        </div>
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-wider">HAPA NDIO CHOONI.</h2>
+                        <h3 class="text-3xl sm:text-4xl font-black uppercase text-red-600">CHAGUA CHA KUJISAIDIA NACHO.</h3>
+                        <p class="mt-4 max-w-2xl mx-auto text-gray-400">
+                            Umechoka na njaa ya mboo? Kila group hapa lina mambo yake ya kishenzi. Video za kutombana, picha za uchi, na namba za malaya. Ingia popote, kojoa na huko.
+                        </p>
+                    </div>
+                    <div id="groups-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        <!-- Card za Magroup zitaingizwa hapa na JavaScript -->
                     </div>
                 </section>
 
@@ -339,6 +327,11 @@
 
     </div>
     
+    <!-- ENEO LA NOTISI ZA UONGO -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50">
+        <!-- Notisi zitaonekana hapa -->
+    </div>
+    
     <!-- Payment Modal (Initially Hidden) -->
     <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
          <div id="payment-box" class="w-full max-w-sm bg-gray-900 border border-gray-700 rounded-lg shadow-2xl p-6 sm:p-8 relative text-white">
@@ -425,6 +418,15 @@
                 { quote: "Napenda 'Video za Kichakani'. Zinaonyesha uhalisia, hakuna kuigiza. Ni kama uko pale unashuhudia live.", author: "David B." }
             ];
 
+            const groupsData = [
+                { id: 1, title: 'MIKUNDU YA WAKE ZA WATU 💦', description: 'Video za wake za watu waliochoka na waume zao, wakitafuta mboo za pembeni. Utamu wa dhambi uko hapa. 🤫🔥', buttonText: 'Ingia Dhambini', hasTyping: false, videoSrc: 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13832852/13832852-preview.webm' },
+                { id: 2, title: 'KUMA ZA MA-VIDEO QUEEN 🍑', description: 'Wale mademu unaowaona kwenye video za Bongo Flava? Humu tuna video zao za chumbani wakinyonywa mboo na wasanii. 🎬🍆', buttonText: 'Ona Nyuma ya Camera', hasTyping: false, videoSrc: 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm' },
+                { id: 3, title: 'VILIO VYA GESTI 🥵', description: 'Hili ni group la sauti tu. Vaa headphone usikie malaya akilia "ingiza yote!". Sauti za kutombana live kutoka gesti za Sinza. 🎧💦', buttonText: 'Sikiliza Kojo', hasTyping: true, videoSrc: 'https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12942650/12942650-preview.webm' },
+                { id: 4, title: 'KUTOMBANA KWA NGUVU 💪', description: 'Unapenda mambo magumu? Hapa ni video za watu wakitombana kinyama. Kupigana makofi, kuvutana nywele, na kuliana live. ⛓️🩸', buttonText: 'Tazama Ukatili', hasTyping: false, videoSrc: 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13487257/13487257-preview.webm' },
+                { id: 5, title: 'USAFI WA NDANI (KUSAFISHA KUMA) 🧼', description: 'Video za mademu wakijisafisha na kujichezea. Wanavyojipiga picha za uchi na kujirekodi wakijichua. Ni maandalizi ya kutombwa. 👀💦', buttonText: 'Ona Maandalizi', hasTyping: false, videoSrc: 'https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12908104/12908104-preview.webm' },
+                { id: 6, title: 'KITUO CHA DALA DALA 🚌', description: 'Video za kutombana kwenye maeneo ya wazi. Kwenye daladala, vichochoroni, na kwenye vibanda vya chipsi. Utamu wa hatari. 😈🔥', buttonText: 'Panda Daladala', hasTyping: false, videoSrc: 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060204/13060204-preview.webm' }
+            ];
+
             // --- Element References ---
             const heroVideoPlayer = document.getElementById('hero-video-player');
             const mainVideoPlayer = document.getElementById('main-video-player');
@@ -433,6 +435,7 @@
             const engongaThumbnailsContainer = document.getElementById('engonga-thumbnails');
             const testimonialSlider = document.getElementById('testimonial-slider');
             const reelsScroller = document.getElementById('reels-scroller');
+            const groupsGrid = document.getElementById('groups-grid');
             
             // Modal elements
             const paymentModal = document.getElementById('payment-modal');
@@ -457,8 +460,67 @@
                 heroVideoPlayer.src = randomHeroVideo;
                 heroVideoPlayer.load();
             }
+
+            // 2. Setup Groups Section
+            if (groupsGrid) {
+                groupsData.forEach(group => {
+                    const card = document.createElement('div');
+                    card.className = 'group-card bg-[#1a1a1a] border border-gray-800 rounded-lg flex flex-col transition-all duration-300 hover:border-red-600 hover:shadow-2xl hover:shadow-red-900/40 overflow-hidden';
+                    card.innerHTML = `
+                        <div class="video-preview-container w-full aspect-video">
+                            <video class="video-preview w-full h-full object-cover" autoplay loop muted playsinline src="${group.videoSrc}"></video>
+                        </div>
+                        <div class="p-4 flex flex-col space-y-4 flex-grow">
+                            <div class="flex items-center space-x-3">
+                                <span class="heartbeat w-3 h-3 bg-red-600 rounded-full" style="animation-duration: ${Math.random() * 1 + 0.8}s;"></span>
+                                <h3 class="font-black text-lg text-white">${group.title}</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">${group.description}</p>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center justify-between text-gray-300">
+                                    <span>🔥 Watazamaji Live:</span>
+                                    <span id="counter-${group.id}" class="font-bold text-green-400">${Math.floor(Math.random() * 200) + 50}</span>
+                                </div>
+                                ${group.hasTyping ? `<div id="typing-${group.id}" class="text-yellow-400 font-bold text-xs typing-indicator" style="display: none;">Malaya anachapa</div>` : ''}
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-500 font-bold">UKALI WA NYEGE</span>
+                                <div class="w-full bg-gray-700 rounded-full h-1.5 mt-1">
+                                    <div id="bar-${group.id}" class="bg-gradient-to-r from-yellow-500 to-red-600 h-1.5 rounded-full" style="width: ${Math.floor(Math.random() * 60) + 40}%; transition: width 2s ease-in-out;"></div>
+                                </div>
+                            </div>
+                            <button class="open-modal-trigger w-full bg-red-600 text-white font-bold py-3 rounded-lg uppercase tracking-wider transition-transform duration-200 hover:scale-105 hover:bg-red-500 mt-auto">
+                                ${group.buttonText}
+                            </button>
+                        </div>
+                    `;
+                    groupsGrid.appendChild(card);
+                });
+
+                // Animation Logic for Groups
+                setInterval(() => {
+                    groupsData.forEach(group => {
+                        const counterElement = document.getElementById(`counter-${group.id}`);
+                        if (counterElement) {
+                            let currentValue = parseInt(counterElement.innerText);
+                            const change = Math.floor(Math.random() * 5) - 2;
+                            counterElement.innerText = Math.max(20, currentValue + change);
+                        }
+                        if (group.hasTyping) {
+                            const typingElement = document.getElementById(`typing-${group.id}`);
+                            if (typingElement) {
+                                typingElement.style.display = Math.random() > 0.5 ? 'block' : 'none';
+                            }
+                        }
+                        const barElement = document.getElementById(`bar-${group.id}`);
+                        if (barElement) {
+                            barElement.style.width = `${Math.floor(Math.random() * 60) + 40}%`;
+                        }
+                    });
+                }, 2500);
+            }
             
-            // 2. Setup Teaser Video Player & Thumbnails
+            // 3. Setup Teaser Video Player & Thumbnails
             if (mainVideoPlayer && thumbnailsContainer) {
                 const shuffledVideos = shuffleArray([...videoSources]);
                 const mainVideoSrc = shuffledVideos[0];
@@ -495,7 +557,7 @@
                 });
             }
 
-            // 3. Setup Engonga Thumbnails
+            // 4. Setup Engonga Thumbnails
             if (engongaThumbnailsContainer) {
                 engongaThumbnailsContainer.innerHTML = '';
                 shuffleArray(engongaVideoSources).slice(0, 12).forEach(src => {
@@ -518,7 +580,7 @@
                 });
             }
 
-            // 4. Setup Testimonials
+            // 5. Setup Testimonials
             if (testimonialSlider) {
                 testimonialSlider.innerHTML = '';
                 testimonials.forEach(item => {
@@ -537,7 +599,7 @@
                 });
             }
 
-            // 5. Setup Reels Carousel
+            // 6. Setup Reels Carousel
             if (reelsScroller) {
                 const selectedReels = shuffleArray([...reelVideoSources]).slice(0, 15);
                 const duplicatedReels = [...selectedReels, ...selectedReels]; 
@@ -551,7 +613,7 @@
                     video.src = src;
                     video.muted = true;
                     video.loop = true;
-                    video.playsInline = true;
+                    video.playsinline = true;
                     
                     videoContainer.appendChild(video);
                     reelsScroller.appendChild(videoContainer);
@@ -654,6 +716,27 @@
                 secondsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;
                 time--;
             }, 1000);
+            
+            // Fake Toast Notifications Logic
+            const toastContainer = document.getElementById('toast-container');
+            const toastMessages = [
+                "🔥 'KUTOMBANA KWA NGUVU' kunawaka moto sasa hivi!",
+                "Mtu kutoka Sinza amejiunga na 'MIKUNDU YA WAKE ZA WATU'",
+                "Audio mpya imepakiwa kwenye 'VILIO VYA GESTI'",
+                "Nafasi 3 pekee zimebaki kwenye 'KUMA ZA MA-VIDEO QUEEN'",
+                "Mtu kutoka Arusha anatazama 'KITUO CHA DALA DALA'"
+            ];
+
+            setInterval(() => {
+                const message = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+                const toast = document.createElement('div');
+                toast.className = 'fake-toast bg-gray-900 border border-green-500 text-white text-sm font-bold p-3 rounded-lg shadow-lg mb-2';
+                toast.innerText = message;
+                toastContainer.appendChild(toast);
+                setTimeout(() => {
+                    toast.remove();
+                }, 4900);
+            }, 8000);
 
             // Payment Form Logic
             const showWaitingScreen = () => {
