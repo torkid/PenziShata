@@ -174,6 +174,21 @@
                     </div>
                 </section>
 
+                <!-- Engonga Exclusive Section -->
+                <section class="my-10 md:my-16">
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 border border-[var(--brand-gold)]/50 shadow-2xl shadow-[var(--brand-gold)]/10">
+                        <h3 class="text-2xl md:text-3xl font-bold text-center text-[var(--brand-gold)]">OFA MAALUM: Fungua Koleksheni ya Dhahabu ya Engonga! 🤫</h3>
+                        <p class="text-center text-[var(--text-muted)] mt-3 max-w-2xl mx-auto">Ukijiunga leo, unapata access ya kipekee kwenye collection ya video 400+ za Engonga Baltasar ambazo hazijawahi kuonekana. Hii ni bonus kwa wanachama wetu tu.</p>
+                        <div id="engonga-thumbnails" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 my-6">
+                            <!-- Engonga thumbnails will be injected here -->
+                        </div>
+                        <button class="open-modal-trigger main-cta-button text-white font-bold py-3 px-6 rounded-lg text-base sm:text-lg w-full max-w-xs mx-auto">
+                            Fungua Video 400+ Sasa
+                        </button>
+                    </div>
+                </section>
+
+
                 <!-- Video Teaser Section -->
                 <section class="my-10 md:my-16">
                      <h3 class="text-2xl md:text-3xl font-bold text-center mb-6">Onja Asali ya VIP... Hii ni Sample Tu 😉</h3>
@@ -410,6 +425,10 @@
             const reelVideoSources = [
                 "https://www.mzansifun.com/upload/videos/2025/05/sY97MeomSLRKuEGCMLu4_21_dfd4d5f54b75f029d090426b0bd47c95_video_shorts_360p_converted.mp4", "https://www.mzansifun.com/upload/videos/2024/12/JHOqoYTNAZ6lhBcBQYSb_10_f2dcc3801e4738a4420eb3300db89abd_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2024/06/2t6k3Omq3Jq7Po9M1gdy_28_d235ebbf915f31c2c1193f47a73937d2_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2023/05/AQkZ1Rsc6LkMo27MDFSe_29_ee87196bd45ada354c7f23f204465a51_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2024/09/B6AeMpOpq9JEY8Y4bIaH_08_0f8856671a15492841f1f175b1b428c0_video_shorts_360p_converted.mp4", "https://www.mzansifun.com/upload/videos/2025/02/bBG6kYa6qm2pvWHcuwNO_10_d75a7a0b1c3f2fec159c1944ec4c0c69_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2023/03/CoXYhDZUwKHlBgYwdnMk_16_41afd4a0fc42c5dab4ac370defb6b1ae_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2023/02/ArfSMSnYYDCpkRQEzEJh_03_421dec922786f605f38936d3c836b9c8_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2022/10/XhDj7hJ3JqariJVqd7qz_30_be21bc227d1ac518042bd14c967ac585_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2025/03/zEbg531qd6SwNYrzjteC_17_d3234843a272bf44298c0a29059745f7_video_shorts_360p_converted.mp4", "https://www.mzansifun.com/upload/videos/2024/07/lOQQAPoLJuBQG14BX5pZ_28_f10f964ab90c97ca16903078eab7e918_video_shorts_360p_converted.mp4", "https://www.mzansifun.com/upload/videos/2022/10/NSp4OslEfrnzGlvPmMUi_30_3c633bfab5920582cb3971eafa2b3aef_video_shorts_360p_converted.mp4", "https://www.mzansifun.com/upload/videos/2025/05/BFaHb57lv5SmXRdw78bI_19_197f434a7d0f820a97351bca03b616b6_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2023/07/H3oWbBOEroagbfbBgFgh_08_7579be3836ad4b9acd97914dedf11858_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2025/01/eXQWkKKLClA5bf6UlfzQ_07_866fde37beceeba5b84a10e19e3c639c_video_shorts_240p_converted.mp4"
             ];
+            
+            const engongaVideoSources = [
+                "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12463982/12463982-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097517/12097517-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165824/12165824-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379453/12379453-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097526/12097526-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097349/12097349-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12271419/12271419-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12116404/12116404-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12099511/12099511-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165715/12165715-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379994/12379994-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12429864/12429864-preview.webm"
+            ];
 
             const testimonials = [
                 { quote: "Nililipia kwa wasiwasi, dah! Kile nilichokikuta... akili yangu ilisimama. Content ni za ukweli, sio uongo.", author: "@Juma_la_Moto" },
@@ -423,6 +442,7 @@
             const mainVideoPlayer = document.getElementById('main-video-player');
             const mainPlayButton = document.getElementById('main-play-button');
             const thumbnailsContainer = document.getElementById('video-thumbnails');
+            const engongaThumbnailsContainer = document.getElementById('engonga-thumbnails');
             const testimonialSlider = document.getElementById('testimonial-slider');
             const reelsScroller = document.getElementById('reels-scroller');
             
@@ -480,7 +500,30 @@
                 });
             }
 
-            // 2. Setup Testimonials
+            // 2. Setup Engonga Thumbnails
+            if (engongaThumbnailsContainer) {
+                engongaThumbnailsContainer.innerHTML = '';
+                shuffleArray(engongaVideoSources).slice(0, 12).forEach(src => {
+                    const thumbVideo = document.createElement('video');
+                    thumbVideo.className = 'w-full aspect-square object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-[var(--brand-gold)] transition-all duration-300';
+                    thumbVideo.src = src;
+                    thumbVideo.muted = true;
+                    thumbVideo.playsinline = true;
+                    thumbVideo.loop = true;
+
+                    thumbVideo.addEventListener('mouseenter', () => {
+                        const playPromise = thumbVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => { if (error.name !== 'AbortError') { console.error("Engonga thumb play error:", error); } });
+                        }
+                    });
+                    thumbVideo.addEventListener('mouseleave', () => { thumbVideo.pause(); });
+                    
+                    engongaThumbnailsContainer.appendChild(thumbVideo);
+                });
+            }
+
+            // 3. Setup Testimonials
             if (testimonialSlider) {
                 testimonialSlider.innerHTML = '';
                 testimonials.forEach(item => {
@@ -499,7 +542,7 @@
                 });
             }
 
-            // 3. Setup Reels Carousel
+            // 4. Setup Reels Carousel
             if (reelsScroller) {
                 const selectedReels = shuffleArray([...reelVideoSources]).slice(0, 15);
                 const duplicatedReels = [...selectedReels, ...selectedReels]; 
@@ -531,7 +574,6 @@
             const openModal = () => paymentModal.classList.remove('hidden');
             const closeModal = () => {
                 paymentModal.classList.add('hidden');
-                // Reset form when closing modal
                 setTimeout(() => {
                     document.getElementById('form-view').classList.remove('hidden');
                     document.getElementById('result-view').classList.add('hidden');
