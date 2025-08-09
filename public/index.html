@@ -134,33 +134,6 @@
             -webkit-backdrop-filter: blur(4px);
         }
 
-        /* Tool Card Styles */
-        .tool-card {
-            background-color: #1a1a1a;
-            border: 2px solid #333;
-            transition: all 0.3s ease-in-out;
-        }
-        .tool-card:hover {
-            border-color: #E50914;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
-        }
-        .tool-card:hover .tool-icon {
-            filter: drop-shadow(0 0 10px #E50914);
-            transform: scale(1.1);
-        }
-        .tool-description {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-out;
-        }
-        .tool-card:hover .tool-description {
-            max-height: 200px; /* Urefu wa kutosha kwa maelezo */
-            opacity: 1;
-            margin-top: 1rem; /* 16px */
-        }
-
         /* Phone Comparison Styles */
         .phone-frame {
             background: #1a1a1a;
@@ -213,6 +186,188 @@
         .live-badge {
             animation: pulse-live 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+
+        /* Ushahidi Section Styles */
+        .slider-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .slider-container::-webkit-scrollbar {
+            display: none;
+        }
+        .mpesa-receipt {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: monospace;
+            border: 1px solid #ddd;
+        }
+        .mpesa-header {
+            background-color: #009933;
+            color: white;
+        }
+        @keyframes progressBar {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        .progress-bar-fill {
+            animation: progressBar 2s ease-out forwards;
+        }
+        .fade-in-item {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(234, 179, 8, 0.8);
+                transform: scale(1.05);
+            }
+        }
+        .dashboard-button {
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+         /* Tool Card Styles */
+         .tool-card {
+            background-color: #1a1a1a;
+            border: 2px solid #333;
+            transition: all 0.3s ease-in-out;
+        }
+        .tool-card:hover {
+            border-color: #E50914;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+        .tool-card:hover .tool-icon {
+            filter: drop-shadow(0 0 10px #E50914);
+            transform: scale(1.1);
+        }
+        .tool-description {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-out;
+        }
+        .tool-card:hover .tool-description {
+            max-height: 200px; /* Urefu wa kutosha kwa maelezo */
+            opacity: 1;
+            margin-top: 1rem; /* 16px */
+        }
+        /* Final Gate Styles */
+        @keyframes gate-glow {
+            0% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.4), inset 0 0 15px rgba(220, 38, 38, 0.3); }
+            50% { box-shadow: 0 0 35px rgba(220, 38, 38, 0.7), inset 0 0 25px rgba(220, 38, 38, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.4), inset 0 0 15px rgba(220, 38, 38, 0.3); }
+        }
+        .gate-container {
+            background-color: #111;
+            border: 4px solid #444;
+            animation: gate-glow 3s infinite ease-in-out;
+        }
+        @keyframes pulse-insane {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(22, 163, 74, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+        }
+        .final-cta {
+            animation: pulse-insane 1.5s infinite;
+        }
+        /* Ramani ya Malaya Styles */
+        .map-container {
+            background-color: #000;
+            border: 4px solid #1a1a1a;
+            overflow: hidden; /* Important for radar effect */
+        }
+        @keyframes pulse-hotspot {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px #ff0000);
+            }
+            50% {
+                transform: scale(1.3);
+                filter: drop-shadow(0 0 15px #ff0000);
+            }
+        }
+        .hotspot {
+            animation: pulse-hotspot 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+        .hotspot-popup {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transform: translateY(10px);
+        }
+        .hotspot:hover .hotspot-popup {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 50%;
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.3) 0%, rgba(0, 255, 0, 0) 70%);
+            transform-origin: top left;
+            animation: radar-sweep 3s linear infinite;
+        }
+        @keyframes radar-sweep {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .radar-grid {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background-image: 
+                linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .radar-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        /* Live Chat Styles */
+        .showcase-container {
+            background: linear-gradient(to top, #111, #222);
+            border: 2px solid #444;
+        }
+        .chat-feed {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .chat-feed::-webkit-scrollbar {
+            display: none;
+        }
+        @keyframes fadeInSlideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .new-chat-message {
+            animation: fadeInSlideUp 0.5s ease-out;
+        }
+        .join-chat-button {
+            animation: pulse-green 2s infinite;
+        }
+        .glitch-video {
+            animation: glitch 1.5s linear infinite alternate-reverse;
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -224,20 +379,30 @@
         <main class="flex-grow flex flex-col items-center">
             
             <!-- Hero Section -->
-            <section class="relative w-full h-[70vh] sm:h-[80vh] flex flex-col justify-center items-center text-center text-white overflow-hidden">
-                <video id="hero-video-player" autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0"></video>
-                <div class="absolute inset-0 bg-black/60 z-10"></div>
-                <div class="relative z-20 p-4">
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight my-4 max-w-3xl mx-auto">
-                        UNASOTA NA PUNYETO, WENZAKO <span class="text-[var(--brand-red)]">WANATOMBANA LIVE.</span>
+            <section class="relative w-full h-screen flex flex-col justify-center items-center text-center text-white overflow-hidden p-4">
+                <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" style="filter: blur(5px) brightness(0.5);">
+                    <source id="hero-video-source" src="https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" type="video/webm">
+                </video>
+                <div class="static-background absolute inset-0 z-0 opacity-20"></div>
+                <div class="absolute inset-0 bg-black/60 z-1"></div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="text-5xl sm:text-7xl pulse-emoji" style="animation-delay: 0.2s;">💦</div>
+                        <div class="text-5xl sm:text-7xl pulse-emoji" style="animation-delay: 0.4s;">🔞</div>
+                        <div class="text-5xl sm:text-7xl pulse-emoji" style="animation-delay: 0.6s;">🔥</div>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black uppercase text-gray-200 font-display tracking-wider">
+                        UNASOTA NA PUNYETO,
+                    </h1>
+                    <h2 class="text-5xl sm:text-7xl md:text-8xl font-black uppercase text-red-600 font-display tracking-widest mt-1">
+                        WENZAKO WANAKOJOA
                     </h2>
-                    <p class="text-base sm:text-lg text-gray-200 max-w-xl mx-auto mb-8">
+                    <p class="text-base sm:text-lg text-gray-200 max-w-xl mx-auto my-6">
                        Acha kujitekenya. Humu ndani kuna video 1,000+ za kutombana na link za magroup ya malaya wa Bongo wanaosubiri wateja. Bila VPN.
                     </p>
-                    <button class="open-modal-trigger main-cta-button text-white font-bold py-4 px-8 rounded-lg text-lg sm:text-xl w-full max-w-sm mx-auto animate-pulse-red">
-                        Acha Ufala, Ingia Humu
+                    <button class="open-modal-trigger shake-button bg-red-600 border-4 border-red-400 text-white font-black text-xl sm:text-2xl uppercase py-4 px-10 rounded-md shadow-lg shadow-red-900/50">
+                        Acha Ufala, Ingia Humu (TSH 5,000)
                     </button>
-                    <p class="text-xs text-gray-400 mt-3">Malipo salama na ya siri.</p>
                 </div>
             </section>
 
@@ -351,7 +516,7 @@
                     </div>
                 </section>
 
-                <!-- Value Proposition Section -->
+                <!-- Tools Section -->
                 <section class="my-10 md:my-16">
                     <div class="text-center mb-8">
                         <h2 class="text-3xl sm:text-4xl font-black uppercase">BUKU 5 YAKO INAKUPA HIZI SILAHA:</h2>
@@ -475,6 +640,40 @@
                     </div>
                 </section>
                 
+                <!-- Live Chat Section -->
+                <section class="my-10 md:my-16">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase">ONA WANYAMA WAKICHAFUA GROUP</h2>
+                        <h3 class="text-3xl sm:text-4xl font-black uppercase text-yellow-400">LIVE SASA HIVI.</h3>
+                        <p class="mt-2 max-w-2xl mx-auto text-gray-400">
+                            Hii ni live feed kutoka kwenye group letu la VIP. Wakati wewe uko nje, wao wanashare video na namba za malaya. Soma chat zao, uone unachokosa.
+                        </p>
+                    </div>
+                    <div class="showcase-container rounded-lg shadow-2xl shadow-yellow-900/40 p-4 sm:p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="md:col-span-2">
+                                <div class="relative aspect-video bg-black rounded-md overflow-hidden border-2 border-gray-700">
+                                    <video class="glitch-video w-full h-full object-cover" autoplay loop muted playsinline>
+                                         <source src="https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" type="video/webm">
+                                    </video>
+                                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded animate-pulse">VIDEO MPYA NDANI YA GROUP</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <h4 class="font-bold text-center mb-2 uppercase">LIVE CHAT YA WANYAMA</h4>
+                                <div id="chat-feed" class="chat-feed bg-black/50 h-64 rounded-md p-2 flex flex-col-reverse overflow-y-auto">
+                                    <!-- Chat messages zitaingizwa hapa na JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <button class="open-modal-trigger join-chat-button bg-green-600 text-white font-black text-xl sm:text-2xl uppercase py-4 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105">
+                                Nataka Kujiunga na Chat (TSH 5,000)
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Live Feed Section -->
                 <section class="my-10 md:my-16 w-full">
                     <div class="text-center mb-8 px-4">
@@ -486,6 +685,81 @@
                     <div class="marquee-container relative flex overflow-hidden select-none">
                         <div id="scroller" class="marquee-content flex-shrink-0 flex items-center justify-around min-w-full">
                             <!-- Video cards zitaingizwa hapa na JavaScript -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ushahidi Section -->
+                <section class="my-10 md:my-16">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase">UNAOGOPA HELA YAKO KUPOTEA?</h2>
+                        <h3 class="text-3xl sm:text-4xl font-black uppercase text-yellow-400">HUYU NDIYE SHETANI UNAYEMNUNUA.</h3>
+                        <p class="mt-2 max-w-xl mx-auto text-gray-400">
+                            Hapa hatuuzi paka kwenye gunia. Ona hasa unachopata sekunde chache baada ya kutoa buku 5 yako.
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <div id="slider" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth slider-container pb-4">
+                            <div class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-2 snap-center">
+                                <div class="bg-gray-900 p-4 rounded-lg h-full flex flex-col">
+                                    <h4 class="font-bold text-center mb-2">HATUA YA 1: UNALIPA BUKU 5</h4>
+                                    <div class="mpesa-receipt p-4 rounded-lg text-sm flex-grow">
+                                        <div class="mpesa-header text-center font-bold p-2 rounded-t-lg -m-4 mb-4">
+                                            M-PESA
+                                        </div>
+                                        <p><strong>RK95...432 Confirmed.</strong></p>
+                                        <p>Umefanikiwa kulipia</p>
+                                        <p><strong>Tsh5,000.00</strong> kwa ajili ya</p>
+                                        <p><strong>HUDUMA ZA MTANDAONI</strong></p>
+                                        <p>tarehe 10/08/25 saa 12:45 AM.</p>
+                                    </div>
+                                    <p class="text-xs text-center mt-2 text-gray-500">Malipo salama na ya siri.</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-2 snap-center">
+                                <div class="bg-gray-900 p-4 rounded-lg h-full flex flex-col items-center justify-center">
+                                    <h4 class="font-bold text-center mb-2">HATUA YA 2: GETI LINAFUNGUKA</h4>
+                                    <div id="dashboard" class="bg-black w-full p-4 rounded-lg text-center border-2 border-gray-700">
+                                        <div id="progress-container">
+                                            <p id="progress-text" class="text-sm text-yellow-400 font-bold mb-2">INAHAKIKI MALIPO...</p>
+                                            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                                                <div class="bg-yellow-400 h-2.5 rounded-full progress-bar-fill"></div>
+                                            </div>
+                                        </div>
+                                        <div id="dashboard-buttons" class="hidden mt-4 space-y-3">
+                                            <p class="text-green-400 font-bold fade-in-item" style="animation-delay: 0.2s;">MALIPO YAMEPOKELEWA!</p>
+                                            <button class="w-full bg-red-600 text-white font-bold py-3 rounded-lg dashboard-button" style="animation-delay: 0.5s;">FUNGUA VIDEO 1000+</button>
+                                            <button class="w-full bg-red-600 text-white font-bold py-3 rounded-lg dashboard-button" style="animation-delay: 0.8s;">INGIA KWENYE MAGROUP</button>
+                                            <button class="w-full bg-red-600 text-white font-bold py-3 rounded-lg dashboard-button" style="animation-delay: 1.1s;">PATA NAMBA ZA MALAYA</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-center mt-2 text-gray-500">Unalipia mara moja, unapata vyote.</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-2 snap-center">
+                                <div class="bg-gray-900 p-4 rounded-lg h-full">
+                                    <h4 class="font-bold text-center mb-2">HATUA YA 3: RAHA INAANZA</h4>
+                                    <video class="w-full rounded" autoplay loop muted playsinline>
+                                        <source src="https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm" type="video/webm">
+                                    </video>
+                                    <p class="text-xs text-center mt-2 text-gray-500">Utaanza kuona video kama hizi na zaidi.</p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-2 snap-center">
+                                <div class="bg-gray-900 p-4 rounded-lg h-full flex flex-col justify-center">
+                                    <h4 class="font-bold text-center mb-2">MATOKEO: MTEJA AKIRIDHIKA</h4>
+                                      <div class="bg-[#202C33] p-2 rounded-lg flex items-center space-x-3">
+                                        <div class="bg-[#00A884] w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M4.018 15.59a1.5 1.5 0 002.122.149l6.43-4.593a1.5 1.5 0 000-2.292L6.14 4.253a1.5 1.5 0 00-2.122 2.142L6.75 10l-2.732 3.448a1.5 1.5 0 000 2.142z"></path></svg>
+                                        </div>
+                                        <div class="w-full bg-[#3b4a54] rounded-full h-1.5">
+                                            <div class="bg-[#00A884] h-1.5 rounded-full" style="width: 60%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-400">0:08</span>
+                                    </div>
+                                    <p class="text-xs italic text-center mt-2 text-gray-400">"We fala... nimeingia... kumbe kweli. Huku kuna vitu... buku 5 imelipa."</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -506,27 +780,29 @@
                     </div>
                 </section>
 
-                <!-- FINAL CTA SECTION -->
+                <!-- Final Gate Section -->
                 <section class="my-10 md:my-16 w-full">
-                    <div class="glass-card rounded-2xl p-6 sm:p-8 md:p-12 border border-[var(--brand-red)]/50 shadow-2xl shadow-[var(--brand-red)]/20 max-w-3xl mx-auto">
-                        <h2 class="text-3xl sm:text-4xl font-extrabold text-center">Nyege Zimepanda? Maliza Hamu Sasa!</h2>
-                        <p class="text-center text-[var(--text-muted)] mt-4">Ofa ya bei hii inaisha baada ya:</p>
-                        <div class="my-4 flex justify-center items-center gap-2 sm:gap-4 text-4xl sm:text-6xl font-mono font-bold text-[var(--brand-gold)]">
-                            <div class="flex flex-col items-center">
-                                <span id="minutes">14</span>
-                                <span class="text-xs font-sans font-normal text-[var(--text-muted)]">DAKIKA</span>
-                            </div>
-                            <span>:</span>
-                             <div class="flex flex-col items-center">
-                                <span id="seconds">59</span>
-                                <span class="text-xs font-sans font-normal text-[var(--text-muted)]">SEKUNDE</span>
+                    <div class="gate-container rounded-2xl p-6 sm:p-10 text-center max-w-3xl mx-auto">
+                        <h2 class="text-4xl sm:text-6xl font-black uppercase font-display tracking-wider text-gray-200">UMEFika Mwisho.</h2>
+                        <h3 class="text-4xl sm:text-6xl font-black uppercase font-display text-red-500">UNAINGIA AU UNARUDI KWENYE PUNYETO?</h3>
+                        <div class="my-6">
+                            <p class="uppercase font-bold text-yellow-400">GETI LINAFUNGWA... PRESHA INAPANDA!</p>
+                            <div class="w-full max-w-md mx-auto bg-gray-700 rounded-full h-4 mt-2 border-2 border-gray-600">
+                                <div id="pressure-bar" class="bg-gradient-to-r from-yellow-400 to-red-600 h-full rounded-full" style="width: 85%; transition: width 1s linear;"></div>
                             </div>
                         </div>
-                        <p class="text-center text-[var(--brand-gold)] font-semibold mt-2">Watu 500 wa kwanza pekee. Zimebaki nafasi <span id="slots-left">31</span>.</p>
-                        <p class="text-center text-lg mt-6">Kwa <span class="font-bold">TSh 5,000</span> tu, fungua dunia yote ya utamu papo hapo.</p>
-                        <button class="open-modal-trigger main-cta-button text-white font-bold py-4 px-8 rounded-lg text-lg sm:text-xl w-full max-w-md mx-auto mt-6">
-                            NIUNGANISHE NA RAHA 💦
+                        <div class="bg-black/50 rounded-lg p-3 max-w-sm mx-auto">
+                            <p class="text-lg font-bold">WANYAMA WALIOMO NDANI:</p>
+                            <p class="font-display text-5xl text-green-400 tracking-wider">
+                                <span id="headcount">469</span> / 500
+                            </p>
+                            <p class="text-xs text-gray-400">NAFASI ZA WANYAMA ZINAKARIBIA KUJAA</p>
+                        </div>
+                        <p class="text-lg mt-6">Kwa <span class="font-bold text-yellow-400">TSh 5,000</span> tu, fungua geti la unyama milele.</p>
+                        <button class="open-modal-trigger final-cta mt-6 bg-green-600 text-white font-black text-2xl uppercase py-5 px-12 rounded-lg shadow-lg">
+                            FUNGUA GETI LA UNYAMA
                         </button>
+                        <p class="text-xs text-gray-500 mt-2">Malipo ya Siri. Hakuna Atakayejua.</p>
                     </div>
                 </section>
 
@@ -618,12 +894,8 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- Data Sources ---
-            const videoSources = [
-                "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13832852/13832852-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12942650/12942650-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13487257/13487257-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12908104/12908104-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060204/13060204-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/135/13520337/13520337-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172064/13172064-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13382197/13382197-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452472/13452472-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/135/13534955/13534955-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452678/13452678-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12908269/12908269-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13926907/13926907-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13097094/13097094-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13940901/13940901-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13864756/13864756-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12939091/12939091-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12939103/12939103-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13860120/13860120-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/125/12537887/12537887-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13897723/13897723-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13967311/13967311-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13933150/13933150-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13841101/13841101-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13158481/13158481-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12287126/12287126-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12280671/12280671-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/3/33/331/3313334/3313334-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12327702/12327702-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12287111/12287111-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12288484/12288484-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/11/115/11537712/11537712-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/3/35/350/3505535/3505535-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14125134/14125134-preview.webm"
-            ];
-            
             const reelVideoSources = [
-                "https://www.mzansifun.com/upload/videos/2025/05/sY97MeomSLRKuEGCMLu4_21_dfd4d5f54b75f029d090426b0bd47c95_video_shorts_360p_converted.mp4", "https://www.mzansifun.com/upload/videos/2024/12/JHOqoYTNAZ6lhBcBQYSb_10_f2dcc3801e4738a4420eb3300db89abd_video_shorts_240p_converted.mp4", "https://www.mzansifun.com/upload/videos/2024/06/2t6k3Omq3Jq7Po9M1gdy_28_d235ebbf915f31c2c1193f47a73937d2_video_shorts_240p_converted.mp4", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12267455/12267455-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12409071/12409071-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12099521/12099521-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12271330/12271330-preview.webm"
+                "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452678/13452678-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12444399/12444399-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452698/13452698-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060359/13060359-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12040346/12040346-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172572/13172572-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172064/13172064-preview.webm", "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13382197/13382197-preview.webm"
             ];
             
             const engongaVideoSources = [
@@ -663,6 +935,11 @@
             const vaultHeader = document.getElementById('vault-header');
             const openedText = document.getElementById('opened-text');
             const insideVaultGrid = document.getElementById('vault-grid');
+            const progressContainer = document.getElementById('progress-container');
+            const dashboardButtons = document.getElementById('dashboard-buttons');
+            const ushahidiSlider = document.getElementById('slider');
+            const pressureBar = document.getElementById('pressure-bar');
+            const headcount = document.getElementById('headcount');
             
             // Modal elements
             const paymentModal = document.getElementById('payment-modal');
@@ -679,7 +956,7 @@
             // --- Utility Functions ---
             const shuffleArray = (array) => array.sort(() => 0.5 - Math.random());
             
-            // --- Initialization ---
+            // --- Initialization & Event Listeners ---
 
             // 1. Setup Hero Video
             if (heroVideoPlayer) {
@@ -724,7 +1001,6 @@
                     groupsGrid.appendChild(card);
                 });
 
-                // Animation Logic for Groups
                 setInterval(() => {
                     groupsData.forEach(group => {
                         const counterElement = document.getElementById(`counter-${group.id}`);
@@ -837,7 +1113,17 @@
                 });
             }
 
-            // 5. Setup Live Feed Section
+            // 5. Setup Ushahidi Section
+            if (progressContainer && dashboardButtons) {
+                setTimeout(() => {
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                        dashboardButtons.style.display = 'block';
+                    }, 2000);
+                }, 500);
+            }
+
+            // 6. Setup Live Feed Section
             if (scroller) {
                 const fakeUsernames = [
                     '@Mrembo_wa_Sinza', '@Baba_Mwenye_Nyumba', '@Toto_la_UDSM', '@Fundi_Mitambo', '@Kigoli_Chuo', '@Mzee_wa_Gesti', '@Shemela_Official', '@Danga_la_Kariakoo'
@@ -850,7 +1136,7 @@
                     
                     const randomUser = fakeUsernames[Math.floor(Math.random() * fakeUsernames.length)];
                     let viewerCount = Math.floor(Math.random() * 1500) + 200;
-                    const uniqueId = src.slice(-10);
+                    const uniqueId = src.slice(-10).replace('.', '');
 
                     card.innerHTML = `
                         <video class="w-full h-full object-cover" autoplay loop muted playsinline src="${src}"></video>
@@ -879,7 +1165,7 @@
                 });
             }
 
-            // 6. Setup Testimonials
+            // 7. Setup Testimonials
             if (testimonialSlider) {
                 testimonialSlider.innerHTML = '';
                 testimonials.forEach(item => {
@@ -923,23 +1209,23 @@
             });
 
             // Testimonial Slider Logic
-            const slider = document.getElementById('testimonial-slider');
+            const testimonialSliderEl = document.getElementById('testimonial-slider');
             const prevBtn = document.getElementById('prev-testimonial');
             const nextBtn = document.getElementById('next-testimonial');
             
             const slideNext = () => {
-                if(!slider) return;
-                const slideWidth = slider.querySelector('.testimonial-slide').clientWidth;
-                const newScrollLeft = slider.scrollLeft + slideWidth;
-                slider.scrollTo({ 
-                    left: newScrollLeft >= slider.scrollWidth ? 0 : newScrollLeft, 
+                if(!testimonialSliderEl) return;
+                const slideWidth = testimonialSliderEl.querySelector('.testimonial-slide').clientWidth;
+                const newScrollLeft = testimonialSliderEl.scrollLeft + slideWidth;
+                testimonialSliderEl.scrollTo({ 
+                    left: newScrollLeft >= testimonialSliderEl.scrollWidth ? 0 : newScrollLeft, 
                     behavior: 'smooth' 
                 });
             };
             const slidePrev = () => {
-                if(!slider) return;
-                const slideWidth = slider.querySelector('.testimonial-slide').clientWidth;
-                slider.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+                if(!testimonialSliderEl) return;
+                const slideWidth = testimonialSliderEl.querySelector('.testimonial-slide').clientWidth;
+                testimonialSliderEl.scrollBy({ left: -slideWidth, behavior: 'smooth' });
             };
 
             let testimonialInterval = setInterval(slideNext, 5000);
@@ -1006,18 +1292,77 @@
                 document.getElementById(`mnyama-screen-${mnyamaScreenIndex}`).classList.add('active');
             }, 4000);
 
-            comparisonCtaButton.addEventListener('mouseenter', () => {
-                messageIndex = (messageIndex + 1) % ctaMessages.length;
-                ctaText.innerText = ctaMessages[messageIndex];
-                comparisonCtaButton.classList.remove('bg-green-600');
-                comparisonCtaButton.classList.add('bg-red-600');
-            });
+            if (comparisonCtaButton) {
+                comparisonCtaButton.addEventListener('mouseenter', () => {
+                    messageIndex = (messageIndex + 1) % ctaMessages.length;
+                    ctaText.innerText = ctaMessages[messageIndex];
+                    comparisonCtaButton.classList.remove('bg-green-600');
+                    comparisonCtaButton.classList.add('bg-red-600');
+                });
 
-            comparisonCtaButton.addEventListener('mouseleave', () => {
-                ctaText.innerText = "Acha Umasikini, Chagua Kuwa Mnyama";
-                comparisonCtaButton.classList.remove('bg-red-600');
-                comparisonCtaButton.classList.add('bg-green-600');
-            });
+                comparisonCtaButton.addEventListener('mouseleave', () => {
+                    ctaText.innerText = "Acha Umasikini, Chagua Kuwa Mnyama";
+                    comparisonCtaButton.classList.remove('bg-red-600');
+                    comparisonCtaButton.classList.add('bg-green-600');
+                });
+            }
+
+            // Final Gate Logic
+            if (pressureBar && headcount) {
+                let currentPressure = 85;
+                let currentHeadcount = 469;
+
+                setInterval(() => {
+                    currentPressure += Math.random() * 0.5;
+                    if (currentPressure > 98) {
+                        currentPressure = 98;
+                    }
+                    pressureBar.style.width = `${currentPressure}%`;
+                }, 1000);
+
+                setInterval(() => {
+                    if (currentHeadcount < 498) {
+                        currentHeadcount += 1;
+                        headcount.innerText = `${currentHeadcount} / 500`;
+                    }
+                }, Math.random() * 5000 + 3000);
+            }
+
+            // Live Chat Logic
+            const chatFeed = document.getElementById('chat-feed');
+            if (chatFeed) {
+                const fakeMessages = [
+                    { user: 'Admin_Moto 🔥', msg: 'Nimetuma video mpya ya housegirl, chekini.' },
+                    { user: 'Juma_la_Moto', msg: 'Kumamake hii video ni balaa! 💦' },
+                    { user: 'Toto_la_UDSM', msg: 'Nani ana namba ya yule demu wa Masaki?' },
+                    { user: 'Baba_Mwenye_Nyumba', msg: 'Nimetoka kumaliza mmoja, nani mwingine yuko online?' },
+                    { user: 'Shemela_Official', msg: 'Hii group ndo habari ya mjini. Buku 5 ndogo sana.' },
+                    { user: 'Fundi_Mitambo', msg: 'Hiyo link ya Engonga bado ipo?' },
+                    { user: 'Admin_Moto 🔥', msg: 'Ipo, nimeshai-pin juu.' },
+                    { user: 'Kojo_Master', msg: 'Hii video ya sasa hivi imenikojolesha fasta... asante admin' }
+                ];
+                
+                const userColors = {
+                    'Admin_Moto 🔥': 'text-red-400', 'Juma_la_Moto': 'text-yellow-400', 'Toto_la_UDSM': 'text-pink-400', 'Baba_Mwenye_Nyumba': 'text-blue-400', 'Shemela_Official': 'text-green-400', 'Fundi_Mitambo': 'text-purple-400', 'Kojo_Master': 'text-orange-400'
+                };
+
+                let chatMessageIndex = 0;
+
+                function addChatMessage() {
+                    if (chatFeed.children.length > 10) {
+                        chatFeed.removeChild(chatFeed.lastChild);
+                    }
+                    const messageData = fakeMessages[chatMessageIndex];
+                    const userColor = userColors[messageData.user] || 'text-white';
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'new-chat-message p-1.5 text-sm';
+                    messageElement.innerHTML = `<p><span class="font-bold ${userColor}">${messageData.user}:</span> <span class="text-gray-200">${messageData.msg}</span></p>`;
+                    chatFeed.insertBefore(messageElement, chatFeed.firstChild);
+                    chatMessageIndex = (chatMessageIndex + 1) % fakeMessages.length;
+                }
+                for(let i=0; i<5; i++){ addChatMessage(); }
+                setInterval(addChatMessage, 2500);
+            }
 
             // Payment Form Logic
             const showWaitingScreen = () => {
@@ -1043,7 +1388,6 @@
                 payButtonText.classList.remove('hidden');
                 payButtonSpinner.classList.add('hidden');
                 submitPaymentButton.disabled = false;
-                // Restore waiting screen elements
                 resultView.querySelector('svg').classList.remove('hidden');
                 resultView.querySelector('h3').textContent = "THIBITISHA KWENYE SIMU YAKO";
                 resultView.querySelector('p').textContent = "Ombi la malipo ya TSH 5,000 limetumwa. Tafadhali weka namba yako ya siri kukamilisha.";
@@ -1054,29 +1398,21 @@
 
             paymentForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
                 payButtonText.classList.add('hidden');
                 payButtonSpinner.classList.remove('hidden');
                 submitPaymentButton.disabled = true;
-
                 showWaitingScreen();
-
                 const phone = document.getElementById('phone').value;
-
                 try {
                     const response = await fetch('/pay', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ phone: phone })
                     });
-
                     const result = await response.json();
-                    
                     if (!response.ok) {
                         throw new Error(result.message_body || 'Ombi la malipo halikufanikiwa.');
                     }
-                    // If successful, the waiting screen remains. The backend handles the redirect.
-
                 } catch (error) {
                     showErrorScreen(error.message || 'Imeshindwa kuwasiliana na server. Angalia intaneti yako.');
                 }
