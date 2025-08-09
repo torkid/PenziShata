@@ -130,6 +130,33 @@
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
         }
+
+        /* Tool Card Styles */
+        .tool-card {
+            background-color: #1a1a1a;
+            border: 2px solid #333;
+            transition: all 0.3s ease-in-out;
+        }
+        .tool-card:hover {
+            border-color: #E50914;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+        .tool-card:hover .tool-icon {
+            filter: drop-shadow(0 0 10px #E50914);
+            transform: scale(1.1);
+        }
+        .tool-description {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-in-out, margin-top 0.5s ease-out;
+        }
+        .tool-card:hover .tool-description {
+            max-height: 200px; /* Urefu wa kutosha kwa maelezo */
+            opacity: 1;
+            margin-top: 1rem; /* 16px */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -270,41 +297,46 @@
 
                 <!-- Value Proposition Section -->
                 <section class="my-10 md:my-16">
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-8">Unapotoa Buku 5, Unanunua Haya Mambo:</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                        <div class="glass-card rounded-xl p-6 text-left flex items-start gap-4">
-                            <div class="text-4xl">🔥</div>
-                            <div>
-                                <h4 class="font-bold text-lg">Daily Dose ya Nyege</h4>
-                                <p class="text-[var(--text-muted)] text-sm mt-1">Video 20+ mpya kila siku. Simu yako haitapumzika.</p>
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase">BUKU 5 YAKO INAKUPA HIZI SILAHA:</h2>
+                        <p class="mt-2 max-w-xl mx-auto text-gray-400">
+                            Hii sio bando la internet. Hii ni leseni ya kufanya ushenzi. Hizi ndio zana zako za kumaliza njaa ya mboo.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                        <div class="tool-card rounded-lg p-4 text-center cursor-pointer">
+                            <div class="tool-icon text-6xl transition-transform duration-300">💣</div>
+                            <h3 class="font-black text-lg mt-2">BOMBA LA VIDEO</h3>
+                            <div class="tool-description text-sm text-gray-300">
+                                Kila saa, admin anadondosha video mpya za kutombana. Simu yako itajaa mpaka itoe moshi. Hutawahi kukosa cha kukojolea.
                             </div>
                         </div>
-                        <div class="glass-card rounded-xl p-6 text-left flex items-start gap-4">
-                            <div class="text-4xl">📹</div>
-                            <div>
-                                <h4 class="font-bold text-lg">Quality ya HD, Utamu Halisi</h4>
-                                <p class="text-[var(--text-muted)] text-sm mt-1">Video zote ni clear, utaona kila kitu. Sio video za 'blurry'.</p>
+                        <div class="tool-card rounded-lg p-4 text-center cursor-pointer">
+                            <div class="tool-icon text-6xl transition-transform duration-300">🦅</div>
+                            <h3 class="font-black text-lg mt-2">JICHO LA TAI (HD)</h3>
+                            <div class="tool-description text-sm text-gray-300">
+                                Video zetu ni clear mpaka unaona matundu ya kuma. Hakuna video za tochi za kusadikika. Hapa ni kuona kila kitu live.
                             </div>
                         </div>
-                        <div class="glass-card rounded-xl p-6 text-left flex items-start gap-4">
-                            <div class="text-4xl">🤫</div>
-                            <div>
-                                <h4 class="font-bold text-lg">Download & Tuma Bila Wasiwasi</h4>
-                                <p class="text-[var(--text-muted)] text-sm mt-1">Pata uwezo wa kudownload na kuwatumia marafiki zako kimyakimya.</p>
+                        <div class="tool-card rounded-lg p-4 text-center cursor-pointer">
+                            <div class="tool-icon text-6xl transition-transform duration-300">🤫</div>
+                            <h3 class="font-black text-lg mt-2">MFUKO WA KUIBA</h3>
+                            <div class="tool-description text-sm text-gray-300">
+                                Umeipenda video? Ibe, iweke kwenye simu yako. Ni yako milele. Tuma kwa washikaji zako wajue na wewe ni mnyama.
                             </div>
                         </div>
-                         <div class="glass-card rounded-xl p-6 text-left flex items-start gap-4">
-                            <div class="text-4xl">💬</div>
-                            <div>
-                                <h4 class="font-bold text-lg">Direct Access kwa Wanachama</h4>
-                                <p class="text-[var(--text-muted)] text-sm mt-1">Chat na wanachama wengine, badilishana namba na picha.</p>
+                        <div class="tool-card rounded-lg p-4 text-center cursor-pointer">
+                            <div class="tool-icon text-6xl transition-transform duration-300">😈</div>
+                            <h3 class="font-black text-lg mt-2">REDIO YA WANYAMA</h3>
+                            <div class="tool-description text-sm text-gray-300">
+                                Hapa sio kutazama tu. Unaingia kwenye group la WhatsApp. Namba za malaya na picha za uchi zinatembea kama njugu.
                             </div>
                         </div>
-                         <div class="glass-card rounded-xl p-6 text-left flex items-start gap-4 sm:col-span-2 lg:col-span-1">
-                            <div class="text-4xl">🚫</div>
-                            <div>
-                                <h4 class="font-bold text-lg">Hakuna Virusi, Hakuna Matangazo</h4>
-                                <p class="text-[var(--text-muted)] text-sm mt-1">Safe & clean. Ni raha zako tu na simu yako.</p>
+                        <div class="tool-card rounded-lg p-4 text-center cursor-pointer">
+                            <div class="tool-icon text-6xl transition-transform duration-300">💀</div>
+                            <h3 class="font-black text-lg mt-2">KINGA DHIDI YA USENGE</h3>
+                            <div class="tool-description text-sm text-gray-300">
+                                Zero matangazo. Zero virusi. Ni wewe, mboo yako, na video za kutombana tu. Hakuna wa kukukatishia uhondo.
                             </div>
                         </div>
                     </div>
