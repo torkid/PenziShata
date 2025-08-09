@@ -82,7 +82,7 @@
     <div class="relative min-h-screen flex flex-col overflow-x-hidden">
 
         <!-- Header -->
-        <header class="w-full px-4 sm:px-8 py-5 z-20">
+        <header class="w-full px-4 sm:px-8 py-5 z-20 absolute top-0 left-0">
             <div class="container mx-auto flex justify-center items-center">
                 <h1 class="text-4xl font-black text-white font-serif-display">Penzi<span class="text-[var(--brand-red)]">Shata</span></h1>
             </div>
@@ -90,22 +90,27 @@
 
         <!-- Main Content -->
         <main class="flex-grow flex flex-col items-center">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-
-                <!-- Hero Section -->
-                <section class="py-8 md:py-12">
+            
+            <!-- Hero Section -->
+            <section class="relative w-full h-[70vh] sm:h-[80vh] flex flex-col justify-center items-center text-center text-white overflow-hidden">
+                <video id="hero-video-player" autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0"></video>
+                <div class="absolute inset-0 bg-black/60 z-10"></div>
+                <div class="relative z-20 p-4">
                     <span class="bg-[var(--brand-red)] text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">🔞 Watu Wazima Pekee</span>
                     <h2 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight my-4 max-w-3xl mx-auto">
                         Acha Punyeto. Pata Utamu Halisi wa <span class="text-[var(--brand-red)]">Video za Kibongo</span>.
                     </h2>
-                    <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-xl mx-auto mb-8">
-                       Umechoka na video feki na picha za kuungaunga? Huku unapata 'raw footage', bila sensor, bila unafiki. Ni raha tupu kutoka kwa watu halisi kama wewe.
+                    <p class="text-base sm:text-lg text-gray-200 max-w-xl mx-auto mb-8">
+                       Umechoka na video feki? Huku unapata 'raw footage', bila sensor, bila unafiki. Ni raha tupu kutoka kwa watu halisi.
                     </p>
                     <button class="open-modal-trigger main-cta-button text-white font-bold py-4 px-8 rounded-lg text-lg sm:text-xl w-full max-w-sm mx-auto animate-pulse-red">
                         NIPE ACCESS SASA (TSH 5,000)
                     </button>
-                    <p class="text-xs text-[var(--text-muted)] mt-3">Malipo salama na ya siri.</p>
-                </section>
+                    <p class="text-xs text-gray-400 mt-3">Malipo salama na ya siri.</p>
+                </div>
+            </section>
+
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
                 <!-- Groups Section -->
                 <section class="my-10 md:my-16">
@@ -428,6 +433,7 @@
             ];
 
             // --- Element References ---
+            const heroVideoPlayer = document.getElementById('hero-video-player');
             const mainVideoPlayer = document.getElementById('main-video-player');
             const mainPlayButton = document.getElementById('main-play-button');
             const thumbnailsContainer = document.getElementById('video-thumbnails');
@@ -451,8 +457,15 @@
             const shuffleArray = (array) => array.sort(() => 0.5 - Math.random());
             
             // --- Initialization ---
+
+            // 1. Setup Hero Video
+            if (heroVideoPlayer) {
+                const randomHeroVideo = shuffleArray([...engongaVideoSources])[0];
+                heroVideoPlayer.src = randomHeroVideo;
+                heroVideoPlayer.load();
+            }
             
-            // 1. Setup Teaser Video Player & Thumbnails
+            // 2. Setup Teaser Video Player & Thumbnails
             if (mainVideoPlayer && thumbnailsContainer) {
                 const shuffledVideos = shuffleArray([...videoSources]);
                 const mainVideoSrc = shuffledVideos[0];
@@ -489,7 +502,7 @@
                 });
             }
 
-            // 2. Setup Engonga Thumbnails
+            // 3. Setup Engonga Thumbnails
             if (engongaThumbnailsContainer) {
                 engongaThumbnailsContainer.innerHTML = '';
                 shuffleArray(engongaVideoSources).slice(0, 12).forEach(src => {
@@ -512,7 +525,7 @@
                 });
             }
 
-            // 3. Setup Testimonials
+            // 4. Setup Testimonials
             if (testimonialSlider) {
                 testimonialSlider.innerHTML = '';
                 testimonials.forEach(item => {
@@ -531,7 +544,7 @@
                 });
             }
 
-            // 4. Setup Reels Carousel
+            // 5. Setup Reels Carousel
             if (reelsScroller) {
                 const selectedReels = shuffleArray([...reelVideoSources]).slice(0, 15);
                 const duplicatedReels = [...selectedReels, ...selectedReels]; 
@@ -545,7 +558,7 @@
                     video.src = src;
                     video.muted = true;
                     video.loop = true;
-                    video.playsinline = true;
+                    video.playsInline = true;
                     
                     videoContainer.appendChild(video);
                     reelsScroller.appendChild(videoContainer);
