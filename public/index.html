@@ -189,6 +189,30 @@
         }
         .cta-button { animation: pulse-green 2s infinite; }
         .cta-button:hover { animation: none; }
+
+        /* Marquee Styles */
+        .marquee-container {
+            display: flex;
+            width: max-content;
+        }
+        .marquee-content {
+            display: flex;
+            animation: marquee 60s linear infinite;
+        }
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0%); }
+            to { transform: translateX(-50%); }
+        }
+        @keyframes pulse-live {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .live-badge {
+            animation: pulse-live 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -451,12 +475,17 @@
                     </div>
                 </section>
                 
-                <!-- Reels Carousel Section -->
-                <section class="my-10 md:my-16 w-full overflow-hidden">
-                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Wanachama Wetu Live... Hakuna Kujificha Hapa. 👀</h2>
-                    <div class="carousel-container relative w-full">
-                        <div id="reels-scroller" class="flex scrolling-wrapper">
-                            <!-- Videos will be injected here by JavaScript -->
+                <!-- Live Feed Section -->
+                <section class="my-10 md:my-16 w-full">
+                    <div class="text-center mb-8 px-4">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase">STATUS ZA WANYAMA LIVE 24/7</h2>
+                        <p class="mt-2 max-w-xl mx-auto text-gray-400">
+                            Huku hakuna kulala. Hizi ni video halisi kutoka kwa wanachama wetu, sasa hivi. Wakati wewe unasoma haya, wao wanatombana.
+                        </p>
+                    </div>
+                    <div class="marquee-container relative flex overflow-hidden select-none">
+                        <div id="scroller" class="marquee-content flex-shrink-0 flex items-center justify-around min-w-full">
+                            <!-- Video cards zitaingizwa hapa na JavaScript -->
                         </div>
                     </div>
                 </section>
@@ -626,7 +655,7 @@
             const cctvThumbnails = document.getElementById('cctv-thumbnails');
             const finalCtaButton = document.getElementById('final-cta-button');
             const testimonialSlider = document.getElementById('testimonial-slider');
-            const reelsScroller = document.getElementById('reels-scroller');
+            const scroller = document.getElementById('scroller');
             const groupsGrid = document.getElementById('groups-grid');
             const vaultContainer = document.getElementById('vault-container');
             const vaultButton = document.getElementById('vault-button');
@@ -808,7 +837,49 @@
                 });
             }
 
-            // 5. Setup Testimonials
+            // 5. Setup Live Feed Section
+            if (scroller) {
+                const fakeUsernames = [
+                    '@Mrembo_wa_Sinza', '@Baba_Mwenye_Nyumba', '@Toto_la_UDSM', '@Fundi_Mitambo', '@Kigoli_Chuo', '@Mzee_wa_Gesti', '@Shemela_Official', '@Danga_la_Kariakoo'
+                ];
+                const allVideos = [...reelVideoSources, ...reelVideoSources];
+
+                allVideos.forEach(src => {
+                    const card = document.createElement('div');
+                    card.className = 'flex-shrink-0 mx-2 w-40 h-64 sm:w-48 sm:h-72 rounded-lg overflow-hidden relative border-2 border-gray-700 hover:border-red-500 transition-all duration-300 cursor-pointer';
+                    
+                    const randomUser = fakeUsernames[Math.floor(Math.random() * fakeUsernames.length)];
+                    let viewerCount = Math.floor(Math.random() * 1500) + 200;
+                    const uniqueId = src.slice(-10);
+
+                    card.innerHTML = `
+                        <video class="w-full h-full object-cover" autoplay loop muted playsinline src="${src}"></video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute top-2 left-2">
+                            <span class="live-badge bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded">LIVE</span>
+                        </div>
+                        <div class="absolute bottom-2 left-2 text-white">
+                            <p class="text-xs font-bold drop-shadow-lg">${randomUser}</p>
+                            <p class="text-xs text-gray-300 drop-shadow-lg flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C3.732 4.943 9.522 3 10 3s6.268 1.943 9.542 7c-3.274 5.057-9.062 7-9.542 7S3.732 15.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                <span id="views-${uniqueId}">${viewerCount}</span>
+                            </p>
+                        </div>
+                    `;
+                    scroller.appendChild(card);
+                    
+                    setInterval(() => {
+                        const viewerElement = document.getElementById(`views-${uniqueId}`);
+                        if(viewerElement){
+                            let currentViews = parseInt(viewerElement.innerText);
+                            const change = Math.floor(Math.random() * 5) - 2;
+                            viewerElement.innerText = Math.max(50, currentViews + change);
+                        }
+                    }, 3000);
+                });
+            }
+
+            // 6. Setup Testimonials
             if (testimonialSlider) {
                 testimonialSlider.innerHTML = '';
                 testimonials.forEach(item => {
@@ -824,32 +895,6 @@
                         </div>
                     `;
                     testimonialSlider.appendChild(slide);
-                });
-            }
-
-            // 6. Setup Reels Carousel
-            if (reelsScroller) {
-                const selectedReels = shuffleArray([...reelVideoSources]).slice(0, 15);
-                const duplicatedReels = [...selectedReels, ...selectedReels]; 
-
-                duplicatedReels.forEach((src) => {
-                    const videoContainer = document.createElement('div');
-                    videoContainer.className = 'open-modal-trigger cursor-pointer flex-shrink-0 mx-2';
-
-                    const video = document.createElement('video');
-                    video.className = 'w-40 h-64 object-cover rounded-lg shadow-lg border-2 border-white/20';
-                    video.src = src;
-                    video.muted = true;
-                    video.loop = true;
-                    video.playsinline = true;
-                    
-                    videoContainer.appendChild(video);
-                    reelsScroller.appendChild(videoContainer);
-
-                    const playPromise = video.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(e => { if (e.name !== 'AbortError') console.log("Autoplay was prevented for reel."); });
-                    }
                 });
             }
 
