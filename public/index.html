@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Condensed:wght@700&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand-red: #E50914;
@@ -25,6 +25,9 @@
         }
         .font-condensed {
             font-family: 'Roboto Condensed', sans-serif;
+        }
+        .font-cctv {
+            font-family: 'Chakra Petch', sans-serif;
         }
         .main-cta-button {
             background-color: var(--brand-red);
@@ -107,6 +110,26 @@
         .inside-vault { opacity: 0; transition: opacity 0.5s 1s ease-in; }
         .vault-container.is-opening .inside-vault { opacity: 1; }
         .glitch-img { animation: glitch 1s linear infinite; }
+
+        /* Challenge Video Animations */
+        @keyframes static-noise {
+            0% { background-position: 0 0; } 10% { background-position: -5% -10%; } 20% { background-position: -15% 5%; } 30% { background-position: 7% -25%; } 40% { background-position: 20% 25%; } 50% { background-position: -25% 10%; } 60% { background-position: 15% 5%; } 70% { background-position: 0 15%; } 80% { background-position: 25% 35%; } 90% { background-position: -10% 10%; } 100% { background-position: 0 0; }
+        }
+        .static-overlay {
+            animation: static-noise 1s steps(1) infinite;
+            opacity: 0.1;
+        }
+        @keyframes rec-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+        .rec-blink {
+            animation: rec-blink 1.5s infinite;
+        }
+        .interrupted-popup {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -210,19 +233,38 @@
                     </div>
                 </section>
 
-                <!-- Video Teaser Section -->
+                <!-- Video Challenge Section -->
                 <section class="my-10 md:my-16">
-                     <h3 class="text-2xl md:text-3xl font-bold text-center mb-6">Onja Asali ya VIP... Hii ni Sample Tu 😉</h3>
-                    <div class="max-w-4xl mx-auto">
-                        <div id="main-video-container" class="bg-black rounded-xl overflow-hidden shadow-lg border border-gray-800 relative aspect-square">
-                            <video id="main-video-player" class="w-full h-full object-cover" muted playsinline></video>
-                             <div id="main-play-button" class="absolute inset-0 flex items-center justify-center bg-black/50 cursor-pointer transition-opacity duration-300 opacity-100 hover:opacity-75">
-                                <svg class="w-16 h-16 md:w-20 md:h-20 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl md:text-4xl font-black uppercase text-yellow-400">JE, UNAWEZA KUMALIZA HII VIDEO</h2>
+                        <h3 class="text-3xl md:text-4xl font-black uppercase text-gray-300">BILA KUKOJOA?</h3>
+                        <p class="mt-4 max-w-2xl mx-auto text-gray-400">
+                            Wengi wameshindwa. Hii video ina utamu uliopitiliza. Tunaweka dau, huwezi kufika sekunde ya 30 bila kumwaga. Thibitisha kama wewe ni mwanaume kweli.
+                        </p>
+                    </div>
+                    <div id="player-container" class="relative w-full max-w-2xl mx-auto border-4 border-gray-800 rounded-lg overflow-hidden shadow-2xl shadow-yellow-900/30">
+                        <video id="challenge-video" class="w-full aspect-video block" muted playsinline preload="metadata">
+                            <!-- Video source itawekwa na JavaScript -->
+                        </video>
+                        <div id="play-overlay" class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center cursor-pointer transition-opacity duration-300">
+                            <svg class="w-20 h-20 text-white opacity-80" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            <span class="text-white font-bold text-xl mt-4">KUBALI CHANGAMOTO</span>
+                        </div>
+                        <div id="interruption-overlay" class="absolute inset-0 flex-col items-center justify-center bg-black/70 interrupted-popup p-8 text-center hidden">
+                            <div class="static-overlay absolute inset-0 z-0"></div>
+                            <div class="relative z-10">
+                                <h3 class="text-5xl md:text-7xl font-black text-red-500 font-cctv tracking-widest">UMESHINDWA MAPEMA!</h3>
+                                <p class="text-lg md:text-xl font-bold text-white mt-4 bg-black/50 p-2 rounded">Video ya bure imeishia hapa. Lipa buku 5 uone kama unaweza kuhimili video nzima.</p>
                             </div>
                         </div>
-                        <div id="video-thumbnails" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-4">
-                            <!-- Thumbnails will be injected here -->
-                        </div>
+                    </div>
+                    <div id="cctv-thumbnails" class="flex flex-wrap justify-center gap-2 sm:gap-4 mt-4">
+                        <!-- Thumbnails zitaingizwa hapa na JavaScript -->
+                    </div>
+                     <div class="text-center mt-8">
+                        <button id="final-cta-button" class="open-modal-trigger bg-yellow-500 text-black font-black text-xl uppercase py-4 px-10 rounded-lg shadow-lg transition-all duration-300 hover:bg-yellow-400 hover:scale-105">
+                            SITAKI KUSHINDWA (TSH 5,000)
+                        </button>
                     </div>
                 </section>
 
@@ -464,9 +506,11 @@
 
             // --- Element References ---
             const heroVideoPlayer = document.getElementById('hero-video-player');
-            const mainVideoPlayer = document.getElementById('main-video-player');
-            const mainPlayButton = document.getElementById('main-play-button');
-            const thumbnailsContainer = document.getElementById('video-thumbnails');
+            const challengeVideo = document.getElementById('challenge-video');
+            const playOverlay = document.getElementById('play-overlay');
+            const interruptionOverlay = document.getElementById('interruption-overlay');
+            const cctvThumbnails = document.getElementById('cctv-thumbnails');
+            const finalCtaButton = document.getElementById('final-cta-button');
             const testimonialSlider = document.getElementById('testimonial-slider');
             const reelsScroller = document.getElementById('reels-scroller');
             const groupsGrid = document.getElementById('groups-grid');
@@ -560,41 +604,55 @@
                 }, 2500);
             }
             
-            // 3. Setup Teaser Video Player & Thumbnails
-            if (mainVideoPlayer && thumbnailsContainer) {
-                const shuffledVideos = shuffleArray([...videoSources]);
-                const mainVideoSrc = shuffledVideos[0];
-                const thumbnailSources = shuffledVideos.slice(1, 9); // Show 8 thumbnails
+            // 3. Setup Video Challenge Section
+            if (challengeVideo) {
+                const challengeVideoSources = [
+                    'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452678/13452678-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12444399/12444399-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452698/13452698-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060359/13060359-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12040346/12040346-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172572/13172572-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172064/13172064-preview.webm', 'https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13382197/13382197-preview.webm'
+                ];
+                let interruptionTimer;
 
-                mainVideoPlayer.src = mainVideoSrc;
-                mainVideoPlayer.load();
+                function setChallengeVideo(src) {
+                    challengeVideo.src = src;
+                    challengeVideo.load();
+                    challengeVideo.pause();
+                    playOverlay.classList.remove('hidden');
+                    interruptionOverlay.classList.add('hidden');
+                    finalCtaButton.classList.remove('animate-pulse-red', 'bg-red-600', 'hover:bg-red-500');
+                    finalCtaButton.innerText = "SITAKI KUSHINDWA (TSH 5,000)";
+                    clearTimeout(interruptionTimer);
+                }
 
-                thumbnailsContainer.innerHTML = ''; // Clear existing
-                thumbnailSources.forEach(src => {
-                    const thumbVideo = document.createElement('video');
-                    thumbVideo.className = 'w-full aspect-video object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-[var(--brand-red)] transition-all duration-300';
-                    thumbVideo.src = src;
-                    thumbVideo.muted = true;
-                    thumbVideo.playsinline = true;
+                function playAndSetTrap() {
+                    playOverlay.classList.add('hidden');
+                    challengeVideo.play().catch(e => console.error("Play failed:", e));
 
-                    thumbVideo.addEventListener('mouseenter', () => {
-                        const playPromise = thumbVideo.play();
-                        if (playPromise !== undefined) {
-                            playPromise.catch(error => {
-                                if (error.name !== 'AbortError') { console.error("Thumbnail play error:", error); }
-                            });
-                        }
-                    });
-                    thumbVideo.addEventListener('mouseleave', () => { thumbVideo.pause(); });
-                    
-                    thumbVideo.addEventListener('click', () => {
-                        mainVideoPlayer.src = src;
-                        mainVideoPlayer.load();
-                        mainVideoPlayer.pause();
-                        mainPlayButton.style.opacity = '1';
-                    });
-                    thumbnailsContainer.appendChild(thumbVideo);
+                    interruptionTimer = setTimeout(() => {
+                        challengeVideo.pause();
+                        interruptionOverlay.classList.remove('hidden');
+                        finalCtaButton.classList.add('animate-pulse-red', 'bg-red-600', 'hover:bg-red-500');
+                        finalCtaButton.innerText = "NAKUBALI DAU (LIPA 5,000)";
+                    }, 10000); // Sekunde 10
+                }
+
+                challengeVideoSources.slice(0, 5).forEach((src, index) => {
+                    const thumbWrapper = document.createElement('div');
+                    thumbWrapper.className = 'relative w-24 h-16 sm:w-32 sm:h-20 border-2 border-gray-700 rounded cursor-pointer overflow-hidden hover:border-yellow-400 transition-all';
+                    thumbWrapper.innerHTML = `
+                        <video class="w-full h-full object-cover" muted loop playsinline src="${src}"></video>
+                        <div class="absolute top-1 left-1 flex items-center space-x-1">
+                            <span class="w-2 h-2 bg-red-500 rounded-full rec-blink"></span>
+                            <span class="font-cctv text-xs text-white drop-shadow-lg">LIVE</span>
+                        </div>
+                        <div class="absolute bottom-0 right-1 font-cctv text-xs text-white drop-shadow-lg">DAU #${index + 1}</div>
+                    `;
+                    thumbWrapper.addEventListener('click', () => setChallengeVideo(src));
+                    cctvThumbnails.appendChild(thumbWrapper);
                 });
+                
+                if (challengeVideoSources.length > 0) {
+                    setChallengeVideo(challengeVideoSources[0]);
+                }
+                playOverlay.addEventListener('click', playAndSetTrap);
             }
 
             // 4. Setup Engonga Vault
@@ -704,33 +762,6 @@
             paymentModal.addEventListener('click', (event) => {
                 if (event.target === paymentModal) closeModal();
             });
-
-            // Main Video Player Logic
-            const playMainVideo = () => {
-                if (!mainVideoPlayer) return;
-                const playPromise = mainVideoPlayer.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        mainPlayButton.style.opacity = '0';
-                        setTimeout(() => {
-                            if (!mainVideoPlayer.paused) {
-                                mainVideoPlayer.pause();
-                                openModal();
-                            }
-                        }, 10000);
-                    }).catch(error => {
-                        if (error.name !== 'AbortError') { console.error("Main video play failed:", error); }
-                    });
-                }
-            };
-
-            mainPlayButton.addEventListener('click', playMainVideo);
-            mainVideoPlayer.addEventListener('click', () => {
-                if (mainVideoPlayer.paused) { playMainVideo(); } 
-                else { mainVideoPlayer.pause(); }
-            });
-            mainVideoPlayer.addEventListener('pause', () => { mainPlayButton.style.opacity = '1'; });
-            mainVideoPlayer.addEventListener('play', () => { mainPlayButton.style.opacity = '0'; });
 
             // Testimonial Slider Logic
             const slider = document.getElementById('testimonial-slider');
