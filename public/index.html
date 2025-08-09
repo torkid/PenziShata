@@ -16,10 +16,11 @@
             --card-bg: #141414;
             --text-light: #F5F5F5;
             --text-muted: #A0A0A0;
+            --whatsapp-card-bg: #121B22;
+            --whatsapp-green: #00A884;
         }
         body { 
             font-family: 'Inter', sans-serif;
-            /* Updated background for performance */
             background-color: var(--dark-bg);
             background-image: radial-gradient(circle at top, #1a1a1a 0%, #0A0A0A 80%);
             color: var(--text-light);
@@ -41,6 +42,16 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .whatsapp-card {
+            background-color: var(--whatsapp-card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .whatsapp-green {
+            background-color: var(--whatsapp-green);
+        }
+        .whatsapp-green:hover {
+            background-color: #00896B;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -94,6 +105,52 @@
                         NIPE ACCESS SASA (TSH 5,000)
                     </button>
                     <p class="text-xs text-[var(--text-muted)] mt-3">Malipo salama na ya siri.</p>
+                </section>
+
+                <!-- Groups Section -->
+                <section class="my-10 md:my-16">
+                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-8">Chagua Sumu Yako... Kila Group Lina Kiu Yake 😈</h3>
+                    <div class="space-y-4 max-w-2xl mx-auto">
+                        <!-- Group Card 1 -->
+                        <div class="whatsapp-card rounded-xl shadow-lg p-3 flex items-center gap-4">
+                           <video class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full flex-shrink-0" autoplay loop muted playsinline>
+                               <source src="https://www.mzansifun.com/upload/videos/2025/05/sY97MeomSLRKuEGCMLu4_21_dfd4d5f54b75f029d090426b0bd47c95_video_shorts_360p_converted.mp4" type="video/mp4">
+                           </video>
+                           <div class="text-left flex-grow">
+                                <h4 class="font-bold text-lg text-white">Video za Kichakani 🌳</h4>
+                                <p class="text-gray-400 mt-1 text-xs sm:text-sm">Video halisi za watu wakijirusha kichakani, gesti, na kwenye magari. Raw & Uncensored.</p>
+                           </div>
+                           <button class="open-modal-trigger whatsapp-green text-white font-bold py-2 px-4 rounded-full text-sm flex-shrink-0">
+                                Jiunge
+                           </button>
+                        </div>
+                        <!-- Group Card 2 -->
+                        <div class="whatsapp-card rounded-xl shadow-lg p-3 flex items-center gap-4">
+                           <video class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full flex-shrink-0" autoplay loop muted playsinline>
+                               <source src="https://www.mzansifun.com/upload/videos/2024/12/JHOqoYTNAZ6lhBcBQYSb_10_f2dcc3801e4738a4420eb3300db89abd_video_shorts_240p_converted.mp4" type="video/mp4">
+                           </video>
+                           <div class="text-left flex-grow">
+                                <h4 class="font-bold text-lg text-white">Mashine za Bongo 🍑</h4>
+                                <p class="text-gray-400 mt-1 text-xs sm:text-sm">Jionee warembo wa Kitanzania wenye maumbo matata wakionyesha ufundi wao.</p>
+                           </div>
+                           <button class="open-modal-trigger whatsapp-green text-white font-bold py-2 px-4 rounded-full text-sm flex-shrink-0">
+                                Jiunge
+                           </button>
+                        </div>
+                        <!-- Group Card 3 -->
+                        <div class="whatsapp-card rounded-xl shadow-lg p-3 flex items-center gap-4">
+                           <video class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full flex-shrink-0" autoplay loop muted playsinline>
+                               <source src="https://www.mzansifun.com/upload/videos/2024/06/2t6k3Omq3Jq7Po9M1gdy_28_d235ebbf915f31c2c1193f47a73937d2_video_shorts_240p_converted.mp4" type="video/mp4">
+                           </video>
+                           <div class="text-left flex-grow">
+                                <h4 class="font-bold text-lg text-white">Wanafunzi wa Chuo (18+) 🎓</h4>
+                                <p class="text-gray-400 mt-1 text-xs sm:text-sm">Tazama wanafunzi (18+) wakivua uniform na kuonyesha utundu wao. Content exclusive.</p>
+                           </div>
+                           <button class="open-modal-trigger whatsapp-green text-white font-bold py-2 px-4 rounded-full text-sm flex-shrink-0">
+                                Jiunge
+                           </button>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- Video Teaser Section -->
