@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Condensed:wght@700&family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Condensed:wght@700&family=Chakra+Petch:wght@700&family=Teko:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand-red: #E50914;
@@ -28,6 +28,9 @@
         }
         .font-cctv {
             font-family: 'Chakra Petch', sans-serif;
+        }
+        .font-display {
+            font-family: 'Teko', sans-serif;
         }
         .main-cta-button {
             background-color: var(--brand-red);
@@ -157,6 +160,35 @@
             opacity: 1;
             margin-top: 1rem; /* 16px */
         }
+
+        /* Phone Comparison Styles */
+        .phone-frame {
+            background: #1a1a1a;
+            border: 8px solid #111;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .phone-screen {
+            background: #000;
+            overflow: hidden;
+        }
+        .mshamba-screen-content, .mnyama-screen-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .mshamba-screen-content.active { display: flex; }
+        .mnyama-screen-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .buffering-icon { animation: spin 1s linear infinite; }
+        .cracked-overlay {
+            background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="crack" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="scale(2) rotate(45)"><path d="M 0 25 L 50 25 M 25 0 L 25 50" stroke="%23222" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23crack)" opacity="0.1"/></svg>');
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(22, 163, 74, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+        }
+        .cta-button { animation: pulse-green 2s infinite; }
+        .cta-button:hover { animation: none; }
     </style>
 </head>
 <body class="antialiased">
@@ -342,30 +374,80 @@
                     </div>
                 </section>
 
-                <!-- Before/After Section -->
+                <!-- Phone Comparison Section -->
                 <section class="my-10 md:my-16">
-                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Upande Gani wa Maisha Upo Sasa Hivi?</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <!-- Left Column -->
-                        <div class="glass-card border-red-700 rounded-xl p-6">
-                            <h3 class="text-2xl font-bold text-red-500 mb-4">MAISHA YA PUNYETO 😫</h3>
-                            <ul class="space-y-3 text-left text-[var(--text-muted)]">
-                                <li class="flex items-start"><span class="mr-3 mt-1">❌</span> <span>Kutafuta video kwenye ma-site ya ajabu yaliyojaa matangazo.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1">❌</span> <span>Ku-download virusi badala ya video unayoitaka.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1">❌</span> <span>Kuishia na picha za 'Photoshop' na video za kuungaunga.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1">❌</span> <span>Kujisikia mpweke na mwenye hamu isiyoisha.</span></li>
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl sm:text-5xl font-black uppercase font-display tracking-wider">USIKU HUU, WEWE NI NANI?</h2>
+                        <p class="mt-2 max-w-2xl mx-auto text-gray-400">
+                            Kuna aina mbili za wanaume. Mmoja anapiga punyeto kwa shida. Mwingine anatazama video za kutombana live. Chagua upande wako.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                        <div class="flex flex-col items-center">
+                            <h3 class="text-3xl font-black text-red-600 uppercase mb-4 font-display">MAISHA YA KILAZA 🤢</h3>
+                            <div class="phone-frame w-full max-w-sm h-[500px] sm:h-[600px] rounded-3xl p-2">
+                                <div class="phone-screen w-full h-full rounded-2xl relative">
+                                    <div class="cracked-overlay absolute inset-0 z-20 pointer-events-none"></div>
+                                    <div id="mshamba-screen-1" class="mshamba-screen-content active h-full flex-col items-center justify-center bg-white text-black p-4">
+                                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <h4 class="font-bold text-xl mt-4">This site can't be reached</h4>
+                                        <p class="text-gray-500 text-sm">ERR_CONNECTION_TIMED_OUT</p>
+                                    </div>
+                                    <div id="mshamba-screen-2" class="mshamba-screen-content h-full flex-col items-center justify-center bg-red-900 text-white p-4">
+                                         <svg class="w-16 h-16 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                        <h4 class="font-bold text-2xl mt-4">WARNING!</h4>
+                                        <p class="text-red-200 text-sm">VIRUS DETECTED</p>
+                                    </div>
+                                    <div id="mshamba-screen-3" class="mshamba-screen-content h-full flex-col items-center justify-center bg-black">
+                                        <div class="w-16 h-16 border-4 border-gray-700 border-t-gray-400 rounded-full buffering-icon"></div>
+                                         <p class="text-gray-500 text-sm mt-4">Loading...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="mt-6 space-y-3 text-left text-gray-400 max-w-sm">
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Ku-google "video za kutombana" na kuambulia matangazo ya kamari.</span></li>
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Kuhangaika na VPN inayokata kila baada ya dakika mbili.</span></li>
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Ku-download virusi vinavyojaza simu yako usenge mtupu.</span></li>
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Kuishia kukojoa na picha za Instagram alizopiga jirani yako.</span></li>
                             </ul>
                         </div>
-                        <!-- Right Column -->
-                        <div class="glass-card border-green-600 rounded-xl p-6">
-                            <h3 class="text-2xl font-bold text-green-500 mb-4">MAISHA YA PENZISHATA 😈</h3>
-                            <ul class="space-y-3 text-left text-[var(--text-muted)]">
-                                <li class="flex items-start"><span class="mr-3 mt-1">✅</span> <span>Kufungua simu na kukutana na video 20+ mpya kila siku.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1">✅</span> <span>Kuwa kwenye community ya watu wenye nyege kama wewe.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1">✅</span> <span>Kuona video halisi za Kibongo, bila sensor na katika ubora wa HD.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1">✅</span> <span>Kuridhisha hamu yako papo hapo, wakati wowote.</span></li>
+                        <div class="flex flex-col items-center">
+                            <h3 class="text-3xl font-black text-green-500 uppercase mb-4 font-display">MAISHA YA KIFALME 🔥</h3>
+                            <div class="phone-frame w-full max-w-sm h-[500px] sm:h-[600px] rounded-3xl p-2 border-green-500/50">
+                                <div class="phone-screen w-full h-full rounded-2xl relative">
+                                    <div id="mnyama-screen-1" class="mnyama-screen-content active h-full bg-gray-900 p-2 grid grid-cols-3 gap-1">
+                                        <img src="https://placehold.co/100x150/000000/FFFFFF?text=HD" class="rounded object-cover">
+                                        <img src="https://placehold.co/100x150/111111/FFFFFF?text=HD" class="rounded object-cover">
+                                        <img src="https://placehold.co/100x150/222222/FFFFFF?text=HD" class="rounded object-cover">
+                                        <img src="https://placehold.co/100x150/333333/FFFFFF?text=HD" class="rounded object-cover">
+                                        <img src="https://placehold.co/100x150/444444/FFFFFF?text=HD" class="rounded object-cover">
+                                        <img src="https://placehold.co/100x150/555555/FFFFFF?text=HD" class="rounded object-cover">
+                                    </div>
+                                    <div id="mnyama-screen-2" class="mnyama-screen-content h-full bg-gray-900 p-4 flex flex-col">
+                                        <div class="bg-green-800/50 p-3 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center font-bold text-white">😈</div>
+                                                <div class="ml-3">
+                                                    <p class="font-bold text-white">WANYAMA TU</p>
+                                                    <p class="text-xs text-gray-300">Video 18 mpya zimetumwa...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="mt-6 space-y-3 text-left text-gray-300 max-w-sm">
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Kufungua link moja na kukutana na video 1000+ za HD zikikusubiri.</span></li>
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Kuwa kwenye magroup ya WhatsApp yaliyojaa malaya na wanyama wenzako.</span></li>
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Ku-download video yoyote unayoitaka na kuitunza kwenye simu yako milele.</span></li>
+                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Kujibu "Niko busy" kwa demu wako, huku unakojoa kimyakimya.</span></li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="text-center mt-16">
+                        <button id="comparison-cta-button" class="cta-button open-modal-trigger bg-green-600 text-white font-black text-2xl uppercase py-5 px-12 rounded-lg shadow-lg shadow-green-900/50 transition-all duration-300 hover:scale-110">
+                            <span id="cta-text">Acha Umasikini, Chagua Kuwa Mnyama</span>
+                        </button>
                     </div>
                 </section>
                 
@@ -856,6 +938,41 @@
                     toast.remove();
                 }, 4900);
             }, 8000);
+
+            // Phone Comparison Logic
+            const comparisonCtaButton = document.getElementById('comparison-cta-button');
+            const ctaText = document.getElementById('cta-text');
+            const ctaMessages = [
+                "LIPA BUKU 5 UWE MNYAMA", "WENZAKO WOTE WAKO NDANI", "USIBAKI PEKE YAKO", "BONGO NZIMA IKO HAPA", "NYEGE HAZISUBIRI..."
+            ];
+            let messageIndex = 0;
+            let mshambaScreenIndex = 1;
+            let mnyamaScreenIndex = 1;
+
+            setInterval(() => {
+                document.querySelectorAll('.mshamba-screen-content').forEach(el => el.classList.remove('active'));
+                mshambaScreenIndex = (mshambaScreenIndex % 3) + 1;
+                document.getElementById(`mshamba-screen-${mshambaScreenIndex}`).classList.add('active');
+            }, 3000);
+
+            setInterval(() => {
+                document.querySelectorAll('.mnyama-screen-content').forEach(el => el.classList.remove('active'));
+                mnyamaScreenIndex = (mnyamaScreenIndex % 2) + 1;
+                document.getElementById(`mnyama-screen-${mnyamaScreenIndex}`).classList.add('active');
+            }, 4000);
+
+            comparisonCtaButton.addEventListener('mouseenter', () => {
+                messageIndex = (messageIndex + 1) % ctaMessages.length;
+                ctaText.innerText = ctaMessages[messageIndex];
+                comparisonCtaButton.classList.remove('bg-green-600');
+                comparisonCtaButton.classList.add('bg-red-600');
+            });
+
+            comparisonCtaButton.addEventListener('mouseleave', () => {
+                ctaText.innerText = "Acha Umasikini, Chagua Kuwa Mnyama";
+                comparisonCtaButton.classList.remove('bg-red-600');
+                comparisonCtaButton.classList.add('bg-green-600');
+            });
 
             // Payment Form Logic
             const showWaitingScreen = () => {
