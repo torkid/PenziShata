@@ -381,8 +381,8 @@
         /* ATM Styles */
         .atm-screen {
             background: #081408; /* Dark green screen */
-            border: 2px solid #333;
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.2), inset 0 0 15px rgba(0,0,0,0.4);
+            border: 4px solid #333;
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.3), inset 0 0 20px rgba(0,0,0,0.5);
         }
         .atm-text {
             color: #4ade80; /* Bright green text */
@@ -390,7 +390,7 @@
         }
         .atm-input {
             background-color: rgba(74, 222, 128, 0.1);
-            border: 1px solid #22c55e;
+            border: 2px solid #22c55e;
             color: #f0f0f0;
         }
         .atm-input::placeholder {
@@ -623,7 +623,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Phone Comparison Section -->
                 <section class="my-10 md:my-16">
                     <div class="text-center mb-12">
@@ -874,56 +874,46 @@
     </div>
     
     <!-- Payment Modal (Initially Hidden) -->
-    <div id="payment-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 modal-backdrop">
-        <div class="bg-black p-2 sm:p-4 rounded-xl border-2 border-gray-700 shadow-2xl relative w-full max-w-sm">
-            <button id="close-modal-btn" class="absolute -top-2 -right-2 w-8 h-8 bg-white text-black rounded-full font-bold text-xl z-10">&times;</button>
-            <div id="atm-screen" class="atm-screen w-full h-auto min-h-[520px] rounded-lg p-4 sm:p-6 flex flex-col">
-                
-                <!-- Form View -->
-                <div id="form-view" class="h-full flex flex-col justify-between">
-                    <div>
-                        <h2 class="font-pixel text-3xl text-center atm-text">ATM YA NYEGE</h2>
-                        <div class="border-t-2 border-green-500/30 my-2"></div>
-                        <p class="text-center text-green-300 text-xs sm:text-sm">Thibitisha muamala wako hapa chini.</p>
-                        <div class="font-pixel text-base atm-text border-y-2 border-dashed border-green-500/30 py-2 my-4 text-left">
-                            <p>UNAPATA HIVI VITU:</p>
-                            <ul class="list-disc list-inside text-green-300">
-                                <li>VIDEO 1000+ (HD)</li>
-                                <li>MAGROUP 69+ (WHATSAPP)</li>
-                                <li>NAMBA ZA MALAYA</li>
-                                <li>ACCESS YA MILELE</li>
-                            </ul>
-                            <p class="text-right mt-1">JUMLA: TSH 5,000/=</p>
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+         <div id="payment-box" class="w-full max-w-md">
+            <div class="bg-gray-800 p-4 rounded-xl border-4 border-gray-900 shadow-2xl relative">
+                <button id="close-modal" class="absolute top-2 right-4 text-gray-400 hover:text-green-400 text-4xl font-light z-20">&times;</button>
+                <div id="atm-screen" class="atm-screen w-full h-[500px] rounded-lg p-6 flex flex-col justify-between">
+                    <div id="form-view">
+                        <h2 class="font-pixel text-4xl text-center atm-text">ATM YA NYEGE</h2>
+                        <div class="border-t-2 border-green-500/30 my-4"></div>
+                        <p class="text-center text-green-300 text-sm">
+                            Weka namba yako ya simu hapa chini. Buku 5 itakatwa, na utapata link zako zote papo hapo.
+                        </p>
+                        <div class="my-6">
+                            <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="Watoa Huduma" class="mx-auto h-8 brightness-200 contrast-200">
                         </div>
-                        <div class="my-4">
-                            <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="Watoa Huduma" class="mx-auto h-6 sm:h-8 brightness-200 contrast-200">
+                        <form id="payment-form">
+                            <label for="phone" class="font-pixel text-lg atm-text">NAMBA YA KUTOLEA MZIGO:</label>
+                            <input type="tel" id="phone" name="phone" class="atm-input font-pixel text-2xl w-full p-2 rounded-md mt-2 text-center" placeholder="07XX XXX XXX" required>
+                            <button type="submit" class="atm-button w-full mt-6 text-white font-black text-2xl py-3 rounded-lg uppercase">
+                                THIBITISHA MUAMALA
+                            </button>
+                        </form>
+                    </div>
+                    <div id="security-view" class="hidden h-full flex flex-col items-center justify-center text-center">
+                        <div class="flex space-x-4 text-6xl">
+                            <span class="bouncing-emoji" style="animation-delay: 0s;">🍆</span>
+                            <span class="bouncing-emoji" style="animation-delay: 0.2s;">🍑</span>
+                            <span class="bouncing-emoji" style="animation-delay: 0.4s;">💦</span>
                         </div>
+                        <p id="loading-text" class="font-pixel text-2xl atm-text mt-8 blinking-text h-12"></p>
                     </div>
-                    <form id="payment-form">
-                        <label for="phone" class="font-pixel text-base atm-text">NAMBA YA KUTOLEA MZIGO:</label>
-                        <input type="tel" id="phone" name="phone" class="atm-input font-pixel text-xl w-full p-2 rounded-md mt-1 text-center" placeholder="07XX XXX XXX" required>
-                        <button type="submit" class="atm-button w-full mt-4 text-white font-black text-xl py-3 rounded-lg uppercase">FUNGUA RAHA SASA</button>
-                    </form>
-                </div>
-
-                <!-- Preparation View -->
-                <div id="preparing-view" class="hidden h-full flex flex-col text-center">
-                    <h3 class="font-pixel text-2xl atm-text mb-3">TUNAKUANDALIA MZIGO...</h3>
-                    <div id="prep-list" class="space-y-2 w-full text-left font-pixel text-base atm-text flex-grow overflow-y-auto"></div>
-                    <p class="font-pixel text-base atm-text mt-2 blinking-text">SUBIRI KIDOGO...</p>
-                </div>
-
-                <!-- Waiting for PIN View -->
-                <div id="waiting-view" class="hidden h-full flex flex-col items-center justify-center text-center">
-                    <div class="w-24 h-24 relative flex items-center justify-center">
-                        <div class="loading-circle absolute w-full h-full border-4 border-dashed border-green-500 rounded-full border-t-transparent"></div>
-                        <svg class="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    <div id="waiting-view" class="hidden h-full flex flex-col items-center justify-center text-center">
+                        <div class="w-32 h-32 relative flex items-center justify-center">
+                            <div class="loading-circle absolute w-full h-full border-4 border-dashed border-green-500 rounded-full border-t-transparent"></div>
+                            <svg class="w-16 h-16 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="font-pixel text-3xl atm-text mt-6">ANGALIA SIMU YAKO!</h3>
+                        <p class="text-green-300 mt-2">Tumekutumia ombi la malipo. Weka namba yako ya siri kumaliza.</p>
+                        <p class="font-pixel text-lg atm-text mt-4 blinking-text">INASUBIRI UTHIBITISHO...</p>
                     </div>
-                    <h3 class="font-pixel text-2xl atm-text mt-4">ANGALIA SIMU YAKO!</h3>
-                    <p class="text-green-300 mt-1 text-sm">Weka namba yako ya siri kumaliza.</p>
-                    <p class="font-pixel text-base atm-text mt-3 blinking-text">INASUBIRI UTHIBITISHO...</p>
                 </div>
-
             </div>
         </div>
     </div>
@@ -983,9 +973,9 @@
             
             // Modal elements
             const paymentModal = document.getElementById('payment-modal');
-            const closeModalButton = document.getElementById('close-modal-btn');
+            const closeModalButton = document.getElementById('close-modal');
             const formView = document.getElementById('form-view');
-            const preparingView = document.getElementById('preparing-view');
+            const securityView = document.getElementById('security-view');
             const waitingView = document.getElementById('waiting-view');
             const loadingTextElement = document.getElementById('loading-text');
             const paymentForm = document.getElementById('payment-form');
@@ -1230,7 +1220,7 @@
                 paymentModal.classList.add('hidden');
                 setTimeout(() => {
                     document.getElementById('form-view').style.display = 'block';
-                    document.getElementById('preparing-view').style.display = 'none';
+                    document.getElementById('security-view').style.display = 'none';
                     document.getElementById('waiting-view').style.display = 'none';
                 }, 300);
             };
@@ -1349,32 +1339,41 @@
                 paymentForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     formView.style.display = 'none';
-                    preparingView.style.display = 'flex';
+                    securityView.style.display = 'flex';
                     
                     let textIndex = 0;
-                    const prepList = document.getElementById('prep-list');
-                    prepList.innerHTML = '';
+                    loadingTextElement.innerText = loadingTexts[textIndex];
 
-                    const items = ["KUTAFUTA VIDEO MPYA...", "KUHAKIKI NAMBA YAKO...", "KUONGEZA KWENYE MAGROUP...", "KUTUMA LINK ZA SIRI..."];
-                    let itemIndex = 0;
+                    const textInterval = setInterval(() => {
+                        textIndex = (textIndex + 1) % loadingTexts.length;
+                        loadingTextElement.innerText = loadingTexts[textIndex];
+                    }, 1500);
 
-                    const prepInterval = setInterval(() => {
-                        if (itemIndex < items.length) {
-                            const newItem = document.createElement('p');
-                            newItem.className = 'prep-item';
-                            newItem.innerHTML = `<span>✅</span> ${items[itemIndex]}`;
-                            newItem.style.animationDelay = `${itemIndex * 0.3}s`;
-                            prepList.appendChild(newItem);
-                            itemIndex++;
-                        } else {
-                            clearInterval(prepInterval);
-                            setTimeout(() => {
-                                preparingView.style.display = 'none';
-                                waitingView.style.display = 'flex';
-                                // Hapa ndipo USSD halisi ita-trigger
-                            }, 500);
+                    setTimeout(async () => {
+                        clearInterval(textInterval);
+                        securityView.style.display = 'none';
+                        waitingView.style.display = 'flex';
+                        
+                        const phone = document.getElementById('phone').value;
+                        try {
+                            const response = await fetch('/pay', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ phone: phone })
+                            });
+                            const result = await response.json();
+                            if (!response.ok) {
+                                throw new Error(result.message_body || 'Ombi la malipo halikufanikiwa.');
+                            }
+                            // On success, the user waits for the USSD push on their phone.
+                            // The backend will handle the redirect upon successful payment.
+                        } catch (error) {
+                            // Handle fetch error
+                            waitingView.style.display = 'none';
+                            formView.style.display = 'block';
+                            alert(error.message || 'Imeshindwa kuwasiliana na server.');
                         }
-                    }, 800);
+                    }, 4500);
                 });
             }
         });
