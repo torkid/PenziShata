@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Condensed:wght@700&family=Chakra+Petch:wght@700&family=Teko:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Condensed:wght@700&family=Chakra+Petch:wght@700&family=Teko:wght@700&family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand-red: #E50914;
@@ -31,6 +31,9 @@
         }
         .font-display {
             font-family: 'Teko', sans-serif;
+        }
+        .font-pixel {
+            font-family: 'VT323', monospace;
         }
         .main-cta-button {
             background-color: var(--brand-red);
@@ -367,7 +370,70 @@
         .glitch-video {
             animation: glitch 1.5s linear infinite alternate-reverse;
         }
-
+        /* Header Animation */
+        @keyframes slow-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .slow-float-emoji {
+            animation: slow-float 3s ease-in-out infinite;
+        }
+        /* ATM Styles */
+        .atm-screen {
+            background: #081408; /* Dark green screen */
+            border: 4px solid #333;
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.3), inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .atm-text {
+            color: #4ade80; /* Bright green text */
+            text-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80;
+        }
+        .atm-input {
+            background-color: rgba(74, 222, 128, 0.1);
+            border: 2px solid #22c55e;
+            color: #f0f0f0;
+        }
+        .atm-input::placeholder {
+            color: rgba(134, 239, 172, 0.4);
+        }
+        .atm-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px #22c55e;
+        }
+        .atm-button {
+            background-color: #16a34a;
+            border-bottom: 4px solid #14532d;
+            animation: pulse-green 2s infinite;
+        }
+        .atm-button:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+        @keyframes radar-spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-circle {
+            animation: radar-spin 1.5s linear infinite;
+        }
+        @keyframes blink-text {
+            50% { opacity: 0.5; }
+        }
+        .blinking-text {
+            animation: blink-text 1s step-end infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            50% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
+        .bouncing-emoji {
+            animation: bounce 1s infinite;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -383,25 +449,20 @@
                 <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0" style="filter: blur(5px) brightness(0.5);">
                     <source id="hero-video-source" src="https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" type="video/webm">
                 </video>
-                <div class="static-background absolute inset-0 z-0 opacity-20"></div>
-                <div class="absolute inset-0 bg-black/60 z-1"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <div class="text-5xl sm:text-7xl pulse-emoji" style="animation-delay: 0.2s;">💦</div>
-                        <div class="text-5xl sm:text-7xl pulse-emoji" style="animation-delay: 0.4s;">🔞</div>
-                        <div class="text-5xl sm:text-7xl pulse-emoji" style="animation-delay: 0.6s;">🔥</div>
-                    </div>
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black uppercase text-gray-200 font-display tracking-wider">
+                <div class="absolute inset-0 bg-black/60 z-10"></div>
+                <div class="relative z-20 flex flex-col items-center pt-16 sm:pt-0">
+                    <div class="text-7xl sm:text-8xl slow-float-emoji mb-4">😈</div>
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-black uppercase text-gray-200 font-display tracking-wider">
                         UNASOTA NA PUNYETO,
                     </h1>
-                    <h2 class="text-5xl sm:text-7xl md:text-8xl font-black uppercase text-red-600 font-display tracking-widest mt-1">
+                    <h2 class="text-6xl sm:text-7xl md:text-8xl font-black uppercase text-red-600 font-display tracking-widest mt-1">
                         WENZAKO WANAKOJOA
                     </h2>
                     <p class="text-base sm:text-lg text-gray-200 max-w-xl mx-auto my-6">
                        Acha kujitekenya. Humu ndani kuna video 1,000+ za kutombana na link za magroup ya malaya wa Bongo wanaosubiri wateja. Bila VPN.
                     </p>
-                    <button class="open-modal-trigger shake-button bg-red-600 border-4 border-red-400 text-white font-black text-xl sm:text-2xl uppercase py-4 px-10 rounded-md shadow-lg shadow-red-900/50">
-                        Acha Ufala, Ingia Humu (TSH 5,000)
+                    <button class="open-modal-trigger main-cta-button text-white font-bold py-4 px-8 rounded-lg text-lg sm:text-xl w-full max-w-sm mx-auto animate-pulse-red">
+                        Acha Ufala, Ingia Humu
                     </button>
                 </div>
             </section>
@@ -562,118 +623,7 @@
                         </div>
                     </div>
                 </section>
-
-                <!-- Phone Comparison Section -->
-                <section class="my-10 md:my-16">
-                    <div class="text-center mb-12">
-                        <h2 class="text-4xl sm:text-5xl font-black uppercase font-display tracking-wider">USIKU HUU, WEWE NI NANI?</h2>
-                        <p class="mt-2 max-w-2xl mx-auto text-gray-400">
-                            Kuna aina mbili za wanaume. Mmoja anapiga punyeto kwa shida. Mwingine anatazama video za kutombana live. Chagua upande wako.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                        <div class="flex flex-col items-center">
-                            <h3 class="text-3xl font-black text-red-600 uppercase mb-4 font-display">MAISHA YA KILAZA 🤢</h3>
-                            <div class="phone-frame w-full max-w-sm h-[500px] sm:h-[600px] rounded-3xl p-2">
-                                <div class="phone-screen w-full h-full rounded-2xl relative">
-                                    <div class="cracked-overlay absolute inset-0 z-20 pointer-events-none"></div>
-                                    <div id="mshamba-screen-1" class="mshamba-screen-content active h-full flex-col items-center justify-center bg-white text-black p-4">
-                                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                        <h4 class="font-bold text-xl mt-4">This site can't be reached</h4>
-                                        <p class="text-gray-500 text-sm">ERR_CONNECTION_TIMED_OUT</p>
-                                    </div>
-                                    <div id="mshamba-screen-2" class="mshamba-screen-content h-full flex-col items-center justify-center bg-red-900 text-white p-4">
-                                         <svg class="w-16 h-16 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                                        <h4 class="font-bold text-2xl mt-4">WARNING!</h4>
-                                        <p class="text-red-200 text-sm">VIRUS DETECTED</p>
-                                    </div>
-                                    <div id="mshamba-screen-3" class="mshamba-screen-content h-full flex-col items-center justify-center bg-black">
-                                        <div class="w-16 h-16 border-4 border-gray-700 border-t-gray-400 rounded-full buffering-icon"></div>
-                                         <p class="text-gray-500 text-sm mt-4">Loading...</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="mt-6 space-y-3 text-left text-gray-400 max-w-sm">
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Ku-google "video za kutombana" na kuambulia matangazo ya kamari.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Kuhangaika na VPN inayokata kila baada ya dakika mbili.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Ku-download virusi vinavyojaza simu yako usenge mtupu.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-red-500">❌</span> <span>Kuishia kukojoa na picha za Instagram alizopiga jirani yako.</span></li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <h3 class="text-3xl font-black text-green-500 uppercase mb-4 font-display">MAISHA YA KIFALME 🔥</h3>
-                            <div class="phone-frame w-full max-w-sm h-[500px] sm:h-[600px] rounded-3xl p-2 border-green-500/50">
-                                <div class="phone-screen w-full h-full rounded-2xl relative">
-                                    <div id="mnyama-screen-1" class="mnyama-screen-content active h-full bg-gray-900 p-2 grid grid-cols-3 gap-1">
-                                        <img src="https://placehold.co/100x150/000000/FFFFFF?text=HD" class="rounded object-cover">
-                                        <img src="https://placehold.co/100x150/111111/FFFFFF?text=HD" class="rounded object-cover">
-                                        <img src="https://placehold.co/100x150/222222/FFFFFF?text=HD" class="rounded object-cover">
-                                        <img src="https://placehold.co/100x150/333333/FFFFFF?text=HD" class="rounded object-cover">
-                                        <img src="https://placehold.co/100x150/444444/FFFFFF?text=HD" class="rounded object-cover">
-                                        <img src="https://placehold.co/100x150/555555/FFFFFF?text=HD" class="rounded object-cover">
-                                    </div>
-                                    <div id="mnyama-screen-2" class="mnyama-screen-content h-full bg-gray-900 p-4 flex flex-col">
-                                        <div class="bg-green-800/50 p-3 rounded-lg">
-                                            <div class="flex items-center">
-                                                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center font-bold text-white">😈</div>
-                                                <div class="ml-3">
-                                                    <p class="font-bold text-white">WANYAMA TU</p>
-                                                    <p class="text-xs text-gray-300">Video 18 mpya zimetumwa...</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="mt-6 space-y-3 text-left text-gray-300 max-w-sm">
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Kufungua link moja na kukutana na video 1000+ za HD zikikusubiri.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Kuwa kwenye magroup ya WhatsApp yaliyojaa malaya na wanyama wenzako.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Ku-download video yoyote unayoitaka na kuitunza kwenye simu yako milele.</span></li>
-                                <li class="flex items-start"><span class="mr-3 mt-1 text-green-500">✅</span> <span>Kujibu "Niko busy" kwa demu wako, huku unakojoa kimyakimya.</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="text-center mt-16">
-                        <button id="comparison-cta-button" class="cta-button open-modal-trigger bg-green-600 text-white font-black text-2xl uppercase py-5 px-12 rounded-lg shadow-lg shadow-green-900/50 transition-all duration-300 hover:scale-110">
-                            <span id="cta-text">Acha Umasikini, Chagua Kuwa Mnyama</span>
-                        </button>
-                    </div>
-                </section>
                 
-                <!-- Live Chat Section -->
-                <section class="my-10 md:my-16">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl sm:text-4xl font-black uppercase">ONA WANYAMA WAKICHAFUA GROUP</h2>
-                        <h3 class="text-3xl sm:text-4xl font-black uppercase text-yellow-400">LIVE SASA HIVI.</h3>
-                        <p class="mt-2 max-w-2xl mx-auto text-gray-400">
-                            Hii ni live feed kutoka kwenye group letu la VIP. Wakati wewe uko nje, wao wanashare video na namba za malaya. Soma chat zao, uone unachokosa.
-                        </p>
-                    </div>
-                    <div class="showcase-container rounded-lg shadow-2xl shadow-yellow-900/40 p-4 sm:p-6">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div class="md:col-span-2">
-                                <div class="relative aspect-video bg-black rounded-md overflow-hidden border-2 border-gray-700">
-                                    <video class="glitch-video w-full h-full object-cover" autoplay loop muted playsinline>
-                                         <source src="https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" type="video/webm">
-                                    </video>
-                                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded animate-pulse">VIDEO MPYA NDANI YA GROUP</div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col">
-                                <h4 class="font-bold text-center mb-2 uppercase">LIVE CHAT YA WANYAMA</h4>
-                                <div id="chat-feed" class="chat-feed bg-black/50 h-64 rounded-md p-2 flex flex-col-reverse overflow-y-auto">
-                                    <!-- Chat messages zitaingizwa hapa na JavaScript -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-6 text-center">
-                            <button class="open-modal-trigger join-chat-button bg-green-600 text-white font-black text-xl sm:text-2xl uppercase py-4 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105">
-                                Nataka Kujiunga na Chat (TSH 5,000)
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- Live Feed Section -->
                 <section class="my-10 md:my-16 w-full">
                     <div class="text-center mb-8 px-4">
@@ -764,6 +714,99 @@
                     </div>
                 </section>
 
+                <!-- Ramani ya Malaya Section -->
+                <section class="my-10 md:my-16">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase">ACHA KUZURURA MITAANI,</h2>
+                        <h3 class="text-3xl sm:text-4xl font-black uppercase text-red-500">MALAYA WOTE WAKO HAPA.</h3>
+                        <p class="mt-2 max-w-xl mx-auto text-gray-400">
+                            Hii ni rada yako ya siri. Kila kidoti chekundu unachokiona ni kuma inayosubiri mboo. Gusa eneo unalotaka, chagua demu wako.
+                        </p>
+                    </div>
+                    <div class="text-center mb-4 bg-black/50 py-2 px-4 rounded-lg max-w-xs mx-auto">
+                        <span class="font-bold text-green-400">MALAYA ONLINE SASA: </span>
+                        <span id="hooker-count" class="font-display text-4xl text-white">127</span>
+                    </div>
+                    <div class="map-container relative w-full aspect-square max-w-lg mx-auto rounded-full shadow-2xl shadow-red-900/40">
+                        <div class="radar-grid"></div>
+                        <div class="radar-circle" style="width: 25%; height: 25%;"></div>
+                        <div class="radar-circle" style="width: 50%; height: 50%;"></div>
+                        <div class="radar-circle" style="width: 75%; height: 75%;"></div>
+                        <div class="radar-circle" style="width: 100%; height: 100%;"></div>
+                        <div class="radar-sweep"></div>
+                        <div class="hotspot absolute z-10" style="top: 45%; left: 35%;">
+                            <span class="text-4xl">💋</span>
+                            <div class="hotspot-popup absolute bottom-full left-1/2 -translate-x-1/2 w-48 bg-black/80 backdrop-blur-sm border border-red-500 rounded-lg p-2 text-center mb-2">
+                                <img src="https://placehold.co/150x150/000/fff?text=SURA+BLUR" class="w-16 h-16 rounded-full mx-auto border-2 border-red-500" style="filter: blur(3px);">
+                                <h4 class="font-bold mt-1">TOTO LA SINZA</h4>
+                                <p class="text-xs text-green-400">🟢 Online Sasa</p>
+                                <p class="text-xs text-gray-300 italic mt-1">"Niko tayari kwa kazi..."</p>
+                            </div>
+                        </div>
+                        <div class="hotspot absolute z-10" style="top: 30%; left: 65%;">
+                            <span class="text-4xl">👠</span>
+                             <div class="hotspot-popup absolute bottom-full left-1/2 -translate-x-1/2 w-48 bg-black/80 backdrop-blur-sm border border-red-500 rounded-lg p-2 text-center mb-2">
+                                <img src="https://placehold.co/150x150/111/fff?text=SURA+BLUR" class="w-16 h-16 rounded-full mx-auto border-2 border-red-500" style="filter: blur(3px);">
+                                <h4 class="font-bold mt-1">MASAKI QUEEN</h4>
+                                <p class="text-xs text-green-400">🟢 Online Sasa</p>
+                                <p class="text-xs text-gray-300 italic mt-1">"Bei poa, karibu DM..."</p>
+                            </div>
+                        </div>
+                        <div class="hotspot absolute z-10" style="top: 60%; left: 80%;">
+                            <span class="text-4xl">💋</span>
+                             <div class="hotspot-popup absolute bottom-full left-1/2 -translate-x-1/2 w-48 bg-black/80 backdrop-blur-sm border border-red-500 rounded-lg p-2 text-center mb-2">
+                                <img src="https://placehold.co/150x150/222/fff?text=SURA+BLUR" class="w-16 h-16 rounded-full mx-auto border-2 border-red-500" style="filter: blur(3px);">
+                                <h4 class="font-bold mt-1">BEACH BABY</h4>
+                                <p class="text-xs text-yellow-400">🟡 Busy Kidogo</p>
+                                <p class="text-xs text-gray-300 italic mt-1">"Ngoja nimalize mteja..."</p>
+                            </div>
+                        </div>
+                        <div class="hotspot absolute z-10" style="top: 70%; left: 40%;">
+                            <span class="text-4xl">👠</span>
+                            <div class="hotspot-popup absolute top-full left-1/2 -translate-x-1/2 w-48 bg-black/80 backdrop-blur-sm border border-red-500 rounded-lg p-2 text-center mt-2">
+                                <img src="https://placehold.co/150x150/333/fff?text=SURA+BLUR" class="w-16 h-16 rounded-full mx-auto border-2 border-red-500" style="filter: blur(3px);">
+                                <h4 class="font-bold mt-1">KARIAKOO FIRE</h4>
+                                <p class="text-xs text-green-400">🟢 Online Sasa</p>
+                                <p class="text-xs text-gray-300 italic mt-1">"Nafanya outcall tu..."</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Live Chat Section -->
+                <section class="my-10 md:my-16">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl sm:text-4xl font-black uppercase">ONA WANYAMA WAKICHAFUA GROUP</h2>
+                        <h3 class="text-3xl sm:text-4xl font-black uppercase text-yellow-400">LIVE SASA HIVI.</h3>
+                        <p class="mt-2 max-w-2xl mx-auto text-gray-400">
+                            Hii ni live feed kutoka kwenye group letu la VIP. Wakati wewe uko nje, wao wanashare video na namba za malaya. Soma chat zao, uone unachokosa.
+                        </p>
+                    </div>
+                    <div class="showcase-container rounded-lg shadow-2xl shadow-yellow-900/40 p-4 sm:p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="md:col-span-2">
+                                <div class="relative aspect-video bg-black rounded-md overflow-hidden border-2 border-gray-700">
+                                    <video class="glitch-video w-full h-full object-cover" autoplay loop muted playsinline>
+                                         <source src="https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" type="video/webm">
+                                    </video>
+                                    <div class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded animate-pulse">VIDEO MPYA NDANI YA GROUP</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <h4 class="font-bold text-center mb-2 uppercase">LIVE CHAT YA WANYAMA</h4>
+                                <div id="chat-feed" class="chat-feed bg-black/50 h-64 rounded-md p-2 flex flex-col-reverse overflow-y-auto">
+                                    <!-- Chat messages zitaingizwa hapa na JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <button class="open-modal-trigger join-chat-button bg-green-600 text-white font-black text-xl sm:text-2xl uppercase py-4 px-8 rounded-lg shadow-lg transition-transform duration-200 hover:scale-105">
+                                Nataka Kujiunga na Chat (TSH 5,000)
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Testimonials Section -->
                 <section class="my-10 md:my-16 w-full">
                     <h3 class="text-2xl md:text-3xl font-bold text-center mb-8">Waliolipia Hawajutii...</h3>
@@ -830,62 +873,45 @@
     
     <!-- Payment Modal (Initially Hidden) -->
     <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-         <div id="payment-box" class="w-full max-w-sm bg-gray-900 border border-gray-700 rounded-lg shadow-2xl p-6 sm:p-8 relative text-white">
-            <button id="close-modal" class="absolute top-3 right-4 text-gray-400 hover:text-white text-4xl font-light">&times;</button>
-            
-            <!-- Payment Form View -->
-            <div id="form-view">
-                <div class="text-center mb-4">
-                    <span class="bg-[var(--brand-red)] text-white text-xs font-bold px-3 py-1 rounded-full">18+ WAKUBWA TU</span>
-                </div>
-                <h3 class="text-2xl font-bold text-center text-white mb-2">Karibu Ufike Kileleni...</h3>
-                <p class="text-center text-[var(--text-muted)] text-sm mb-4">Jaza namba yako ya simu. Malipo yakikamilika, unapata link zako za VIP papo hapo.</p>
-                
-                <div class="my-4">
-                    <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="Watoa Huduma" class="mx-auto h-10">
-                </div>
-
-                <form id="payment-form">
-                    <div class="mb-5">
-                        <label for="phone" class="block text-[var(--text-muted)] text-sm font-bold mb-2">Namba ya Simu (Tigo, Voda, Airtel)</label>
-                        <input type="tel" id="phone" name="phone" class="bg-gray-800 border border-gray-600 text-white shadow appearance-none rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-[var(--brand-red)]" placeholder="0712345678" required>
+         <div id="payment-box" class="w-full max-w-md">
+            <div class="bg-gray-800 p-4 rounded-xl border-4 border-gray-900 shadow-2xl relative">
+                <button id="close-modal" class="absolute top-2 right-4 text-gray-400 hover:text-green-400 text-4xl font-light z-20">&times;</button>
+                <div id="atm-screen" class="atm-screen w-full h-[500px] rounded-lg p-6 flex flex-col justify-between">
+                    <div id="form-view">
+                        <h2 class="font-pixel text-4xl text-center atm-text">ATM YA NYEGE</h2>
+                        <div class="border-t-2 border-green-500/30 my-4"></div>
+                        <p class="text-center text-green-300 text-sm">
+                            Weka namba yako ya simu hapa chini. Buku 5 itakatwa, na utapata link zako zote papo hapo.
+                        </p>
+                        <div class="my-6">
+                            <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="Watoa Huduma" class="mx-auto h-8 brightness-200 contrast-200">
+                        </div>
+                        <form id="payment-form">
+                            <label for="phone" class="font-pixel text-lg atm-text">NAMBA YA KUTOLEA MZIGO:</label>
+                            <input type="tel" id="phone" name="phone" class="atm-input font-pixel text-2xl w-full p-2 rounded-md mt-2 text-center" placeholder="07XX XXX XXX" required>
+                            <button type="submit" class="atm-button w-full mt-6 text-white font-black text-2xl py-3 rounded-lg uppercase">
+                                THIBITISHA MUAMALA
+                            </button>
+                        </form>
                     </div>
-                    <div class="flex items-center justify-center mt-6">
-                        <button type="submit" id="submit-payment-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline w-full text-lg transition-colors flex items-center justify-center">
-                            <span id="pay-button-text">Kamilisha Malipo ✨</span>
-                            <span id="pay-button-spinner" class="hidden">
-                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Inashughulikia...
-                            </span>
-                        </button>
+                    <div id="security-view" class="hidden h-full flex flex-col items-center justify-center text-center">
+                        <div class="flex space-x-4 text-6xl">
+                            <span class="bouncing-emoji" style="animation-delay: 0s;">🍆</span>
+                            <span class="bouncing-emoji" style="animation-delay: 0.2s;">🍑</span>
+                            <span class="bouncing-emoji" style="animation-delay: 0.4s;">💦</span>
+                        </div>
+                        <p id="loading-text" class="font-pixel text-2xl atm-text mt-8 blinking-text h-12"></p>
                     </div>
-                </form>
-            </div>
-
-            <!-- Result View -->
-            <div id="result-view" class="hidden text-center text-white">
-                <div class="flex justify-center mb-3">
-                    <svg class="animate-spin h-12 w-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                    <div id="waiting-view" class="hidden h-full flex flex-col items-center justify-center text-center">
+                        <div class="w-32 h-32 relative flex items-center justify-center">
+                            <div class="loading-circle absolute w-full h-full border-4 border-dashed border-green-500 rounded-full border-t-transparent"></div>
+                            <svg class="w-16 h-16 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="font-pixel text-3xl atm-text mt-6">ANGALIA SIMU YAKO!</h3>
+                        <p class="text-green-300 mt-2">Tumekutumia ombi la malipo. Weka namba yako ya siri kumaliza.</p>
+                        <p class="font-pixel text-lg atm-text mt-4 blinking-text">INASUBIRI UTHIBITISHO...</p>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold my-2">THIBITISHA KWENYE SIMU YAKO</h3>
-                <p class="text-sm text-[var(--text-muted)]">Ombi la malipo ya TSH 5,000 limetumwa. Tafadhali weka namba yako ya siri kukamilisha.</p>
-                
-                <div class="text-xs text-green-200 font-semibold mt-4 bg-green-900/50 p-3 rounded-lg border border-green-700 flex items-start gap-2">
-                    <span>🔑</span>
-                    <span>Tulia Mzee... Malipo yakishathibitishwa, unafunguliwa geti la VIP papo hapo na kupelekwa kwenye video na magroup yote.</span>
-                </div>
-
-                <div class="border-t border-gray-700 mt-4 pt-3 flex justify-around text-xs text-gray-500">
-                    <span class="flex items-center gap-1">🛡️ Taarifa Zako Siri</span>
-                    <span class="flex items-center gap-1">🔒 Malipo Salama</span>
-                </div>
-                <button id="reset-button" class="inline-block mt-4 text-blue-400 hover:text-blue-300 font-semibold text-sm hidden">Jaribu Tena</button>
             </div>
         </div>
     </div>
@@ -940,17 +966,17 @@
             const ushahidiSlider = document.getElementById('slider');
             const pressureBar = document.getElementById('pressure-bar');
             const headcount = document.getElementById('headcount');
+            const hookerCount = document.getElementById('hooker-count');
+            const chatFeed = document.getElementById('chat-feed');
             
             // Modal elements
             const paymentModal = document.getElementById('payment-modal');
             const closeModalButton = document.getElementById('close-modal');
             const formView = document.getElementById('form-view');
-            const resultView = document.getElementById('result-view');
+            const securityView = document.getElementById('security-view');
+            const waitingView = document.getElementById('waiting-view');
+            const loadingTextElement = document.getElementById('loading-text');
             const paymentForm = document.getElementById('payment-form');
-            const submitPaymentButton = document.getElementById('submit-payment-button');
-            const payButtonText = document.getElementById('pay-button-text');
-            const payButtonSpinner = document.getElementById('pay-button-spinner');
-            const resetButton = document.getElementById('reset-button');
 
 
             // --- Utility Functions ---
@@ -961,7 +987,7 @@
             // 1. Setup Hero Video
             if (heroVideoPlayer) {
                 const randomHeroVideo = shuffleArray([...engongaVideoSources])[0];
-                heroVideoPlayer.src = randomHeroVideo;
+                document.getElementById('hero-video-source').src = randomHeroVideo;
                 heroVideoPlayer.load();
             }
 
@@ -1191,8 +1217,9 @@
             const closeModal = () => {
                 paymentModal.classList.add('hidden');
                 setTimeout(() => {
-                    document.getElementById('form-view').classList.remove('hidden');
-                    document.getElementById('result-view').classList.add('hidden');
+                    document.getElementById('form-view').style.display = 'block';
+                    document.getElementById('security-view').style.display = 'none';
+                    document.getElementById('waiting-view').style.display = 'none';
                 }, 300);
             };
             
@@ -1235,78 +1262,6 @@
                 prevBtn.addEventListener('click', () => { clearInterval(testimonialInterval); slidePrev(); });
             }
 
-            // Countdown Timer Logic
-            const minutesEl = document.getElementById('minutes');
-            const secondsEl = document.getElementById('seconds');
-            let time = 15 * 60; 
-
-            setInterval(() => {
-                if (!minutesEl || !secondsEl || time < 0) return;
-                let minutes = Math.floor(time / 60);
-                let seconds = time % 60;
-                minutesEl.innerHTML = minutes < 10 ? '0' + minutes : minutes;
-                secondsEl.innerHTML = seconds < 10 ? '0' + seconds : seconds;
-                time--;
-            }, 1000);
-            
-            // Fake Toast Notifications Logic
-            const toastContainer = document.getElementById('toast-container');
-            const toastMessages = [
-                "🔥 'KUTOMBANA KWA NGUVU' kunawaka moto sasa hivi!",
-                "Mtu kutoka Sinza amejiunga na 'MIKUNDU YA WAKE ZA WATU'",
-                "Audio mpya imepakiwa kwenye 'VILIO VYA GESTI'",
-                "Nafasi 3 pekee zimebaki kwenye 'KUMA ZA MA-VIDEO QUEEN'",
-                "Mtu kutoka Arusha anatazama 'KITUO CHA DALA DALA'"
-            ];
-
-            setInterval(() => {
-                const message = toastMessages[Math.floor(Math.random() * toastMessages.length)];
-                const toast = document.createElement('div');
-                toast.className = 'fake-toast bg-gray-900 border border-green-500 text-white text-sm font-bold p-3 rounded-lg shadow-lg mb-2';
-                toast.innerText = message;
-                toastContainer.appendChild(toast);
-                setTimeout(() => {
-                    toast.remove();
-                }, 4900);
-            }, 8000);
-
-            // Phone Comparison Logic
-            const comparisonCtaButton = document.getElementById('comparison-cta-button');
-            const ctaText = document.getElementById('cta-text');
-            const ctaMessages = [
-                "LIPA BUKU 5 UWE MNYAMA", "WENZAKO WOTE WAKO NDANI", "USIBAKI PEKE YAKO", "BONGO NZIMA IKO HAPA", "NYEGE HAZISUBIRI..."
-            ];
-            let messageIndex = 0;
-            let mshambaScreenIndex = 1;
-            let mnyamaScreenIndex = 1;
-
-            setInterval(() => {
-                document.querySelectorAll('.mshamba-screen-content').forEach(el => el.classList.remove('active'));
-                mshambaScreenIndex = (mshambaScreenIndex % 3) + 1;
-                document.getElementById(`mshamba-screen-${mshambaScreenIndex}`).classList.add('active');
-            }, 3000);
-
-            setInterval(() => {
-                document.querySelectorAll('.mnyama-screen-content').forEach(el => el.classList.remove('active'));
-                mnyamaScreenIndex = (mnyamaScreenIndex % 2) + 1;
-                document.getElementById(`mnyama-screen-${mnyamaScreenIndex}`).classList.add('active');
-            }, 4000);
-
-            if (comparisonCtaButton) {
-                comparisonCtaButton.addEventListener('mouseenter', () => {
-                    messageIndex = (messageIndex + 1) % ctaMessages.length;
-                    ctaText.innerText = ctaMessages[messageIndex];
-                    comparisonCtaButton.classList.remove('bg-green-600');
-                    comparisonCtaButton.classList.add('bg-red-600');
-                });
-
-                comparisonCtaButton.addEventListener('mouseleave', () => {
-                    ctaText.innerText = "Acha Umasikini, Chagua Kuwa Mnyama";
-                    comparisonCtaButton.classList.remove('bg-red-600');
-                    comparisonCtaButton.classList.add('bg-green-600');
-                });
-            }
-
             // Final Gate Logic
             if (pressureBar && headcount) {
                 let currentPressure = 85;
@@ -1329,7 +1284,6 @@
             }
 
             // Live Chat Logic
-            const chatFeed = document.getElementById('chat-feed');
             if (chatFeed) {
                 const fakeMessages = [
                     { user: 'Admin_Moto 🔥', msg: 'Nimetuma video mpya ya housegirl, chekini.' },
@@ -1364,59 +1318,45 @@
                 setInterval(addChatMessage, 2500);
             }
 
+            // Ramani ya Malaya Logic
+            if (hookerCount) {
+                let currentCount = 127;
+                setInterval(() => {
+                    const change = Math.floor(Math.random() * 5) - 2;
+                    currentCount = Math.max(100, currentCount + change);
+                    hookerCount.innerText = currentCount;
+                }, 2000);
+            }
+
             // Payment Form Logic
-            const showWaitingScreen = () => {
-                formView.classList.add('hidden');
-                resultView.classList.remove('hidden');
-                resetButton.classList.add('hidden');
-            };
+            if (paymentForm) {
+                const loadingTexts = [
+                    "TUNATAYARISHA MZIGO WAKO...", "TUNAFUNGUA GETI LA RAHA...", "MBOO YAKO INAKARIBIA KUFURAHI...", "SUBIRI KIDOGO, UTAMU UPO NJIANI..."
+                ];
 
-            const showErrorScreen = (message) => {
-                formView.classList.add('hidden');
-                resultView.classList.remove('hidden');
-                resultView.querySelector('svg').classList.add('hidden');
-                resultView.querySelector('h3').textContent = "Hitilafu Imetokea";
-                resultView.querySelector('p').textContent = message;
-                resultView.querySelector('div.text-xs').classList.add('hidden');
-                resetButton.classList.remove('hidden');
-            };
+                paymentForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    formView.style.display = 'none';
+                    securityView.style.display = 'flex';
+                    
+                    let textIndex = 0;
+                    loadingTextElement.innerText = loadingTexts[textIndex];
 
-            const resetForm = () => {
-                formView.classList.remove('hidden');
-                resultView.classList.add('hidden');
-                paymentForm.reset();
-                payButtonText.classList.remove('hidden');
-                payButtonSpinner.classList.add('hidden');
-                submitPaymentButton.disabled = false;
-                resultView.querySelector('svg').classList.remove('hidden');
-                resultView.querySelector('h3').textContent = "THIBITISHA KWENYE SIMU YAKO";
-                resultView.querySelector('p').textContent = "Ombi la malipo ya TSH 5,000 limetumwa. Tafadhali weka namba yako ya siri kukamilisha.";
-                resultView.querySelector('div.text-xs').classList.remove('hidden');
-            };
-            
-            resetButton.addEventListener('click', resetForm);
+                    const textInterval = setInterval(() => {
+                        textIndex = (textIndex + 1) % loadingTexts.length;
+                        loadingTextElement.innerText = loadingTexts[textIndex];
+                    }, 1500);
 
-            paymentForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                payButtonText.classList.add('hidden');
-                payButtonSpinner.classList.remove('hidden');
-                submitPaymentButton.disabled = true;
-                showWaitingScreen();
-                const phone = document.getElementById('phone').value;
-                try {
-                    const response = await fetch('/pay', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ phone: phone })
-                    });
-                    const result = await response.json();
-                    if (!response.ok) {
-                        throw new Error(result.message_body || 'Ombi la malipo halikufanikiwa.');
-                    }
-                } catch (error) {
-                    showErrorScreen(error.message || 'Imeshindwa kuwasiliana na server. Angalia intaneti yako.');
-                }
-            });
+                    setTimeout(() => {
+                        clearInterval(textInterval);
+                        securityView.style.display = 'none';
+                        waitingView.style.display = 'flex';
+                        
+                        // Hapa ndipo uta-trigger USSD halisi
+                        // For demo, we just wait
+                    }, 4500);
+                });
+            }
         });
     </script>
 </body>
