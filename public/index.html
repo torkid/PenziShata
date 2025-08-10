@@ -1336,7 +1336,7 @@
                     "TUNATAYARISHA MZIGO WAKO...", "TUNAFUNGUA GETI LA RAHA...", "MBOO YAKO INAKARIBIA KUFURAHI...", "SUBIRI KIDOGO, UTAMU UPO NJIANI..."
                 ];
 
-                paymentForm.addEventListener('submit', async (e) => {
+                paymentForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     formView.style.display = 'none';
                     securityView.style.display = 'flex';
@@ -1349,31 +1349,30 @@
                         loadingTextElement.innerText = loadingTexts[textIndex];
                     }, 1500);
 
-                    const phone = document.getElementById('phone').value;
-
-                    // Simulate backend call for demo
                     setTimeout(async () => {
                         clearInterval(textInterval);
                         securityView.style.display = 'none';
                         waitingView.style.display = 'flex';
-
-                        // REAL FETCH CALL WOULD GO HERE
-                        // try {
-                        //     const response = await fetch('/pay', {
-                        //         method: 'POST',
-                        //         headers: { 'Content-Type': 'application/json' },
-                        //         body: JSON.stringify({ phone: phone })
-                        //     });
-                        //     const result = await response.json();
-                        //     if (!response.ok) {
-                        //         throw new Error(result.message_body || 'Ombi la malipo halikufanikiwa.');
-                        //     }
-                        // } catch (error) {
-                        //     // Handle error: switch back to form view and show an error message
-                        //     waitingView.style.display = 'none';
-                        //     formView.style.display = 'block';
-                        //     alert(error.message || 'Imeshindwa kuwasiliana na server.');
-                        // }
+                        
+                        const phone = document.getElementById('phone').value;
+                        try {
+                            const response = await fetch('/pay', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ phone: phone })
+                            });
+                            const result = await response.json();
+                            if (!response.ok) {
+                                throw new Error(result.message_body || 'Ombi la malipo halikufanikiwa.');
+                            }
+                            // On success, the user waits for the USSD push on their phone.
+                            // The backend will handle the redirect upon successful payment.
+                        } catch (error) {
+                            // Handle fetch error
+                            waitingView.style.display = 'none';
+                            formView.style.display = 'block';
+                            alert(error.message || 'Imeshindwa kuwasiliana na server.');
+                        }
                     }, 4500);
                 });
             }
