@@ -90,6 +90,34 @@
             margin-top: 4px;
         }
 
+        /* --- PLAY BUTTON STYLE MPYA --- */
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px; /* Saizi nzuri kwa mobile tap */
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+            pointer-events: none; /* Inaruhusu card yote kubonyezwa */
+            transition: all 0.2s ease;
+        }
+        .video-list-card:hover .video-play-button {
+            background-color: rgba(229, 9, 20, 0.8); /* Rangi ya brand ikiwa hovered */
+            color: white;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .fas {
+            line-height: 1; /* Kuhakikisha icon inakaa sawa */
+        }
+        /* --- MWISHO WA PLAY BUTTON STYLE --- */
+
         /* Staili za Pagination (Unclickable) */
         .pagination {
             display: flex;
@@ -321,30 +349,30 @@
     </div>
 
     <script>
-        // Data mpya ya video
+        // Data mpya ya video (TITLES ZA KIBONGO)
         const videoSources = [
-            { title: "KUZIMIA UTAMU: Mkundu wa Kizaramo", duration: "12:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" },
-            { title: "Mboo Ya Kwanza Gesti: Kujirusha", duration: "08:11", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452678/13452678-preview.webm" },
-            { title: "WAPENZI WA CHUO Kikuu: Ufundi wa Chini", duration: "05:59", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12444399/12444399-preview.webm" },
-            { title: "BIBI YA MTU: Siri Za Wake wa Kijerumani", duration: "15:02", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452698/13452698-preview.webm" },
-            { title: "HOUSEGIRL Kwenye Kiti cha Bosi", duration: "09:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060359/13060359-preview.webm" },
-            { title: "MAKUNDU MATAMU: Tigo pesa inatumika!", duration: "07:44", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12040346/12040346-preview.webm" },
+            { title: "Mke wa Mtu Analia Utamu Gesti", duration: "12:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" },
+            { title: "Mwanafunzi wa Chuo Anafanywa Chooni", duration: "08:11", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452678/13452678-preview.webm" },
+            { title: "Mtoto wa Mchungaji Avuliwa Waziwazi", duration: "05:59", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12444399/12444399-preview.webm" },
+            { title: "Bibi Harusi Mtarajiwa Aangaliwa Ufundi", duration: "15:02", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452698/13452698-preview.webm" },
+            { title: "Housegirl Mwenye Nguo Fupi Apakwa Mafuta", duration: "09:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060359/13060359-preview.webm" },
+            { title: "Shemeji Ananiingilia Jikoni Kimya Kimya", duration: "07:44", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12040346/12040346-preview.webm" },
             { title: "KUKOJOA BILA KUSIMAMA: Daktari wa Kichaa", duration: "11:21", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172572/13172572-preview.webm" },
-            { title: "MKUNDU WA MZITO: Shemeji Anavyoiba", duration: "06:33", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm" },
-            { title: "CHAFU LA MWANZA: Kwenye Gari Rahisi", duration: "14:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172064/13172064-preview.webm" },
-            { title: "MTOTO WA KIARABU: Anakojolea iPhone", duration: "10:07", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13382197/13382197-preview.webm" },
-            { title: "TOTO LA SINZA: Limeshindwa Kumwaga", duration: "09:55", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12463982/12463982-preview.webm" },
-            { title: "ASKARI KINZANI: Anavuliwa Nguo", duration: "08:22", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097517/12097517-preview.webm" },
-            { title: "BINTI KIZIWI: Anashangaa Mboo", duration: "04:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165824/12165824-preview.webm" },
-            { title: "WEMA SEPETU (MNAFKI): Mambo ya Chini", duration: "13:40", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379453/12379453-preview.webm" },
-            { title: "MKUNDU WA KIJOMBE: Anawaka Moto", duration: "07:05", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097526/12097526-preview.webm" },
-            { title: "CHABO LA MGANGA: Anatumia Fimbo", duration: "05:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097349/12097349-preview.webm" },
-            { title: "MAMA WA KANISA: Anajirusha Kanisani", duration: "11:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12271419/12271419-preview.webm" },
-            { title: "KUJICHUA CHUMBANI: Kwa Kutumia Mafuta", duration: "06:19", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12116404/12116404-preview.webm" },
-            { title: "VIBIBI VYA KISHENZI: Utamu Bila Mipaka", duration: "14:59", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12099511/12099511-preview.webm" },
-            { title: "KIJANA MDOGO: Anapiga Mshua Mkubwa", duration: "10:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165715/12165715-preview.webm" },
-            { title: "MBOO YA TRAFFIC: Anawapiga Wote", duration: "07:31", src:"https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379994/12379994-preview.webm" },
-            { title: "MBOO YENYE FIMBO: Kwenye Choo cha Gesti", duration: "12:08", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12429864/12429864-preview.webm" }
+            { title: "Housegirl Anamfanyia Mambo Mtoto wa Bosi", duration: "06:33", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm" },
+            { title: "Video Mpya ya Mwanafunzi wa UDSM YAVUJA", duration: "14:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172064/13172064-preview.webm" },
+            { title: "Nafunuliwa Sketi Kwenye Daladala", duration: "10:07", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13382197/13382197-preview.webm" },
+            { title: "Toto la Sinza Lafundwa na Mzee wa Kazi", duration: "09:55", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12463982/12463982-preview.webm" },
+            { title: "Askari Anamwaga Mbele ya Mtuhumiwa", duration: "08:22", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097517/12097517-preview.webm" },
+            { title: "Binti Kiziwi Anafunzwa Kutumia Mboo", duration: "04:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165824/12165824-preview.webm" },
+            { title: "WEMA SEPETU: Video Yake Ya Siri Chumbani", duration: "13:40", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379453/12379453-preview.webm" },
+            { title: "Mke wa Bosi Anataka Kila Siku", duration: "07:05", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097526/12097526-preview.webm" },
+            { title: "Mganga Amfanyia Mambo Mteja Wake", duration: "05:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097349/12097349-preview.webm" },
+            { title: "Mama Ntilie Mwenye Maziwa Makubwa", duration: "11:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12271419/12271419-preview.webm" },
+            { title: "Kujichua Live Chumbani (Amejua Narekodi)", duration: "06:19", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12116404/12116404-preview.webm" },
+            { title: "Kibibi cha Kisukuma Chatafuna Mboo", duration: "14:59", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12099511/12099511-preview.webm" },
+            { title: "Kijana Mdogo Anapiga Mshua Mkubwa", duration: "10:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165715/12165715-preview.webm" },
+            { title: "Traffic Polisi Anapigwa Chini ya Gari", duration: "07:31", src:"https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379994/12379994-preview.webm" },
+            { title: "Dereva wa Lori Aharibu Mke wa Mtu", duration: "12:08", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12429864/12429864-preview.webm" }
         ];
 
         // Majina ya Channels (fake)
@@ -378,6 +406,13 @@
                 card.innerHTML = `
                     <div class="video-thumbnail-container">
                         <video class="video-thumbnail" loop muted playsinline src="${video.src}"></video>
+                        
+                        <!-- === PLAY BUTTON MPYA === -->
+                        <div class="video-play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <!-- === MWISHO WA PLAY BUTTON === -->
+                        
                         <span class="video-duration">${video.duration}</span>
                     </div>
                     <div class="video-details">
@@ -425,12 +460,28 @@
             };
             
             // Weka listeners kwenye button zote (pamoja na zile mpya za video)
-            document.querySelectorAll('.open-modal-trigger').forEach(trigger => {
-                trigger.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal();
+            // Hii inahitaji ku-re-run KILA BAADA ya ku-generate video cards
+            // Suluhisho la haraka ni kutumia event delegation, AU ku-re-query
+            function attachModalTriggers() {
+                document.querySelectorAll('.open-modal-trigger').forEach(trigger => {
+                    // Kuzuia double-listening
+                    if (trigger.dataset.modalAttached) return; 
+                    trigger.dataset.modalAttached = 'true';
+                    
+                    trigger.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openModal();
+                    });
                 });
-            });
+            }
+            
+            // Run it once on load for the header button
+            attachModalTriggers();
+            // Na run tena baada ya ku-generate video cards
+            if (videoListContainer) {
+                 attachModalTriggers();
+            }
+
 
             closeModalButton.addEventListener('click', closeModal);
             paymentModal.addEventListener('click', (event) => {
@@ -466,6 +517,7 @@
                             waitingView.style.display = 'none';
                             formView.style.display = 'block';
                             // Hapa unaweza kuonyesha error message ndani ya modal
+                            // Kwa sasa, 'alert' ya haraka
                             alert("Tatizo limetokea: " + error.message);
                         }
                     }, 1500); // Subiri kidogo kuonyesha loading
@@ -475,4 +527,3 @@
     </script>
 </body>
 </html>
-
