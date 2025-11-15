@@ -134,9 +134,9 @@
             color: white;
         }
 
-        /* Staili za Modal Mpya (Kama Picha) */
+        /* === STYLES FOR NEW MODAL (FROM IMAGE) === */
         .modal-card {
-            background-color: #f3f4f6; /* Light gray background */
+            background-color: #ffffff; /* White background */
             color: #1f2937; /* Dark gray text */
             border-radius: 0.75rem; /* rounded-lg */
             padding: 2rem; /* p-8 */
@@ -155,8 +155,8 @@
             color: white;
             font-size: 1.25rem; /* text-xl */
             font-weight: 700;
-            border: 4px solid #111827; /* border-4 border-gray-900 */
             margin: 0 auto 1rem auto; /* Center */
+            /* Removed border */
         }
         .modal-title {
             font-size: 1.25rem; /* text-xl */
@@ -166,7 +166,7 @@
         }
         .modal-subtitle {
             font-size: 0.875rem; /* text-sm */
-            color: #4b5563; /* text-gray-600 */
+            color: #374151; /* text-gray-700 (darker) */
             text-align: center;
             margin-top: 0.5rem; /* mt-2 */
             max-width: 90%;
@@ -176,8 +176,8 @@
         }
         .modal-label {
             font-size: 0.875rem; /* text-sm */
-            font-weight: 600; /* font-semibold */
-            color: #374151; /* text-gray-700 */
+            font-weight: 700; /* font-bold */
+            color: #1f2937; /* text-gray-900 */
             margin-top: 1.5rem; /* mt-6 */
             margin-bottom: 0.5rem; /* mb-2 */
         }
@@ -191,12 +191,12 @@
         }
         .modal-input:focus {
             outline: none;
-            border-color: #6d28d9; /* purple-700 */
-            box-shadow: 0 0 0 2px #c4b5fd; /* purple-200 ring */
+            border-color: #dc2626; /* red-600 */
+            box-shadow: 0 0 0 2px #fecaca; /* red-200 ring */
         }
         .modal-button {
             width: 100%;
-            background-color: #6d28d9; /* bg-purple-600 */
+            background-color: #dc2626; /* bg-red-600 */
             color: white;
             border-radius: 0.375rem; /* rounded-md */
             padding: 0.75rem; /* p-3 */
@@ -206,7 +206,7 @@
             transition: background-color 0.2s ease;
         }
         .modal-button:hover {
-            background-color: #5b21b6; /* bg-purple-700 */
+            background-color: #b91c1c; /* bg-red-700 */
         }
         .secure-payment {
             display: flex;
@@ -218,12 +218,14 @@
         }
         .payment-logos {
             margin-top: 1rem; /* mt-4 */
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem; /* space between logos */
         }
         .payment-logos img {
             height: 24px; /* h-6 */
-            display: inline-block;
-            margin: 0 0.5rem; /* mx-2 */
+            object-fit: contain;
         }
         .modal-footer-text {
             font-size: 0.75rem; /* text-xs */
@@ -231,6 +233,7 @@
             text-align: center;
             margin-top: 1.5rem; /* mt-6 */
         }
+
 
         /* Staili za ATM za zamani (zimefichwa) */
         .atm-screen, .atm-text, .atm-input, .atm-button, .loading-circle, .blinking-text, .bouncing-emoji {
@@ -304,12 +307,16 @@
             <!-- Form View -->
             <div id="form-view">
                 <div class="icon-18">18+</div>
-                <h2 class="modal-title">LIPIA TSH 1,000/= TU.</h2>
-                <p class="modal-subtitle">Video zote za kikubwa pamoja na connection kali na Mpya za Mjini Utazipata hapa</p>
+                <!-- MODIFIED: Title changed to match image -->
+                <h2 class="modal-title">LIPIA TSH <span class="text-red-600">1000</span>/= TU.</h2>
+                <!-- MODIFIED: Subtitle changed to match image -->
+                <p class="modal-subtitle">Fungua video zote za kikubwa na connection kali za mjini.</p>
                 
                 <form id="payment-form">
-                    <label for="phone" class="modal-label">Weka namba yenye pesa *</label>
+                    <!-- MODIFIED: Label changed to match image -->
+                    <label for="phone" class="modal-label">Weka namba yako ya pesa</label>
                     <input type="tel" id="phone" name="phone" class="modal-input" placeholder="07XXXXXXXX" required pattern="0[6-7][0-9]{8}">
+                    <!-- MODIFIED: Button changed to red -->
                     <button type="submit" class="modal-button">
                         <i class="fas fa-lock mr-2"></i> LIPA SASA
                     </button>
@@ -319,18 +326,27 @@
                     <i class="fas fa-lock w-4 h-4 mr-2"></i> Secure Payment
                 </div>
                 
+                <!-- MODIFIED: Payment logos changed to match image -->
                 <div class="payment-logos">
-                    <!-- Nimetumia logo moja ya ZenoPay kama ilivyokuwa kwenye file la kwanza, inawakilisha zote -->
-                    <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="Watoa Huduma" class="h-8 mx-auto">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Tigo_Pesa_Logo.png" alt="Tigo Pesa" onerror="this.style.display='none'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/1280px-M-PESA_LOGO-01.svg.png" alt="M-Pesa" onerror="this.style.display='none'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Airtel_Money_logo.svg/2560px-Airtel_Money_logo.svg.png" alt="Airtel Money" onerror="this.style.display='none'">
+                    <img src="https://www.halotel.co.tz/uploads/61640a39a661f_Halopesa_logo_1.png" alt="HaloPesa" onerror="this.style.display='none'">
+                </div>
+                
+                <!-- ADDED: Zenopay Logo -->
+                <div class="payment-logos" style="margin-top: 0.5rem;">
+                     <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="zenopay-logo" border="0" class="h-8 mx-auto">
                 </div>
                 
                 <p class="modal-footer-text">You're supporting PenziShata with this payment.</p>
             </div>
 
             <!-- Loading View (Inatumia style mpya) -->
+            <!-- MODIFIED: Loading spinner changed to red -->
             <div id="waiting-view" class="hidden h-full flex flex-col items-center justify-center text-center py-10">
-                <div class="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
-                <h3 class="modal-title mt-6 text-purple-700">ANGALIA SIMU YAKO!</h3>
+                <div class="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+                <h3 class="modal-title mt-6 text-red-700">ANGALIA SIMU YAKO!</h3>
                 <p class="modal-subtitle mt-2">Tumekutumia ombi la malipo. Weka namba yako siri kumaliza.</p>
                 <p class="font-bold text-gray-500 mt-4 animate-pulse">INASUBIRI UTHIBITISHO...</p>
             </div>
@@ -338,97 +354,155 @@
     </div>
 
     <script>
-        // *** MODIFIED: Video zimegawanywa kwenye categories na titles zimebadilishwa ***
+        // === NEW VIDEO LIST ===
+        // All old videos removed and replaced with the new list
+        
+        // === REVERTED: Original categories and titles restored ===
+        // === UPDATED: New links inserted into original structure ===
+
+        const newLinks = [
+            "https://www.empressleak.xyz/media/videos/tmb/7072/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6995/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6673/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/7167/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/7047/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/7099/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/7097/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/7071/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/7042/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6991/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6992/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6920/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6904/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6862/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6757/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6745/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm",
+            // Links for "UTAMU CHUMBANI" (16 links)
+            "https://www.empressleak.xyz/media/videos/tmb/6699/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6680/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6671/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6670/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6653/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6651/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6598/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6428/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6254/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6214/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6213/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/6203/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5921/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5863/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5861/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5792/video.webm",
+            // Links for "WANAFUNZI WA CHUO" (first 9 links)
+            "https://www.empressleak.xyz/media/videos/tmb/5733/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5622/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5590/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5575/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5504/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5492/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5476/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5449/video.webm",
+            "https://www.empressleak.xyz/media/videos/tmb/5431/video.webm"
+        ];
+
+        let linkIndex = 0;
 
         const categories = {
             "VIDEO MPYA ZIMEVUJA": [
-                { title: "IMEVUJA: Mke wa Mtu Akilia na Mchepuko Gesti", duration: "12:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452687/13452687-preview.webm" },
-                { title: "SKENDO: Mwanafunzi wa Chuo Adaiwa Kufanywa Chooni", duration: "08:11", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452678/13452678-preview.webm" },
-                { title: "Mtoto wa Mchungaji AVULIWA WAZIWAZI Live", duration: "05:59", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12444399/12444399-preview.webm" },
-                { title: "SHOCKING: Bibi Harusi Akifanywa Kabla ya Ndoa", duration: "15:02", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13452698/13452698-preview.webm" },
-                { title: "LEAKED: Housegirl Mwenye Nguo Fupi Apakwa Mafuta", duration: "09:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13060359/13060359-preview.webm" },
-                { title: "Shemeji Ananiingilia Jikoni Kimya Kimya (Video)", duration: "07:44", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12040346/12040346-preview.webm" },
-                { title: "DAKTARI WA KICHAA: Akikojoa Bila Kusimama", duration: "11:21", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172572/13172572-preview.webm" },
-                { title: "Housegirl Amfanyia Mambo Mtoto wa Bosi Wakiwa Peke Yao", duration: "06:33", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172048/13172048-preview.webm" },
-                { title: "VIDEO MPYA UDSM: Mwanafunzi YAVUJA Chumbani", duration: "14:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13172064/13172064-preview.webm" },
-                { title: "LIVE DALADALA: Ananifunulia Sketi Kwenye Siti", duration: "10:07", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13382197/13382197-preview.webm" },
-                { title: "Toto la Sinza Lafundwa na MZEE WA KAZI", duration: "09:55", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12463982/12463982-preview.webm" },
-                { title: "ASKARI Amwaga LIVE Mbele ya Mtuhumiwa", duration: "08:22", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097517/12097517-preview.webm" },
-                { title: "Binti Kiziwi AFUNZWA Kutumia Mboo na Fundi", duration: "04:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165824/12165824-preview.webm" },
-                { title: "WEMA SEPETU: Video Yake Ya Siri Chumbani YAVUJA", duration: "13:40", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379453/12379453-preview.webm" },
-                { title: "Mke wa Bosi Anataka Kila Siku (IMENASWA)", duration: "07:05", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097526/12097526-preview.webm" },
-                { title: "MGANGA Amfanyia Mambo Mteja Wake wa Kike", duration: "05:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12097349/12097349-preview.webm" },
-                { title: "Mama Ntilie Mwenye MAZIWA MAKUBWA Afanywa Jikoni", duration: "11:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/122/12271419/12271419-preview.webm" },
-                { title: "AJICHUA LIVE CHUMBANI: Ajua Narekodi!", duration: "06:19", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12116404/12116404-preview.webm" },
-                { title: "Kibibi cha Kisukuma Chatafuna MBOO Ya Mjukuu", duration: "14:59", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/120/12099511/12099511-preview.webm" },
-                { title: "KIJANA MDOGO Ampiga Mshua Mkubwa Gesti", duration: "10:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/121/12165715/12165715-preview.webm" },
-                { title: "TRAFFIC POLISI Anapigwa Chini ya Gari (LEAKED)", duration: "07:31", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/123/12379994/12379994-preview.webm" },
-                { title: "Dereva wa Lori Aharibu Mke wa Mtu (VIDEO NZIMA)", duration: "12:08", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/124/12429864/12429864-preview.webm" }
+                { title: "IMEVUJA: Mke wa Mtu Akilia na Mchepuko Gesti", duration: "12:45", src: newLinks[linkIndex++] || "#" },
+                { title: "SKENDO: Mwanafunzi wa Chuo Adaiwa Kufanywa Chooni", duration: "08:11", src: newLinks[linkIndex++] || "#" },
+                { title: "Mtoto wa Mchungaji AVULIWA WAZIWAZI Live", duration: "05:59", src: newLinks[linkIndex++] || "#" },
+                { title: "SHOCKING: Bibi Harusi Akifanywa Kabla ya Ndoa", duration: "15:02", src: newLinks[linkIndex++] || "#" },
+                { title: "LEAKED: Housegirl Mwenye Nguo Fupi Apakwa Mafuta", duration: "09:30", src: newLinks[linkIndex++] || "#" },
+                { title: "Shemeji Ananiingilia Jikoni Kimya Kimya (Video)", duration: "07:44", src: newLinks[linkIndex++] || "#" },
+                { title: "DAKTARI WA KICHAA: Akikojoa Bila Kusimama", duration: "11:21", src: newLinks[linkIndex++] || "#" },
+                { title: "Housegirl Amfanyia Mambo Mtoto wa Bosi Wakiwa Peke Yao", duration: "06:33", src: newLinks[linkIndex++] || "#" },
+                { title: "VIDEO MPYA UDSM: Mwanafunzi YAVUJA Chumbani", duration: "14:01", src: newLinks[linkIndex++] || "#" },
+                { title: "LIVE DALADALA: Ananifunulia Sketi Kwenye Siti", duration: "10:07", src: newLinks[linkIndex++] || "#" },
+                { title: "Toto la Sinza Lafundwa na MZEE WA KAZI", duration: "09:55", src: newLinks[linkIndex++] || "#" },
+                { title: "ASKARI Amwaga LIVE Mbele ya Mtuhumiwa", duration: "08:22", src: newLinks[linkIndex++] || "#" },
+                { title: "Binti Kiziwi AFUNZWA Kutumia Mboo na Fundi", duration: "04:50", src: newLinks[linkIndex++] || "#" },
+                { title: "WEMA SEPETU: Video Yake Ya Siri Chumbani YAVUJA", duration: "13:40", src: newLinks[linkIndex++] || "#" },
+                { title: "Mke wa Bosi Anataka Kila Siku (IMENASWA)", duration: "07:05", src: newLinks[linkIndex++] || "#" },
+                { title: "MGANGA Amfanyia Mambo Mteja Wake wa Kike", duration: "05:15", src: newLinks[linkIndex++] || "#" },
+                { title: "Mama Ntilie Mwenye MAZIWA MAKUBWA Afanywa Jikoni", duration: "11:50", src: newLinks[linkIndex++] || "#" },
+                { title: "AJICHUA LIVE CHUMBANI: Ajua Narekodi!", duration: "06:19", src: newLinks[linkIndex++] || "#" },
+                { title: "Kibibi cha Kisukuma Chatafuna MBOO Ya Mjukuu", duration: "14:59", src: newLinks[linkIndex++] || "#" },
+                { title: "KIJANA MDOGO Ampiga Mshua Mkubwa Gesti", duration: "10:20", src: newLinks[linkIndex++] || "#" },
+                { title: "TRAFFIC POLISI Anapigwa Chini ya Gari (LEAKED)", duration: "07:31", src: newLinks[linkIndex++] || "#" },
+                { title: "Dereva wa Lori Aharibu Mke wa Mtu (VIDEO NZIMA)", duration: "12:08", src: newLinks[linkIndex++] || "#" }
             ],
             "UTAMU CHUMBANI": [
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/147/14715721/14715721-preview.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/145/14574312/14574312-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/145/14573992/14573992-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "14:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/145/14573988/14573988-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/145/14540948/14540948-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/145/14540880/14540880-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "12:12", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/145/14540873/14540873-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "06:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/143/14354675/14354675-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/143/14341601/14341601-preview.webm" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/143/14341577/14341577-preview.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14084170/14084170-preview.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "14:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14084058/14084058-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14062364/14062364-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13976391/2_240.jpg" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "12:12", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13809075/13809075-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "06:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/136/13647975/13647975-preview.webm" }
+                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "08:15", src: newLinks[linkIndex++] || "#" },
+                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "11:30", src: newLinks[linkIndex++] || "#" },
+                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "05:45", src: newLinks[linkIndex++] || "#" },
+                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "14:20", src: newLinks[linkIndex++] || "#" },
+                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "07:01", src: newLinks[linkIndex++] || "#" },
+                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "09:50", src: newLinks[linkIndex++] || "#" },
+                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "12:12", src: newLinks[linkIndex++] || "#" },
+                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "06:30", src: newLinks[linkIndex++] || "#" },
+                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "08:15", src: newLinks[linkIndex++] || "#" },
+                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "11:30", src: newLinks[linkIndex++] || "#" },
+                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "05:45", src: newLinks[linkIndex++] || "#" },
+                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "14:20", src: newLinks[linkIndex++] || "#" },
+                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "07:01", src: newLinks[linkIndex++] || "#" },
+                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "09:50", src: newLinks[linkIndex++] || "#" },
+                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "12:12", src: newLinks[linkIndex++] || "#" },
+                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "06:30", src: newLinks[linkIndex++] || "#" }
             ],
             "WANAFUNZI WA CHUO": [
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/135/13531336/13531336-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13490416/13490416-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13490373/13490373-preview.webm" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "14:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13490317/13490317-preview.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13489977/13489977-preview.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13489877/13489877-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "12:12", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13488662/13488662-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "06:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13488496/13488496-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/134/13408356/13408356-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12970319/12970319-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12955831/12955831-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "14:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12955801/12955801-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12942650/1_240.jpg" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/15/150/15072438/15072438-preview.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "12:12", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14056187/14056187-preview.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "06:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14041042/14041042-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14040963/14040963-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14040939/14040939-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13967284/13967284-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "14:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13955903/13955903-preview.webm" }
+                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "08:15", src: newLinks[linkIndex++] || "#" },
+                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "11:30", src: newLinks[linkIndex++] || "#" },
+                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "05:45", src: newLinks[linkIndex++] || "#" },
+                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "14:20", src: newLinks[linkIndex++] || "#" },
+                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "07:01", src: newLinks[linkIndex++] || "#" },
+                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "09:50", src: newLinks[linkIndex++] || "#" },
+                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "12:12", src: newLinks[linkIndex++] || "#" },
+                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "06:30", src: newLinks[linkIndex++] || "#" },
+                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "08:15", src: newLinks[linkIndex++] || "#" },
+                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12970319/12970319-preview.webm" },
+                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12955831/12955831-preview.webm" },
+                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12955801/12955801-preview.webm" },
+                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12942650/1_240.jpg" },
+                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/15/150/15072438/15072438-preview.webm" },
+                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14056187/14056187-preview.webm" },
+                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14041042/14041042-preview.webm" },
+                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14040963/14040963-preview.webm" },
+                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14040939/14040939-preview.webm" },
+                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13967284/13967284-preview.webm" },
+                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13955903/13955903-preview.webm" }
             ],
             "SKENDO ZA MJINI": [
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13933150/13933150-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13841101/13841101-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "12:12", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13365658/13365658-preview.webm" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "06:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/132/13222340/13222340-preview.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13194633/6_240.jpg" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13142077/13142077-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13195057/2_240.jpg" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "14:20", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13013907/13013907-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/9/93/935/9359672/9359672-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/127/12760030/12760030-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "12:12", src: "https://www.empressleak.xyz/media/videos/tmb/7072/video.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "06:30", src: "https://www.empressleak.xyz/media/videos/tmb/6995/video.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "08:15", src: "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "11:30", src: "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "05:45", src: "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "14:20", src: "https://www.empressleak.xyz/media/videos/tmb/6673/video.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "07:01", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181416/14181416-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "09:50", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181442/14181442-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "12:12", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14179568/14179568-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "06:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181491/14181491-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "08:15", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13844503/13844503-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "11:30", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/11/119/11940424/11940424-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "05:45", src: "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/144/14435745/14435745-preview.webm" }
+                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13933150/13933150-preview.webm" },
+                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13841101/13841101-preview.webm" },
+                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13365658/13365658-preview.webm" },
+                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/132/13222340/13222340-preview.webm" },
+                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13194633/6_240.jpg" },
+                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13142077/13142077-preview.webm" },
+                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13195057/2_240.jpg" },
+                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13013907/13013907-preview.webm" },
+                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/9/93/935/9359672/9359672-preview.webm" },
+                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/127/12760030/12760030-preview.webm" },
+                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/7072/video.webm" },
+                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6995/video.webm" },
+                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm" },
+                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm" },
+                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm" },
+                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6673/video.webm" },
+                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181416/14181416-preview.webm" },
+                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181442/14181442-preview.webm" },
+                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14179568/14179568-preview.webm" },
+                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "httpss://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181491/14181491-preview.webm" },
+                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13844503/13844503-preview.webm" },
+                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/11/119/11940424/11940424-preview.webm" },
+                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/144/14435745/14435745-preview.webm" }
             ]
         };
 
@@ -576,4 +650,3 @@
     </script>
 </body>
 </html>
-
