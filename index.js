@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000; // Vercel will set the port automatically
 const API_KEY = "npYIizy98hHRyWqWSwkFwgPThh5TErG8JXHyYVaEC1kIjHngTqw0R3dNmS94NYr7mMRVC2KFn5N7yerlynBeCw";
 
 // BEI IMEBADILISHWA KUWA 1000 KULINGANA NA PAGE MPYA
-const GROUP_PRICE = 1000; // The price for your WhatsApp group in TZS
+const GROUP_PRICE = 200; // The price for your WhatsApp group in TZS
 const API_URL = "https://zenoapi.com/api/payments/mobile_money_tanzania";
 
 // --- Middleware ---
