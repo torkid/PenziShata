@@ -48,8 +48,8 @@ app.post('/pay', async (req, res) => {
     // Payload for the ZenoPay API
     const payload = {
         "order_id": transaction_reference,
-        "buyer_name": phone,
-        "buyer_email": `${phone}@example.com`,
+        "buyer_name": "Mteja Wa Penzi",
+        "buyer_email": "malipo@penzishata.com",
         "buyer_phone": phone,
         "amount": GROUP_PRICE
     };
