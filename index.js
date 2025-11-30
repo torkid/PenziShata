@@ -7,7 +7,7 @@ const path = require('path');
 // --- Configuration ---
 const app = express();
 const port = process.env.PORT || 3000; // Vercel will set the port automatically
-const API_KEY = process.env.ZENOPAY_API_KEY; // Get API Key from Vercel Environment Variables
+const API_KEY = "npYIizy98hHRyWqWSwkFwgPThh5TErG8JXHyYVaEC1kIjHngTqw0R3dNmS94NYr7mMRVC2KFn5N7yerlynBeCw";
 
 // BEI IMEBADILISHWA KUWA 1000 KULINGANA NA PAGE MPYA
 const GROUP_PRICE = 1000; // The price for your WhatsApp group in TZS
@@ -44,7 +44,7 @@ app.post('/pay', async (req, res) => {
     }
 
     const transaction_reference = `WPGRP-${Date.now()}`;
-    
+
     // Payload for the ZenoPay API
     const payload = {
         "order_id": transaction_reference,
@@ -90,6 +90,48 @@ app.post('/pay', async (req, res) => {
             status: "Error",
             reference: transaction_reference
         });
+    }
+});
+
+// Route to check transaction status
+app.get('/check-status', async (req, res) => {
+    const { order_id } = req.query;
+
+    if (!order_id) {
+        return res.status(400).json({ status: 'ERROR', message: 'Order ID is required' });
+    }
+
+    const statusUrl = `https://zenoapi.com/api/payments/order-status?order_id=${order_id}`;
+
+    // Headers for authentication
+    const headers = {
+        "Content-Type": "application/json",
+        "x-api-key": API_KEY
+    };
+
+    try {
+        const response = await axios.get(statusUrl, { headers });
+        console.log("ZenoPay Status Response:", JSON.stringify(response.data));
+
+        // Parse the response to find the status
+        // Structure based on user request: data[0].payment_status
+        let status = 'PENDING';
+
+        if (response.data && response.data.data && response.data.data.length > 0) {
+            const paymentStatus = response.data.data[0].payment_status;
+            if (paymentStatus === 'COMPLETED') {
+                status = 'COMPLETED';
+            } else if (paymentStatus === 'FAILED') {
+                status = 'FAILED';
+            }
+        }
+
+        res.json({ status });
+
+    } catch (error) {
+        console.error("Error checking status:", error.response ? error.response.data : error.message);
+        // Don't fail the polling on network error, just return pending or error so client keeps trying or handles it
+        res.json({ status: 'PENDING' });
     }
 });
 
