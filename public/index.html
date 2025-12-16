@@ -384,12 +384,12 @@
                         
                         <!-- Play Overlay -->
                         <div class="video-play-overlay absolute inset-0 flex items-center justify-center">
-                            <div class="play-icon w-14 h-14 bg-white/90 rounded-full flex items-center justify-center text-red-600 shadow-lg backdrop-blur-sm">
+                            <div class="play-icon w-14 h-14 bg-white/90 rounded-full flex items-center justify-center text-red-600 shadow-lg">
                                 <i class="fas fa-play text-xl ml-1"></i>
                             </div>
                         </div>
                         
-                        <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">
+                        <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">
                             ${video.duration}
                         </span>
                     </div>
@@ -572,20 +572,8 @@
                 });
             }
 
-            // --- LAZY LOADING ---
-            const lazyVideos = document.querySelectorAll('video[data-src]');
-            const videoObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const video = entry.target;
-                        video.src = video.dataset.src;
-                        video.load();
-                        observer.unobserve(video);
-                    }
-                });
-            }, { rootMargin: '200px' });
-
-            lazyVideos.forEach(video => videoObserver.observe(video));
+            // --- LAZY LOADING REMOVED FOR PERFORMANCE (LOAD ON CLICK) ---
+            // The click listener below handles loading src on demand.
 
         });
     </script>
