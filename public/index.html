@@ -3,724 +3,577 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PenziShata - Video Mpya Zimevuja Kila Siku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PenziShata - Connection Zote</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Teko:wght@700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Teko:wght@700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        :root {
-            --brand-red: #E50914;
-        }
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
+    <!-- OneSignal SDK -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function (OneSignal) {
+            await OneSignal.init({
+                appId: "eaa5f924-488c-4ca8-8c9d-6a69af3d8abe",
+            });
+        });
+    </script>
+    <style>
         body {
-            font-family: 'Roboto Condensed', sans-serif;
-            /* Font kama ya YouTube */
-            background-color: #0A0A0A;
-            color: #f1f1f1;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            /* Dot Pattern Background */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
         .font-display {
             font-family: 'Teko', sans-serif;
         }
 
-        /* Staili za Video Card (YouTube-style) */
-        .video-list-card {
-            margin-bottom: 1rem;
-            cursor: pointer;
+        /* Animation kwa Emojis */
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
 
-        .video-thumbnail-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            /* Aspect ratio ya video */
-            background-color: #222;
-            border-radius: 8px;
-            overflow: hidden;
+        .emoji-animate {
+            display: inline-block;
+            animation: bounce-slow 1.5s infinite ease-in-out;
         }
 
-        .video-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        /* Brutalist Shadow for Price */
+        .brutal-shadow {
+            box-shadow: 4px 4px 0px 0px #dc2626;
         }
 
-        .video-duration {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background-color: rgba(0, 0, 0, 0.75);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            /* text-xs */
-            font-weight: 700;
-        }
-
-        .video-details {
-            padding-top: 12px;
-            /* Flex imeondolewa, si lazima tena */
-        }
-
-        /* === CSS YA AVATAR IMEONDOLEWA === */
-
-        .video-text-meta {
-            overflow: hidden;
-            /* Kuzuia title ndefu kuharibu layout */
-        }
-
-        /* *** MODIFIED: Font size imeongezwa kutoka text-base *** */
-        .video-title {
-            font-size: 1.125rem;
-            /* text-lg */
-            font-weight: 700;
-            color: #f1f1f1;
-            line-height: 1.3;
-            /* Kuficha text ndefu (ellipsis) */
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* *** MODIFIED: Font size imeongezwa kutoka text-sm *** */
-        .video-channel-info {
-            font-size: 1rem;
-            /* text-base */
-            color: #aaa;
-            margin-top: 4px;
-        }
-
-        /* --- PLAY BUTTON STYLE MPYA --- */
-        .video-play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            /* Saizi nzuri kwa mobile tap */
-            height: 60px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 24px;
-            pointer-events: none;
-            /* Inaruhusu card yote kubonyezwa */
+        /* Video Card Hover Effects */
+        .video-play-overlay {
+            background: rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
         }
 
-        .video-list-card:hover .video-play-button {
-            background-color: rgba(229, 9, 20, 0.8);
-            /* Rangi ya brand ikiwa hovered */
-            color: white;
-            transform: translate(-50%, -50%) scale(1.1);
+        .video-card:active .play-icon {
+            transform: scale(0.9);
         }
 
-        .fas {
-            line-height: 1;
-            /* Kuhakikisha icon inakaa sawa */
-        }
-
-        /* --- MWISHO WA PLAY BUTTON STYLE --- */
-
-        /* Staili za Pagination (Unclickable) */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem 0;
-            border-top: 1px solid #222;
-            margin-top: 1rem;
-        }
-
-        .pagination-item {
-            padding: 8px 12px;
-            margin: 0 4px;
-            border-radius: 4px;
-            font-weight: 700;
-            color: #555;
-            /* Rangi iliyofifia */
-            background-color: #1a1a1a;
-            cursor: not-allowed;
-            /* Inaonyesha haibonyezwi */
-        }
-
-        .pagination-item.active {
-            background-color: var(--brand-red);
-            color: white;
-        }
-
-        /* === STYLES FOR NEW MODAL (FROM IMAGE) === */
-        .modal-card {
-            background-color: #ffffff;
-            /* White background */
-            color: #1f2937;
-            /* Dark gray text */
-            border-radius: 0.75rem;
-            /* rounded-lg */
-            padding: 2rem;
-            /* p-8 */
-            width: 100%;
-            max-width: 28rem;
-            /* max-w-sm */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .icon-18 {
-            width: 3.5rem;
-            /* w-14 */
-            height: 3.5rem;
-            /* h-14 */
-            background-color: #dc2626;
-            /* bg-red-600 */
-            border-radius: 9999px;
-            /* rounded-full */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            /* text-xl */
-            font-weight: 700;
-            margin: 0 auto 1rem auto;
-            /* Center */
-            /* Removed border */
-        }
-
-        .modal-title {
-            font-size: 1.25rem;
-            /* text-xl */
-            font-weight: 700;
-            text-align: center;
-            color: #1f2937;
-        }
-
-        .modal-subtitle {
-            font-size: 0.875rem;
-            /* text-sm */
-            color: #374151;
-            /* text-gray-700 (darker) */
-            text-align: center;
-            margin-top: 0.5rem;
-            /* mt-2 */
-            max-width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.4;
-        }
-
-        .modal-label {
-            font-size: 0.875rem;
-            /* text-sm */
-            font-weight: 700;
-            /* font-bold */
-            color: #1f2937;
-            /* text-gray-900 */
-            margin-top: 1.5rem;
-            /* mt-6 */
-            margin-bottom: 0.5rem;
-            /* mb-2 */
-        }
-
-        .modal-input {
-            width: 100%;
-            border: 1px solid #d1d5db;
-            /* border-gray-300 */
-            border-radius: 0.375rem;
-            /* rounded-md */
-            padding: 0.75rem 1rem;
-            /* p-3 */
-            font-size: 1.125rem;
-            /* text-lg */
-            color: #1f2937;
-        }
-
-        .modal-input:focus {
-            outline: none;
-            border-color: #dc2626;
-            /* red-600 */
-            box-shadow: 0 0 0 2px #fecaca;
-            /* red-200 ring */
-        }
-
-        .modal-button {
-            width: 100%;
-            background-color: #dc2626;
-            /* bg-red-600 */
-            color: white;
-            border-radius: 0.375rem;
-            /* rounded-md */
-            padding: 0.75rem;
-            /* p-3 */
-            font-weight: 700;
-            font-size: 1.125rem;
-            /* text-lg */
-            margin-top: 1.5rem;
-            /* mt-6 */
-            transition: background-color 0.2s ease;
-        }
-
-        .modal-button:hover {
-            background-color: #b91c1c;
-            /* bg-red-700 */
-        }
-
-        .secure-payment {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            /* text-xs */
-            color: #6b7280;
-            /* text-gray-500 */
-            margin-top: 1.5rem;
-            /* mt-6 */
-        }
-
-        .payment-logos {
-            margin-top: 1rem;
-            /* mt-4 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            /* space between logos */
-        }
-
-        .payment-logos img {
-            height: 24px;
-            /* h-6 */
-            object-fit: contain;
-        }
-
-        .modal-footer-text {
-            font-size: 0.75rem;
-            /* text-xs */
-            color: #6b7280;
-            /* text-gray-500 */
-            text-align: center;
-            margin-top: 1.5rem;
-            /* mt-6 */
-        }
-
-
-        /* Staili za ATM za zamani (zimefichwa) */
-        .atm-screen,
-        .atm-text,
-        .atm-input,
-        .atm-button,
-        .loading-circle,
-        .blinking-text,
-        .bouncing-emoji {
+        /* Hide Scrollbar for horizontal scroll if added later */
+        .no-scrollbar::-webkit-scrollbar {
             display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 18+ Badge Animation */
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .badge-pulse::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background-color: #dc2626;
+            z-index: -1;
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        /* USSD Animation */
+        @keyframes typing {
+            0% {
+                width: 0;
+            }
+
+            50% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0;
+            }
+        }
+
+        .typing-dots::after {
+            content: '...';
+            animation: typing 1.5s steps(4, end) infinite;
+            display: inline-block;
+            vertical-align: bottom;
+            overflow: hidden;
+            width: 0px;
+        }
+
+        @keyframes phone-vibrate {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        .animate-vibrate {
+            animation: phone-vibrate 0.8s linear infinite;
         }
     </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased min-h-screen flex flex-col items-center pb-20 overflow-x-hidden relative">
 
-    <!-- Main Container -->
-    <div class="relative min-h-screen flex flex-col">
+    <!-- AGE GATE OVERLAY -->
+    <div id="age-gate"
+        class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm z-[100] flex flex-col items-center justify-center p-6 text-center">
+        <!-- Warning Icon -->
+        <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mb-6 animate-pulse">
+            <span class="text-4xl font-black text-white">18+</span>
+        </div>
 
-        <!-- Header Mpya -->
-        <header
-            class="w-full py-3 px-4 sm:px-8 border-b border-gray-800 sticky top-0 bg-black/70 backdrop-blur-md z-30">
-            <div class="container mx-auto flex justify-between items-center">
-                <h1 class="text-3xl sm:text-4xl font-black uppercase text-red-600 font-display tracking-wider">
-                    PenziShata
-                </h1>
-                <button
-                    class="open-modal-trigger bg-red-600 hover:bg-red-700 transition-all text-white font-bold py-2 px-6 rounded-lg text-sm sm:text-base animate-pulse shadow-lg shadow-red-500/30">
-                    Jiunge VIP (TSH 1,000)
-                </button>
-            </div>
-        </header>
+        <h1 class="text-4xl font-display text-white uppercase mb-4 tracking-wider">
+            Onyo: Maudhui ya Wakubwa
+        </h1>
 
-        <!-- Main Content (Video List) -->
-        <!-- *** MODIFIED: 'max-w-xl' imebadilishwa kuwa 'max-w-7xl' *** -->
-        <main class="flex-grow flex flex-col w-full max-w-7xl mx-auto p-4 sm:p-8">
+        <p class="text-slate-400 text-sm max-w-xs mb-8 leading-relaxed">
+            Tovuti hii ina video za kikubwa ambazo haziruhusiwi kwa watu chini ya miaka 18.
+            Je, una umri wa miaka 18 na zaidi?
+        </p>
 
-            <!-- Hapa ndipo video zitawekwa na JavaScript -->
-            <!-- *** MODIFIED: Changed 'lg:grid-cols-4' to 'md:grid-cols-4' *** -->
-            <div id="video-list-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
-                <!-- Mfano wa Card (itaondolewa na JS) -->
-                <!-- *** HII SECTION SASA ITAJAZWA NA JS, PAMOJA NA TITLES ZA CATEGORY *** -->
-                <div class.="col-span-1 sm:col-span-2 md:col-span-4">
-                    <div class="w-full h-64 bg-gray-800 animate-pulse rounded-lg"></div>
-                </div>
-            </div>
+        <button id="enter-site-btn"
+            class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg shadow-red-600/30 transition-all transform active:scale-95 flex items-center gap-3">
+            <i class="fas fa-check-circle"></i> NDIYO, NIRUHUSU
+        </button>
 
-            <!-- Pagination (Unclickable) -->
-            <nav class="pagination" aria-label="Pagination">
-                <span class="pagination-item active" aria-current="page">1</span>
-                <span class="pagination-item">2</span>
-                <span class="pagination-item">3</span>
-                <span class="pagination-item">...</span>
-                <span class="pagination-item">
-                    <i class="fas fa-chevron-right"></i>
-                </span>
-            </nav>
+        <p class="mt-6 text-[10px] text-slate-600 uppercase tracking-widest">
+            PenziShata VIP Access
+        </p>
 
-        </main>
-
-        <!-- Footer -->
-        <footer class="w-full py-8 px-4 sm:px-8 mt-12 border-t border-white/10">
-            <div class="container mx-auto text-center text-gray-500">
-                <p>&copy; 2025 PenziShata. Haki zote zimehifadhiwa.</p>
-                <div class="mt-2 text-sm">
-                    <a href="#" class="hover:text-white mx-2">Vigezo & Masharti</a>
-                    <span class="text-gray-600">•</span>
-                    <a href="#" class="hover:text-white mx-2">Sera ya Faragha</a>
-                </div>
-            </div>
-        </footer>
-
+        <!-- OneSignal Container (Hidden/Required) -->
+        <div class='onesignal-customlink-container hidden'></div>
     </div>
 
-    <!-- Payment Modal MPYA (Kama Picha) -->
+    <!-- Sticky Alert Bar -->
+    <div
+        class="w-full bg-red-600 text-white text-center py-2 text-xs font-black tracking-widest uppercase animate-pulse sticky top-0 z-40 shadow-md">
+        ⚠️ Video hizi zinafutwa baada ya dk 10!
+    </div>
+
+    <!-- === HERO SECTION (BOLDER & BIGGER) === -->
+    <header class="w-full max-w-md mx-auto pt-8 pb-4 px-4 text-center flex flex-col items-center relative z-10">
+
+        <!-- Live Status -->
+        <div
+            class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full border border-red-100 shadow-sm mb-5">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+            </span>
+            <span class="text-sm font-bold text-red-600 tracking-wide">LIVE LEAKS TZ</span>
+        </div>
+
+        <!-- Heading Kubwa Sana (Teko Font) -->
+        <h1 class="font-display text-7xl sm:text-8xl leading-[0.85] text-slate-900 mb-3 uppercase italic tracking-wide">
+            Connection<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">Zote Hapa</span>
+        </h1>
+
+        <!-- Price Sticker (Creative Element) -->
+        <div
+            class="my-6 transform rotate-[-2deg] hover:rotate-0 transition-transform duration-200 cursor-pointer open-modal-trigger">
+            <div
+                class="bg-black text-white text-4xl font-display px-10 py-3 rounded-xl brutal-shadow border-2 border-black tracking-wider">
+                TSH 1,000/=
+            </div>
+        </div>
+
+        <!-- Subtext -->
+        <p class="text-slate-600 font-medium text-base leading-relaxed max-w-[300px] mx-auto">
+            Usipitwe na uhondo. Watoto wakali wanajirekodi chumbani.
+            <span class="emoji-animate text-xl">🍑</span>
+        </p>
+    </header>
+
+    <!-- === MAIN CONTENT (VIDEO GRID) === -->
+    <main class="w-full max-w-xl px-4 mt-6">
+
+
+        <div id="video-list-container" class="space-y-6">
+            <!-- Loading Skeletons -->
+            <div class="animate-pulse bg-white p-4 rounded-3xl shadow-sm border border-slate-100">
+                <div class="h-56 bg-slate-200 rounded-2xl w-full mb-4"></div>
+                <div class="h-5 bg-slate-200 rounded w-3/4 mb-3"></div>
+                <div class="h-4 bg-slate-200 rounded w-1/4"></div>
+            </div>
+            <div class="animate-pulse bg-white p-4 rounded-3xl shadow-sm border border-slate-100">
+                <div class="h-56 bg-slate-200 rounded-2xl w-full mb-4"></div>
+                <div class="h-5 bg-slate-200 rounded w-3/4 mb-3"></div>
+                <div class="h-4 bg-slate-200 rounded w-1/4"></div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+
+    <!-- Footer -->
+    <footer class="mt-auto py-6 text-slate-400 text-xs text-center w-full">
+        <p>18+ Only. &copy; 2025 PenziShata VIP.</p>
+    </footer>
+
+    <!-- === NEW REDESIGNED PAYMENT MODAL === -->
     <div id="payment-modal"
-        class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
-        <div id="payment-box" class="modal-card relative">
+        class="fixed inset-0 bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden transition-opacity duration-300 h-[100dvh]">
+
+        <!-- Modal Content -->
+        <!-- Modal Content -->
+        <div id="payment-box"
+            class="w-full max-w-[350px] bg-white rounded-3xl px-5 py-6 relative transform transition-all duration-300 scale-95 opacity-0 shadow-2xl flex flex-col items-center text-center">
+
             <button id="close-modal"
-                class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-3xl font-light z-20">&times;</button>
+                class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 text-xl z-20 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
 
             <!-- Form View -->
-            <div id="form-view">
-                <div class="icon-18">18+</div>
-                <!-- MODIFIED: Title changed to match image -->
-                <h2 class="modal-title">LIPIA TSH <span class="text-red-600">1,000</span>/= TU.</h2>
-                <!-- MODIFIED: Subtitle changed to match image -->
-                <p class="modal-subtitle">Fungua video zote za kikubwa na connection kali za mjini.</p>
+            <div id="form-view" class="w-full flex flex-col items-center">
 
-                <form id="payment-form">
-                    <!-- MODIFIED: Label changed to match image -->
-                    <label for="phone" class="modal-label">Weka namba yako ya pesa</label>
-                    <input type="tel" id="phone" name="phone" class="modal-input" placeholder="07XXXXXXXX" required
-                        pattern="0[6-7][0-9]{8}">
-                    <!-- MODIFIED: Button changed to red -->
-                    <button type="submit" class="modal-button">
-                        <i class="fas fa-lock mr-2"></i> LIPA SASA
+                <!-- 18+ ANimated Badge (Moved Here) -->
+                <div class="relative mb-4 mx-auto">
+                    <div
+                        class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white font-black text-xl border-4 border-white shadow-lg badge-pulse relative z-10">
+                        18+
+                    </div>
+                </div>
+
+                <h2 class="text-sm font-bold text-slate-400 tracking-wider uppercase mb-1">GHARAMA YA KUJIUNGA</h2>
+                <div class="text-3xl font-black text-slate-900 mb-2 font-display tracking-wide">
+                    TSH 1,000/= <span class="text-sm text-slate-500 font-bold">TU</span>
+                </div>
+                <p class="text-xs text-slate-500 leading-tight mb-6 px-2">
+                    Fungua video zote za kikubwa na connection kali za mjini.
+                </p>
+
+                <form id="payment-form" class="space-y-4 w-full">
+                    <div class="text-left">
+                        <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1.5 ml-1">Weka namba yako
+                            ya pesa</label>
+                        <input type="tel" id="phone" name="phone"
+                            class="w-full bg-slate-50 border border-slate-200 text-slate-900 text-lg rounded-xl focus:ring-1 focus:ring-red-500 focus:border-red-500 block p-3 text-center outline-none transition-all font-bold placeholder-slate-300"
+                            placeholder="07XXXXXXXX" required pattern="0[6-7][0-9]{8}">
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-lg shadow-lg shadow-red-500/20 transition-all flex items-center justify-center gap-2 active:scale-95 transform">
+                        <i class="fas fa-lock"></i> LIPIA SASA
                     </button>
                 </form>
 
-                <div class="secure-payment">
-                    <i class="fas fa-lock w-4 h-4 mr-2"></i> Secure Payment
+                <!-- Footer with Trust Badge -->
+                <div class="mt-6 border-t border-slate-100 pt-3 w-full">
+                    <div
+                        class="flex items-center justify-center gap-1.5 mb-2 text-[10px] text-slate-400 font-semibold uppercase">
+                        <i class="fas fa-shield-alt text-green-500"></i> Malipo Salama
+                    </div>
+                    <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="Payment Providers"
+                        class="h-4 mx-auto opacity-60 grayscale hover:grayscale-0 transition-all">
                 </div>
-
-                <!-- MODIFIED: Removed the extra M-Pesa/Tigo logos -->
-
-                <!-- ADDED: Zenopay Logo -->
-                <div class="payment-logos" style="margin-top: 1rem;">
-                    <img src="https://i.ibb.co/jvqbh208/zenopay-logo.png" alt="zenopay-logo" border="0"
-                        class="h-8 mx-auto">
-                </div>
-
-                <p class="modal-footer-text">You're supporting PenziShata with this payment.</p>
             </div>
 
-            <!-- Loading View (Inatumia style mpya) -->
-            <!-- MODIFIED: Loading spinner changed to red -->
-            <div id="waiting-view" class="hidden h-full flex flex-col items-center justify-center text-center py-10">
-                <div class="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-                <h3 class="modal-title mt-6 text-red-700">ANGALIA SIMU YAKO!</h3>
-                <p class="modal-subtitle mt-2">Tumekutumia ombi la malipo. Weka namba yako siri kumaliza.</p>
-                <p class="font-bold text-gray-500 mt-4 animate-pulse">INASUBIRI UTHIBITISHO...</p>
+            <!-- NEW CREATIVE WAITING VIEW -->
+            <div id="waiting-view" class="hidden w-full py-2">
+
+                <!-- Phone Animation Container -->
+                <div
+                    class="relative w-24 h-40 bg-slate-800 rounded-2xl border-4 border-slate-900 mx-auto mb-6 shadow-xl flex flex-col items-center justify-center overflow-hidden animate-vibrate">
+                    <div class="absolute top-2 w-8 h-1 bg-slate-600 rounded-full"></div>
+                    <!-- Screen Content -->
+                    <div class="w-full h-full bg-slate-700 flex flex-col items-center justify-center pt-4">
+                        <div class="w-16 h-8 bg-white/10 rounded mb-2"></div>
+                        <div class="w-12 h-2 bg-white/10 rounded mb-4"></div>
+                        <div class="flex gap-1">
+                            <div
+                                class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-[8px] font-bold">
+                                PIN</div>
+                        </div>
+                    </div>
+                    <!-- Notification Badge -->
+                    <div
+                        class="absolute -top-1 -right-1 w-6 h-6 bg-red-500 border-2 border-white rounded-full flex items-center justify-center text-white text-xs font-bold animate-bounce">
+                        1
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-black text-slate-900 mb-2">POKEA OMBI LA MALIPO</h3>
+
+                <div class="bg-yellow-50 border border-yellow-100 rounded-xl p-3 mb-4 text-left">
+                    <p class="text-xs text-yellow-800 font-medium">
+                        <i class="fas fa-info-circle mr-1"></i> Ujumbe umetumwa kwenye simu yako.
+                    </p>
+                    <p class="text-xs text-slate-700 mt-1 pl-4">
+                        Weka <span class="font-bold">namba ya siri</span> (PIN) ili kukamilisha muamala.
+                    </p>
+                </div>
+
+                <div class="text-xs text-slate-400 font-semibold flex items-center justify-center gap-2">
+                    <i class="fas fa-circle-notch fa-spin text-red-500 text-lg"></i>
+                    <span>Inasubiri malipo<span class="typing-dots"></span></span>
+                </div>
             </div>
+
         </div>
     </div>
 
     <script>
-        // === NEW VIDEO LIST ===
-        // All old videos removed and replaced with the new list
-
-        // === REVERTED: Original categories and titles restored ===
-        // === UPDATED: New links inserted into original structure ===
-
-        const newLinks = [
-            "https://www.empressleak.xyz/media/videos/tmb/7072/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6995/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6673/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/7167/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/7047/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/7099/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/7097/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/7071/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/7042/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6991/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6992/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6920/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6904/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6862/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6757/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6745/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm",
-            // Links for "UTAMU CHUMBANI" (16 links)
-            "https://www.empressleak.xyz/media/videos/tmb/6699/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6680/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6671/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6670/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6653/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6651/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6598/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6428/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6254/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6214/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6213/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/6203/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5921/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5863/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5861/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5792/video.webm",
-            // Links for "WANAFUNZI WA CHUO" (first 9 links)
-            "https://www.empressleak.xyz/media/videos/tmb/5733/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5622/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5590/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5575/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5504/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5492/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5476/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5449/video.webm",
-            "https://www.empressleak.xyz/media/videos/tmb/5431/video.webm"
+        // === DATA & LOGIC ===
+        const videos = [
+            { title: "Mwanafunzi Albino wa chuo cha NIT connection hii hapa.", src: "https://vids.upwiru.site/mipiko/albino.mp4", thumb: "https://vids.upwiru.site/thumbs/albino.jpg", duration: "10:05" },
+            { title: "Amber Rutty connection yake mpya hii hapa", src: "https://vids.upwiru.site/mipiko/amber%20rutty.mp4", thumb: "https://vids.upwiru.site/thumbs/amberrutty.jpg", duration: "08:42" },
+            { title: "Asha Zungu akipakuliwa kinondoni mzigo huu hapa", src: "https://vids.upwiru.site/mipiko/asha%20zungu.mp4", thumb: "https://vids.upwiru.site/thumbs/ashazungu.jpg", duration: "14:15" },
+            { title: "Aslay connection nzima hii hapa mpya na ndefu zaidi", src: "https://vids.upwiru.site/mipiko/Aslya.mp4", thumb: "https://vids.upwiru.site/thumbs/aslay.jpg", duration: "09:30" },
+            { title: "Mfanyakazi wa CRDB vvideo yake akipigwa doggy na jamaa wa boda", src: "https://vids.upwiru.site/mipiko/crdb.mp4", thumb: "https://vids.upwiru.site/thumbs/crdb.jpg", duration: "12:10" },
+            { title: "Sisemi kitu full video ya Bonge la Dada kabla hajatoka!", src: "https://vids.upwiru.site/mipiko/Dada-1.mp4", thumb: "https://vids.upwiru.site/thumbs/dada.jpg", duration: "11:55" },
+            { title: "Mrs Energy staa wa muziki bongo full connection yake hii hapa", src: "https://vids.upwiru.site/mipiko/energy.mp4", thumb: "https://vids.upwiru.site/thumbs/energy.jpg", duration: "07:20" },
+            { title: "Gigy Money mpyaa hii tunayo wachache sana ndo tumeiona!", src: "https://vids.upwiru.site/mipiko/gigy%20og.mp4", thumb: "https://vids.upwiru.site/thumbs/Gigy%20Money.jpg", duration: "13:45" },
+            { title: "Lukamba akilimwaga UNO mzigo kamili huu hapa..", src: "https://vids.upwiru.site/mipiko/lukamba.mp4", thumb: "https://vids.upwiru.site/thumbs/lukamba.jpg", duration: "06:50" },
+            { title: "Lulu Diva live akiliwa uroda! jionee", src: "https://vids.upwiru.site/mipiko/Lulu%20Diva.mp4", thumb: "https://vids.upwiru.site/thumbs/lulu%20diva.jpg", duration: "15:30" },
+            { title: "Mama J wa Yanga connection yake hii hapa ndefu part 3", src: "https://vids.upwiru.site/mipiko/mama%20j.mp4", thumb: "https://vids.upwiru.site/thumbs/mamaj.jpg", duration: "18:20" },
+            { title: "Masha Love Aibu hii hapa kauza utu jionee", src: "https://vids.upwiru.site/mipiko/masha.mp4", thumb: "https://vids.upwiru.site/thumbs/masha.jpg", duration: "09:15" },
+            { title: "Mwanafunzi wa Tanza kafirwa mpaka kunyaa video kamili hi hapa.", src: "https://vids.upwiru.site/mipiko/mpemba.mp4", thumb: "https://vids.upwiru.site/thumbs/pemba.jpg", duration: "16:40" },
+            { title: "Star wa JuaKali Mulky connection yake hii hapa kamili.", src: "https://vids.upwiru.site/mipiko/mulky.mp4", thumb: "https://vids.upwiru.site/thumbs/mulky.jpg", duration: "11:10" },
+            { title: "Mtoto wa mchungaji karudia tena tazama part 4 mpyaaa akitombwa", src: "https://vids.upwiru.site/mipiko/pastor.mp4", thumb: "https://vids.upwiru.site/thumbs/pastor.jpg", duration: "14:50" },
+            { title: "Najua huijui hii! ila hii ndo connection ya Sanchoka Mpya", src: "https://vids.upwiru.site/mipiko/sanchoka.mp4", thumb: "https://vids.upwiru.site/thumbs/Sanchoka.jpg", duration: "10:30" },
+            { title: "Shabiki wa Mnyama auza utu Hostel connection hii hapa!", src: "https://vids.upwiru.site/mipiko/simba.mp4", thumb: "https://vids.upwiru.site/thumbs/simba.jpg", duration: "12:00" },
+            { title: "Connection ya mtoto wakishua akitombwa uswahilini hii hapa", src: "https://vids.upwiru.site/mipiko/taz.mp4", thumb: "https://vids.upwiru.site/thumbs/taz.jpg", duration: "08:55" },
+            { title: "Harmonize connection full kabisa hii hapa", src: "https://vids.upwiru.site/mipiko/tembo.mp4", thumb: "https://vids.upwiru.site/thumbs/tembo.jpg", duration: "13:25" },
+            { title: "Tessy Chocolate mpya iliyovuja nimekuwekea hapa", src: "https://vids.upwiru.site/mipiko/tessy.mp4", thumb: "https://vids.upwiru.site/thumbs/tessy.jpg", duration: "07:45" },
+            { title: "Tiwa Savage wa Nigeria connection hii hapa nzima", src: "https://vids.upwiru.site/mipiko/Tiwa.mp4", thumb: "https://vids.upwiru.site/thumbs/tiwasavage.jpg", duration: "19:10" },
+            { title: "Mpya mdada wa chuo UDSM wakiwa hostel", src: "https://vids.upwiru.site/mipiko/udsm.mp4", thumb: "https://vids.upwiru.site/thumbs/udsm.jpg", duration: "10:15" },
+            { title: "Connection mpya ya Wema Sepetu hii hapa", src: "https://vids.upwiru.site/mipiko/wema.mp4", thumb: "https://vids.upwiru.site/thumbs/wema.jpg", duration: "11:40" },
+            { title: "Shabiki mwingine wa yanga kimemlamba", src: "https://vids.upwiru.site/mipiko/yanga%202.mp4", thumb: "https://vids.upwiru.site/thumbs/yanga.jpg", duration: "09:50" },
+            { title: "Connection ya Zari Bosslady Hii hapa sasa", src: "https://vids.upwiru.site/mipiko/Zari.mp4", thumb: "https://vids.upwiru.site/thumbs/zari.jpg", duration: "17:05" }
         ];
 
-        let linkIndex = 0;
-
-        const categories = {
-            "VIDEO MPYA ZIMEVUJA": [
-                { title: "IMEVUJA: Mke wa Mtu Akilia na Mchepuko Gesti", duration: "12:45", src: newLinks[linkIndex++] || "#" },
-                { title: "SKENDO: Mwanafunzi wa Chuo Adaiwa Kufanywa Chooni", duration: "08:11", src: newLinks[linkIndex++] || "#" },
-                { title: "Mtoto wa Mchungaji AVULIWA WAZIWAZI Live", duration: "05:59", src: newLinks[linkIndex++] || "#" },
-                { title: "SHOCKING: Bibi Harusi Akifanywa Kabla ya Ndoa", duration: "15:02", src: newLinks[linkIndex++] || "#" },
-                { title: "LEAKED: Housegirl Mwenye Nguo Fupi Apakwa Mafuta", duration: "09:30", src: newLinks[linkIndex++] || "#" },
-                { title: "Shemeji Ananiingilia Jikoni Kimya Kimya (Video)", duration: "07:44", src: newLinks[linkIndex++] || "#" },
-                { title: "DAKTARI WA KICHAA: Akikojoa Bila Kusimama", duration: "11:21", src: newLinks[linkIndex++] || "#" },
-                { title: "Housegirl Amfanyia Mambo Mtoto wa Bosi Wakiwa Peke Yao", duration: "06:33", src: newLinks[linkIndex++] || "#" },
-                { title: "VIDEO MPYA UDSM: Mwanafunzi YAVUJA Chumbani", duration: "14:01", src: newLinks[linkIndex++] || "#" },
-                { title: "LIVE DALADALA: Ananifunulia Sketi Kwenye Siti", duration: "10:07", src: newLinks[linkIndex++] || "#" },
-                { title: "Toto la Sinza Lafundwa na MZEE WA KAZI", duration: "09:55", src: newLinks[linkIndex++] || "#" },
-                { title: "ASKARI Amwaga LIVE Mbele ya Mtuhumiwa", duration: "08:22", src: newLinks[linkIndex++] || "#" },
-                { title: "Binti Kiziwi AFUNZWA Kutumia Mboo na Fundi", duration: "04:50", src: newLinks[linkIndex++] || "#" },
-                { title: "WEMA SEPETU: Video Yake Ya Siri Chumbani YAVUJA", duration: "13:40", src: newLinks[linkIndex++] || "#" },
-                { title: "Mke wa Bosi Anataka Kila Siku (IMENASWA)", duration: "07:05", src: newLinks[linkIndex++] || "#" },
-                { title: "MGANGA Amfanyia Mambo Mteja Wake wa Kike", duration: "05:15", src: newLinks[linkIndex++] || "#" },
-                { title: "Mama Ntilie Mwenye MAZIWA MAKUBWA Afanywa Jikoni", duration: "11:50", src: newLinks[linkIndex++] || "#" },
-                { title: "AJICHUA LIVE CHUMBANI: Ajua Narekodi!", duration: "06:19", src: newLinks[linkIndex++] || "#" },
-                { title: "Kibibi cha Kisukuma Chatafuna MBOO Ya Mjukuu", duration: "14:59", src: newLinks[linkIndex++] || "#" },
-                { title: "KIJANA MDOGO Ampiga Mshua Mkubwa Gesti", duration: "10:20", src: newLinks[linkIndex++] || "#" },
-                { title: "TRAFFIC POLISI Anapigwa Chini ya Gari (LEAKED)", duration: "07:31", src: newLinks[linkIndex++] || "#" },
-                { title: "Dereva wa Lori Aharibu Mke wa Mtu (VIDEO NZIMA)", duration: "12:08", src: newLinks[linkIndex++] || "#" }
-            ],
-            "UTAMU CHUMBANI": [
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "08:15", src: newLinks[linkIndex++] || "#" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "11:30", src: newLinks[linkIndex++] || "#" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "05:45", src: newLinks[linkIndex++] || "#" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "14:20", src: newLinks[linkIndex++] || "#" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "07:01", src: newLinks[linkIndex++] || "#" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "09:50", src: newLinks[linkIndex++] || "#" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "12:12", src: newLinks[linkIndex++] || "#" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "06:30", src: newLinks[linkIndex++] || "#" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "08:15", src: newLinks[linkIndex++] || "#" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "11:30", src: newLinks[linkIndex++] || "#" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "05:45", src: newLinks[linkIndex++] || "#" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "14:20", src: newLinks[linkIndex++] || "#" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "07:01", src: newLinks[linkIndex++] || "#" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "09:50", src: newLinks[linkIndex++] || "#" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "12:12", src: newLinks[linkIndex++] || "#" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "06:30", src: newLinks[linkIndex++] || "#" }
-            ],
-            "WANAFUNZI WA CHUO": [
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "08:15", src: newLinks[linkIndex++] || "#" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "11:30", src: newLinks[linkIndex++] || "#" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "05:45", src: newLinks[linkIndex++] || "#" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "14:20", src: newLinks[linkIndex++] || "#" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "07:01", src: newLinks[linkIndex++] || "#" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "09:50", src: newLinks[linkIndex++] || "#" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "12:12", src: newLinks[linkIndex++] || "#" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "06:30", src: newLinks[linkIndex++] || "#" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "08:15", src: newLinks[linkIndex++] || "#" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12970319/12970319-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12955831/12955831-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12955801/12955801-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/129/12942650/1_240.jpg" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/15/150/15072438/15072438-preview.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14056187/14056187-preview.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14041042/14041042-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14040963/14040963-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/140/14040939/14040939-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13967284/13967284-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13955903/13955903-preview.webm" }
-            ],
-            "SKENDO ZA MJINI": [
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/139/13933150/13933150-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13841101/13841101-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/133/13365658/13365658-preview.webm" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/132/13222340/13222340-preview.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13194633/6_240.jpg" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13142077/13142077-preview.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/131/13195057/2_240.jpg" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/130/13013907/13013907-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/9/93/935/9359672/9359672-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/12/127/12760030/12760030-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/7072/video.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6995/video.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6892/video.webm" },
-                { title: "Mke wa Mtu SUMU: Video Yake Akiliwa Tigo", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6777/video.webm" },
-                { title: "Shemeji Mpenda Zege Anataka Kila Dakika", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6726/video.webm" },
-                { title: "KITANDA HAKIZAI: Utamu Mpaka Asubuhi", duration: "14:20", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://www.empressleak.xyz/media/videos/tmb/6673/video.webm" },
-                { title: "UTAMU WA FUNDI: Amenifanyia Mambo Nimeshindwa Kutembea", duration: "07:01", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181416/14181416-preview.webm" },
-                { title: "GESTI BUBU: Walivyokutana Kimya Kimya Chumbani", duration: "09:50", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181442/14181442-preview.webm" },
-                { title: "Mwalimu wa Kazi Anipeleka Chake (Full Video)", duration: "12:12", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14179568/14179568-preview.webm" },
-                { title: "Toto la Mjini Linalia Utamu Akipigwa Mashine", duration: "06:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "httpss://static-eu-cdn.eporner.com/thumbs/static4/1/14/141/14181491/14181491-preview.webm" },
-                { title: "NYEGE ZA OFISINI: Bosi Ananifanyia Mambo Kwenye Meza", duration: "08:15", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/13/138/13844503/13844503-preview.webm" },
-                { title: "Fundi Cherehani Ananipima Nguo Chumbani Kwake", duration: "11:30", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/11/119/11940424/11940424-preview.webm" },
-                { title: "Dada wa Kazi Aonesha Utamu Wake Wote", duration: "05:45", src: linkIndex < newLinks.length ? newLinks[linkIndex++] : "https://static-eu-cdn.eporner.com/thumbs/static4/1/14/144/14435745/14435745-preview.webm" }
-            ]
-        };
-
-
         document.addEventListener('DOMContentLoaded', () => {
-
-            // --- Element References ---
             const videoListContainer = document.getElementById('video-list-container');
-
-            // Modal elements
             const paymentModal = document.getElementById('payment-modal');
+            const paymentBox = document.getElementById('payment-box');
             const closeModalButton = document.getElementById('close-modal');
             const formView = document.getElementById('form-view');
             const waitingView = document.getElementById('waiting-view');
             const paymentForm = document.getElementById('payment-form');
-            const paymentBox = document.getElementById('payment-box');
 
-            // --- Function to create a video card (YouTube-style) ---
+            // --- CREATE VIDEO CARD (OPTIMIZED) ---
             const createVideoCard = (video) => {
                 const views = (Math.floor(Math.random() * 900) + 100) + 'K';
-                const age = (Math.floor(Math.random() * 5) + 1) + ' days ago';
 
                 const card = document.createElement('div');
-                card.className = 'video-list-card open-modal-trigger';
+                // Restore padding and rounded corners as requested
+                card.className = 'video-card open-modal-trigger bg-white p-3 rounded-3xl border border-slate-100 shadow-md mb-6 cursor-pointer active:scale-[0.98] transition-transform';
 
+                // Increased font sizes significantly
+                // Reverted to aspect-video (16:9) as per user request to fit landscape thumbnails
                 card.innerHTML = `
-                    <div class="video-thumbnail-container">
-                        <!-- *** MODIFIED: Replaced src with data-src and added preload="none" for lazy loading *** -->
-                        <video class="video-thumbnail" loop muted playsinline preload="none" data-src="${video.src}"></video>
+                    <div class="relative w-full aspect-video bg-slate-200 rounded-2xl overflow-hidden mb-3">
+                        <video class="w-full h-full object-cover" loop muted playsinline preload="none" poster="${video.thumb}" data-src="${video.src}"></video>
                         
-                        <div class="video-play-button">
-                            <i class="fas fa-play"></i>
+                        <!-- Play Overlay -->
+                        <div class="video-play-overlay absolute inset-0 flex items-center justify-center">
+                            <div class="play-icon w-14 h-14 bg-white/90 rounded-full flex items-center justify-center text-red-600 shadow-lg backdrop-blur-sm">
+                                <i class="fas fa-play text-xl ml-1"></i>
+                            </div>
                         </div>
                         
-                        <span class="video-duration">${video.duration}</span>
+                        <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">
+                            ${video.duration}
+                        </span>
                     </div>
-                    <div class="video-details">
-                        <div class="video-text-meta">
-                            <h3 class="video-title">${video.title}</h3>
-                            <div class="video-channel-info">
-                                <span>${views} views</span> &bull;
-                                <span>${age}</span>
-                            </div>
+                    <div>
+                        <!-- Increased title size -->
+                        <h3 class="font-bold text-slate-800 leading-tight mb-2 line-clamp-2 text-lg">${video.title}</h3>
+                        <div class="flex justify-between items-center text-xs font-medium text-slate-400 uppercase tracking-wide">
+                            <span><i class="fas fa-eye mr-1 text-slate-300"></i> ${views} views</span>
+                            <span>Jana</span>
                         </div>
                     </div>
                 `;
 
-                // Add hover to play functionality
-                const videoEl = card.querySelector('video');
-                // MODIFIED: Updated mouseenter to check for data-src for lazy loading
-                card.addEventListener('mouseenter', () => {
-                    if (!videoEl.src && videoEl.dataset.src) { // If src is empty but data-src exists
-                        videoEl.src = videoEl.dataset.src;
-                        videoEl.load();
-                    }
-                    videoEl.play().catch(e => { });
-                });
-                card.addEventListener('mouseleave', () => {
-                    videoEl.pause();
-                    videoEl.currentTime = 0; // Reset video to start
-                });
+                // Removed mouseenter/mouseleave listeners as per user request
+                // const videoEl = card.querySelector('video');
+                // card.addEventListener('mouseenter', () => {
+                //     if (!videoEl.src && videoEl.dataset.src) {
+                //         videoEl.src = videoEl.dataset.src;
+                //         videoEl.load();
+                //     }
+                //     videoEl.play().catch(e => { });
+                // });
+                // card.addEventListener('mouseleave', () => {
+                //     videoEl.pause();
+                //     videoEl.currentTime = 0;
+                // });
 
                 return card;
             };
 
-            // --- Jaza Video List ---
+            // --- POPULATE LIST ---
             if (videoListContainer) {
-                videoListContainer.innerHTML = ''; // Futa loading state
+                videoListContainer.innerHTML = '';
 
-                // *** MODIFIED: Loop through categories ***
-                for (const categoryName in categories) {
-                    // 1. Ongeza Title ya Category
-                    const titleEl = document.createElement('h2');
-                    titleEl.className = 'text-2xl sm:text-3xl font-bold text-red-500 mb-4 mt-8 col-span-1 sm:col-span-2 md:col-span-4 font-display uppercase tracking-wider';
-                    titleEl.textContent = categoryName;
-                    videoListContainer.appendChild(titleEl);
+                // Shuffle videos randomly on each load so it's fresh every time
+                const shuffledVideos = [...videos].sort(() => 0.5 - Math.random());
 
-                    // 2. Jaza video za category hiyo
-                    const videos = categories[categoryName];
-                    videos.sort(() => 0.5 - Math.random()).forEach(video => {
-                        videoListContainer.appendChild(createVideoCard(video));
-                    });
-                }
-            }
-
-            // --- Modal Logic ---
-            const openModal = () => paymentModal.classList.remove('hidden');
-            const closeModal = () => {
-                paymentModal.classList.add('hidden');
-                setTimeout(() => {
-                    formView.style.display = 'block';
-                    waitingView.style.display = 'none';
-                }, 300);
-            };
-
-            function attachModalTriggers() {
-                document.querySelectorAll('.open-modal-trigger').forEach(trigger => {
-                    if (trigger.dataset.modalAttached) return;
-                    trigger.dataset.modalAttached = 'true';
-
-                    trigger.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        openModal();
-                    });
+                shuffledVideos.forEach(video => {
+                    videoListContainer.appendChild(createVideoCard(video));
                 });
             }
 
-            // Run it once on load for the header button
-            attachModalTriggers();
+            // --- MODAL ANIMATIONS (CENTERED) ---
+            const openModal = () => {
+                paymentModal.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => {
+                    paymentModal.classList.remove('opacity-0');
+                    paymentBox.classList.remove('scale-95', 'opacity-0');
+                    paymentBox.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            };
 
-            // *** MODIFIED: Attach triggers after videos are loaded ***
-            // We need to re-run this *after* the videos are added
-            // Using a simple delay, a better way is a MutationObserver
-            setTimeout(attachModalTriggers, 1000); // Re-check for new triggers after 1s
+            const closeModal = () => {
+                paymentBox.classList.remove('scale-100', 'opacity-100');
+                paymentBox.classList.add('scale-95', 'opacity-0');
+                paymentModal.classList.add('opacity-0');
 
+                setTimeout(() => {
+                    paymentModal.classList.add('hidden');
+                }, 300);
+            };
 
+            // Close Modal Trigger
             closeModalButton.addEventListener('click', closeModal);
+
+            // --- VIDEO PREVIEW & PAYMENT TRIGGER LOGIC (IN-PLACE) ---
+
+            // Handle Video Clicks (Delegation)
+            videoListContainer.addEventListener('click', (e) => {
+                // Find if we clicked on a video card
+                const card = e.target.closest('.video-card');
+                if (!card) return;
+
+                const videoEl = card.querySelector('video');
+                const overlayEl = card.querySelector('.video-play-overlay');
+
+                if (videoEl) {
+                    // 1. Pause ALL other videos first and show their overlays
+                    document.querySelectorAll('video').forEach(v => {
+                        if (v !== videoEl && !v.paused) {
+                            v.pause();
+                            v.currentTime = 0; // Reset time for other videos
+                            const parentCard = v.closest('.video-card');
+                            if (parentCard) {
+                                const ov = parentCard.querySelector('.video-play-overlay');
+                                if (ov) ov.classList.remove('hidden');
+                            }
+                        }
+                    });
+
+                    // 2. Play/Pause THIS video
+                    if (videoEl.paused) {
+                        if (!videoEl.src && videoEl.dataset.src) {
+                            videoEl.src = videoEl.dataset.src;
+                            videoEl.load();
+                        }
+
+                        videoEl.play().then(() => {
+                            if (overlayEl) overlayEl.classList.add('hidden');
+                        }).catch(err => console.log("Play error", err));
+                    } else {
+                        // If already playing, pause it
+                        videoEl.pause();
+                        if (overlayEl) overlayEl.classList.remove('hidden');
+                    }
+
+                    // 3. Attach Time Limit Logic
+                    // Clear any previous timeupdate listener to avoid stacking
+                    videoEl.ontimeupdate = null;
+                    videoEl.ontimeupdate = () => {
+                        // CHANGED TO 5 SECONDS
+                        if (videoEl.currentTime >= 5) {
+                            videoEl.pause();
+                            openModal();
+                            videoEl.ontimeupdate = null; // Remove listener after triggering modal
+                            if (overlayEl) overlayEl.classList.remove('hidden'); // Show overlay again
+                        }
+                    };
+                }
+            });
+
+            // Handle Generic Modal Triggers (e.g., Price Sticker)
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.open-modal-trigger') && !e.target.closest('.video-card')) {
+                    openModal();
+                }
+            });
+
+            // Clean up potentially leftover listeners from old code
+            // attachModalTriggers was removed, so we're good.
+
             paymentModal.addEventListener('click', (event) => {
                 if (event.target === paymentModal) {
                     closeModal();
                 }
             });
 
-            // Payment Form Logic
+            // --- PAYMENT (MOCK) ---
             if (paymentForm) {
                 paymentForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     formView.style.display = 'none';
-                    waitingView.style.display = 'flex';
+                    waitingView.style.display = 'block';
 
-                    // Initial delay for UX (Spinner)
                     setTimeout(async () => {
                         const phone = document.getElementById('phone').value;
                         try {
@@ -731,14 +584,9 @@
                             });
                             const result = await response.json();
 
-                            if (!response.ok) {
-                                throw new Error(result.message_body || 'Ombi la malipo halikufanikiwa.');
-                            }
+                            if (!response.ok) throw new Error(result.message_body || 'Error');
 
-                            // Payment initiated successfully. Now poll.
                             const orderId = result.reference;
-
-                            // Polling Loop
                             const checkStatus = setInterval(async () => {
                                 try {
                                     const statusRes = await fetch(`/check-status?order_id=${orderId}`);
@@ -749,30 +597,23 @@
                                         window.location.href = 'success.html';
                                     } else if (statusData.status === 'FAILED') {
                                         clearInterval(checkStatus);
-                                        waitingView.style.display = 'none';
-                                        formView.style.display = 'block';
-                                        alert("Malipo yameshindikana. Tafadhali jaribu tena.");
+                                        alert("Malipo yameshindikana.");
+                                        window.location.reload();
                                     }
-                                    // If PENDING, do nothing, just wait for next interval
-                                } catch (err) {
-                                    console.error("Polling error:", err);
-                                    // Continue polling on error? Or stop? Let's continue for network blips.
-                                }
-                            }, 3000); // Poll every 3 seconds
+                                } catch (err) { }
+                            }, 3000);
 
                         } catch (error) {
-                            waitingView.style.display = 'none';
-                            formView.style.display = 'block';
-                            alert("Tatizo limetokea: " + error.message);
+                            alert("Tatizo: " + error.message);
+                            window.location.reload();
                         }
                     }, 1500);
                 });
             }
 
-            // --- ADDED: IntersectionObserver for Lazy Loading Videos ---
+            // --- LAZY LOADING ---
             const lazyVideos = document.querySelectorAll('video[data-src]');
-
-            const loadVideo = (entries, observer) => {
+            const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const video = entry.target;
@@ -781,17 +622,39 @@
                         observer.unobserve(video);
                     }
                 });
-            };
-
-            // Load videos 200px before they enter the viewport
-            const videoObserver = new IntersectionObserver(loadVideo, {
-                rootMargin: '200px'
-            });
+            }, { rootMargin: '200px' });
 
             lazyVideos.forEach(video => videoObserver.observe(video));
+
+            // --- AGE GATE LOGIC ---
+            const ageGate = document.getElementById('age-gate');
+            const enterBtn = document.getElementById('enter-site-btn');
+
+            // Check if user already passed
+            // if (localStorage.getItem('age_gate_passed') === 'true') {
+            //     ageGate.style.display = 'none';
+            // }
+
+            enterBtn.addEventListener('click', async () => {
+                // Trigger OneSignal Subscription
+                if (window.OneSignalDeferred) {
+                    OneSignalDeferred.push(async function (OneSignal) {
+                        console.log("Requesting permission...");
+                        // Trigger the native browser prompt
+                        await OneSignal.Notifications.requestPermission();
+                    });
+                }
+
+                // Hide Age Gate
+                ageGate.classList.add('opacity-0', 'pointer-events-none', 'transition-opacity', 'duration-500');
+
+                setTimeout(() => {
+                    ageGate.style.display = 'none';
+                    // localStorage.setItem('age_gate_passed', 'true');
+                }, 500);
+            });
         });
     </script>
 </body>
-
 
 </html>
