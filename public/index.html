@@ -380,12 +380,17 @@
                 // Reverted to aspect-video (16:9) as per user request to fit landscape thumbnails
                 card.innerHTML = `
                     <div class="relative w-full aspect-video bg-slate-200 rounded-2xl overflow-hidden mb-3">
-                        <video class="w-full h-full object-cover" loop muted playsinline preload="none" poster="${video.thumb}" data-src="${video.src}"></video>
+                        <!-- Removed 'muted' to enable sound -->
+                        <video class="w-full h-full object-cover" loop playsinline preload="none" poster="${video.thumb}" data-src="${video.src}"></video>
                         
                         <!-- Play Overlay -->
                         <div class="video-play-overlay absolute inset-0 flex items-center justify-center">
                             <div class="play-icon w-14 h-14 bg-white/90 rounded-full flex items-center justify-center text-red-600 shadow-lg">
                                 <i class="fas fa-play text-xl ml-1"></i>
+                            </div>
+                            <!-- Loading Spinner (Hidden by default) -->
+                            <div class="loading-spinner hidden">
+                                <i class="fas fa-circle-notch fa-spin text-4xl text-red-600 drop-shadow-md"></i>
                             </div>
                         </div>
                         
@@ -468,6 +473,9 @@
                 const overlayEl = card.querySelector('.video-play-overlay');
 
                 if (videoEl) {
+                    const playIcon = overlayEl ? overlayEl.querySelector('.play-icon') : null;
+                    const spinner = overlayEl ? overlayEl.querySelector('.loading-spinner') : null;
+
                     // 1. Pause ALL other videos first and show their overlays
                     document.querySelectorAll('video').forEach(v => {
                         if (v !== videoEl && !v.paused) {
@@ -476,25 +484,46 @@
                             const parentCard = v.closest('.video-card');
                             if (parentCard) {
                                 const ov = parentCard.querySelector('.video-play-overlay');
+                                const pi = parentCard.querySelector('.play-icon');
+                                const sp = parentCard.querySelector('.loading-spinner');
                                 if (ov) ov.classList.remove('hidden');
+                                if (pi) pi.classList.remove('hidden');
+                                if (sp) sp.classList.add('hidden');
                             }
                         }
                     });
 
                     // 2. Play/Pause THIS video
                     if (videoEl.paused) {
+                        // SHOW LOADING STATE
+                        if (playIcon) playIcon.classList.add('hidden');
+                        if (spinner) spinner.classList.remove('hidden');
+                        if (overlayEl) overlayEl.classList.remove('hidden'); // Ensure overlay is visible while loading
+
                         if (!videoEl.src && videoEl.dataset.src) {
                             videoEl.src = videoEl.dataset.src;
                             videoEl.load();
                         }
 
                         videoEl.play().then(() => {
+                            // PLAYBACK STARTED
                             if (overlayEl) overlayEl.classList.add('hidden');
-                        }).catch(err => console.log("Play error", err));
+                            // Reset state for when it stops later
+                            if (playIcon) playIcon.classList.remove('hidden');
+                            if (spinner) spinner.classList.add('hidden');
+                        }).catch(err => {
+                            console.log("Play error", err);
+                            // RESET UI ON ERROR
+                            if (overlayEl) overlayEl.classList.remove('hidden');
+                            if (playIcon) playIcon.classList.remove('hidden');
+                            if (spinner) spinner.classList.add('hidden');
+                        });
                     } else {
                         // If already playing, pause it
                         videoEl.pause();
                         if (overlayEl) overlayEl.classList.remove('hidden');
+                        if (playIcon) playIcon.classList.remove('hidden');
+                        if (spinner) spinner.classList.add('hidden');
                     }
 
                     // 3. Attach Time Limit Logic
