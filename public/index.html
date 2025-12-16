@@ -16,8 +16,6 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-    <!-- OneSignal SDK -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -158,32 +156,6 @@
 </head>
 
 <body class="antialiased min-h-screen flex flex-col items-center pb-20 overflow-x-hidden relative">
-
-    <!-- AGE GATE OVERLAY -->
-    <div id="age-gate"
-        class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm z-[100] flex flex-col items-center justify-center p-6 text-center">
-        <!-- Warning Icon -->
-        <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mb-6 animate-pulse">
-            <span class="text-4xl font-black text-white">18+</span>
-        </div>
-
-        <h1 class="text-4xl font-display text-white uppercase mb-4 tracking-wider">
-            Onyo: Maudhui ya Wakubwa
-        </h1>
-
-        <p class="text-slate-400 text-sm max-w-xs mb-8 leading-relaxed">
-            Tovuti hii ina video za kikubwa ambazo haziruhusiwi kwa watu chini ya miaka 18.
-            Je, una umri wa miaka 18 na zaidi?
-        </p>
-
-        <!-- OneSignal Custom Link Container -->
-        <div class='onesignal-customlink-container' style="margin-top: 20px;"></div>
-
-        <!-- Fallback/Help Text -->
-        <p class="mt-6 text-[10px] text-slate-600 uppercase tracking-widest">
-            PenziShata VIP Access
-        </p>
-    </div>
 
     <!-- Sticky Alert Bar -->
     <div
@@ -615,60 +587,6 @@
 
             lazyVideos.forEach(video => videoObserver.observe(video));
 
-            // --- AGE GATE & ONESIGNAL LOGIC ---
-            const ageGate = document.getElementById('age-gate');
-
-            window.OneSignalDeferred = window.OneSignalDeferred || [];
-            OneSignalDeferred.push(function (OneSignal) {
-
-                // Initialize OneSignal with Custom Link Prompt
-                OneSignal.init({
-                    appId: "eaa5f924-488c-4ca8-8c9d-6a69af3d8abe",
-                    safari_web_id: "web.onesignal.auto.60172545-2965-4f4c-8519-5d666601b088",
-                    notifyButton: {
-                        enable: false,
-                    },
-                    promptOptions: {
-                        customlink: {
-                            enabled: true,
-                            style: "button",
-                            size: "large",
-                            color: {
-                                button: '#DC2626', // Tailwind red-600
-                                text: '#FFFFFF',
-                            },
-                            text: {
-                                subscribe: "NDIYO, NIRUHUSU",
-                                unsubscribe: "Unsubscribe",
-                                explanation: "",
-                            },
-                            unsubscribeEnabled: false,
-                        }
-                    }
-                });
-
-                // Function to hide Age Gate
-                const hideAgeGate = () => {
-                    if (ageGate) {
-                        ageGate.classList.add('opacity-0', 'pointer-events-none');
-                        setTimeout(() => ageGate.style.display = 'none', 500);
-                    }
-                };
-
-                // Check current permission on load
-                // If they are strictly opted out, we might still want to show it? 
-                // But if they are granted, definitely hide it.
-                if (OneSignal.Notifications.permission) {
-                    hideAgeGate();
-                }
-
-                // Listen for changes
-                OneSignal.Notifications.addEventListener("permissionChange", function (permission) {
-                    if (permission) {
-                        hideAgeGate();
-                    }
-                });
-            });
         });
     </script>
 </body>
